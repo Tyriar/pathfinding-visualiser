@@ -245,7 +245,7 @@ SOFTWARE. */
                     neighbors[count++] = new node(n.x - 1, n.y + 1, n, COST_DIAGONAL);
             }
         }
-        if (n.x < MAP_WIDTH) {
+        if (n.x < MAP_WIDTH - 1) {
             if (map[n.x + 1][n.y])
                 neighbors[count++] = new node(n.x + 1, n.y, n, COST_STRAIGHT);
             if (n.y > 0 && map[n.x + 1][n.y - 1]) {
@@ -259,7 +259,7 @@ SOFTWARE. */
         }
         if (n.y > 0 && map[n.x][n.y - 1])
             neighbors[count++] = new node(n.x, n.y - 1, n, COST_STRAIGHT);
-        if (n.y < MAP_HEIGHT && map[n.x][n.y + 1])
+        if (n.y < MAP_HEIGHT - 1 && map[n.x][n.y + 1])
             neighbors[count++] = new node(n.x, n.y + 1, n, COST_STRAIGHT);
 
         neighbors[count++]
