@@ -254,6 +254,9 @@
     }
 
     function draw(closed, open, goalNode) {
+        drawStartGoal(goal.x, goal.y);
+        drawStartGoal(start.x, start.y);
+
         context.beginPath();
         context.moveTo((goalNode.x + 0.5) * MAP_SCALE, (goalNode.y + 0.5) * MAP_SCALE);
 
@@ -306,6 +309,10 @@
 
     function drawVisited(x, y) {
         drawNode(x, y, VISITED_COLOR);
+    }
+
+    function drawStartGoal(x, y) {
+        drawNode(x, y, PATH_COLOR);
     }
 
     function drawNode(x, y, color) {
