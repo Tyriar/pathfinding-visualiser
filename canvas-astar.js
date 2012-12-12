@@ -6,8 +6,8 @@
 - */
 
 (function () {
-    var CANVAS_WIDTH = 960;
-    var CANVAS_HEIGHT = 600;
+    var CANVAS_WIDTH = 640;
+    var CANVAS_HEIGHT = 480;
     var COST_STRAIGHT = 1;
     var COST_DIAGONAL = 1.414;
     var MAP_SCALE = 10; // Must be a divisor or CANVAS_WIDTH and CANVAS_HEIGHT
@@ -37,8 +37,8 @@
             canvas.height = CANVAS_HEIGHT;
 
             map = [];
-            start = new node(0, 0);
-            goal = new node(MAP_WIDTH - 1, MAP_HEIGHT - 1);
+            start = new Node(0, 0);
+            goal = new Node(MAP_WIDTH - 1, MAP_HEIGHT - 1);
             isMouseDown = false;
 
             registerEvents();
@@ -54,7 +54,7 @@
         document.getElementById('clear').addEventListener('click', clearMap);
     }
 
-    function node(x, y, parent, cost) {
+    function Node(x, y, parent, cost) {
         this.x = x;
         this.y = y;
         this.g = 0;
@@ -113,23 +113,19 @@
     }
 
     function getPosition(e) {
-        var x = 0;
-        var y = 0;
+        var targ;
         if (!e)
-            var e = window.event;
-        if (e.pageX || e.pageY) {
-            x = e.pageX;
-            y = e.pageY;
-        }
-        else if (e.clientX || e.clientY) {
-            x = e.clientX + document.body.scrollLeft
-                + document.documentElement.scrollLeft;
-            y = e.clientY + document.body.scrollTop
-                + document.documentElement.scrollTop;
-        }
-        x -= canvas.offsetLeft;
-        y -= canvas.offsetTop;
-        
+            e = window.event;
+        if (e.target)
+            targ = e.target;
+        else if (e.srcElement)
+            targ = e.srcElement;
+        if (targ.nodeType == 3)
+            targ = targ.parentNode;
+
+        var x = e.pageX - $(targ).offset().left;
+        var y = e.pageY - $(targ).offset().top;
+
         return { 'x': x, 'y': y };
     }
 
@@ -222,32 +218,32 @@
 
         if (n.x > 0) {
             if (map[n.x - 1][n.y])
-                neighbors[count++] = new node(n.x - 1, n.y, n, COST_STRAIGHT);
+                neighbors[count++] = new Node(n.x - 1, n.y, n, COST_STRAIGHT);
             if (n.y > 0 && map[n.x - 1][n.y - 1]) {
                 if (map[n.x - 1][n.y] && map[n.x][n.y - 1])
-                    neighbors[count++] = new node(n.x - 1, n.y - 1, n, COST_DIAGONAL);
+                    neighbors[count++] = new Node(n.x - 1, n.y - 1, n, COST_DIAGONAL);
             }
             if (n.y < MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
                 if (map[n.x - 1][n.y] && map[n.x][n.y + 1])
-                    neighbors[count++] = new node(n.x - 1, n.y + 1, n, COST_DIAGONAL);
+                    neighbors[count++] = new Node(n.x - 1, n.y + 1, n, COST_DIAGONAL);
             }
         }
         if (n.x < MAP_WIDTH - 1) {
             if (map[n.x + 1][n.y])
-                neighbors[count++] = new node(n.x + 1, n.y, n, COST_STRAIGHT);
+                neighbors[count++] = new Node(n.x + 1, n.y, n, COST_STRAIGHT);
             if (n.y > 0 && map[n.x + 1][n.y - 1]) {
                 if (map[n.x + 1][n.y] && map[n.x][n.y - 1])
-                    neighbors[count++] = new node(n.x + 1, n.y - 1, n, COST_DIAGONAL);
+                    neighbors[count++] = new Node(n.x + 1, n.y - 1, n, COST_DIAGONAL);
             }
             if (n.y < MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
                 if (map[n.x + 1][n.y] && map[n.x][n.y + 1])
-                    neighbors[count++] = new node(n.x + 1, n.y + 1, n, COST_DIAGONAL);
+                    neighbors[count++] = new Node(n.x + 1, n.y + 1, n, COST_DIAGONAL);
             }
         }
         if (n.y > 0 && map[n.x][n.y - 1])
-            neighbors[count++] = new node(n.x, n.y - 1, n, COST_STRAIGHT);
+            neighbors[count++] = new Node(n.x, n.y - 1, n, COST_STRAIGHT);
         if (n.y < MAP_HEIGHT - 1 && map[n.x][n.y + 1])
-            neighbors[count++] = new node(n.x, n.y + 1, n, COST_STRAIGHT);
+            neighbors[count++] = new Node(n.x, n.y + 1, n, COST_STRAIGHT);
 
         neighbors[count++]
         return neighbors;
