@@ -93,6 +93,7 @@
 
         for (var x = mouse.x - 2; x <= mouse.x + 2; x++) {
             for (var y = mouse.y - 2; y <= mouse.y + 2; y++) {
+                console.log(e.which);
                 if (e.which == 1) { // left-click
                     if (isOnMap(x, y) && map[x][y]) {
                         map[x][y] = false;
@@ -123,8 +124,8 @@
         if (targ.nodeType == 3)
             targ = targ.parentNode;
 
-        var x = e.pageX - $(targ).offset().left;
-        var y = e.pageY - $(targ).offset().top;
+        var x = e.pageX - targ.offsetLeft;
+        var y = e.pageY - targ.offsetTop;
 
         return { 'x': x, 'y': y };
     }

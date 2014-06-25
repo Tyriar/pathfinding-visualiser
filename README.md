@@ -1,4 +1,4 @@
-# canvas-astar.js
+# pathfinding-visualiser
 
 A demonstration of the A* pathfinding algorithm that I made for my blog.
 
