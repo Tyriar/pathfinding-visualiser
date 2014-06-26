@@ -4,16 +4,3 @@ body {
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
   margin: 0;
 }
-
-#astar {
-  margin:20px auto;
-  display:block;
-}
-
-#astar:hover {
-  cursor:crosshair;
-}
-
-#astar-info {
-  border:1px #000 solid;
-}
