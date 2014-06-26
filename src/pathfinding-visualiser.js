@@ -27,7 +27,6 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
     isMouseDown = false;
 
-    //registerEvents(canvasElement);
     module.clear();
 
     window.addEventListener('resize', resizeWindow);
@@ -108,14 +107,18 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
 
   function getPosition(e) {
     var target;
-    if (!e)
+    if (!e) {
       e = window.event;
-    if (e.target)
+    }
+    if (e.target) {
       target = e.target;
-    else if (e.srcElement)
+    }
+    else if (e.srcElement) {
       target = e.srcElement;
-    if (target.nodeType == 3)
+    }
+    if (target.nodeType == 3) {
       target = target.parentNode;
+    }
 
     var x = e.pageX - target.offsetLeft;
     var y = e.pageY - target.offsetTop;

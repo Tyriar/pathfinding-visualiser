@@ -58,33 +58,40 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap) {
     var count = 0;
 
     if (n.x > 0) {
-      if (map[n.x - 1][n.y])
+      if (map[n.x - 1][n.y]) {
         neighbors[count++] = new core.Node(n.x - 1, n.y, n, COST_STRAIGHT);
+      }
       if (n.y > 0 && map[n.x - 1][n.y - 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y - 1])
+        if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
           neighbors[count++] = new core.Node(n.x - 1, n.y - 1, n, COST_DIAGONAL);
+        }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y + 1])
+        if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
           neighbors[count++] = new core.Node(n.x - 1, n.y + 1, n, COST_DIAGONAL);
+        }
       }
     }
     if (n.x < core.MAP_WIDTH - 1) {
       if (map[n.x + 1][n.y])
         neighbors[count++] = new core.Node(n.x + 1, n.y, n, COST_STRAIGHT);
       if (n.y > 0 && map[n.x + 1][n.y - 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y - 1])
+        if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
           neighbors[count++] = new core.Node(n.x + 1, n.y - 1, n, COST_DIAGONAL);
+        }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y + 1])
+        if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
           neighbors[count++] = new core.Node(n.x + 1, n.y + 1, n, COST_DIAGONAL);
+        }
       }
     }
-    if (n.y > 0 && map[n.x][n.y - 1])
+    if (n.y > 0 && map[n.x][n.y - 1]) {
       neighbors[count++] = new core.Node(n.x, n.y - 1, n, COST_STRAIGHT);
-    if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1])
+    }
+    if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
       neighbors[count++] = new core.Node(n.x, n.y + 1, n, COST_STRAIGHT);
+    }
 
     neighbors[count++]
     return neighbors;

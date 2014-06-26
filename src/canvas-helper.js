@@ -55,15 +55,7 @@ var canvasHelper = (function () {
     context.fillRect(0, 0, core.CANVAS_WIDTH, core.CANVAS_HEIGHT);
   };
 
-  // TODO: Do this properly
-  var _closed, _open, _startNode, _goalNode;
-
   module.draw = function (closed, open, startNode, goalNode) {
-    _closed = closed;
-    _open = open;
-    _startNode = startNode;
-    _goalNode = goalNode;
-
     canvasHelper.drawStartGoal(goalNode.x, goalNode.y);
     canvasHelper.drawStartGoal(startNode.x, startNode.y);
 
@@ -79,14 +71,6 @@ var canvasHelper = (function () {
     context.lineWidth = PATH_WIDTH;
     context.stroke();
     context.closePath();
-  };
-
-  module.redraw = function (map) {
-    module.clearCanvas();
-    module.drawObstacles(map);
-    if (_startNode) {
-      module.draw(_closed, _open, _startNode, _goalNode)
-    }
   };
 
   module.getCanvasWidth = function () {
