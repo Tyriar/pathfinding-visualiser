@@ -6,7 +6,7 @@
     "Daniel Imms (http://www.growingwiththeweb.com)"
   ],
   "description": "An app that visualises pathfinding algorithms.",
-  "main": "canvas-astar.js",
+  "main": "pathfinding-visualiser.html",
   "license": "MIT",
   "private": true,
   "ignore": [

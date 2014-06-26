@@ -1,4 +1,4 @@
-var aStar = (function (core, canvasHelper, BinaryHeap) {
+var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap) {
   'use strict';
 
   var COST_STRAIGHT = 1;

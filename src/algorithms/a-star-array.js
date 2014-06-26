@@ -1,4 +1,4 @@
-var aStar = (function (core, canvasHelper) {
+var aStarArray = (function (core, canvasHelper) {
   'use strict';
 
   var COST_STRAIGHT = 1;
