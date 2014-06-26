@@ -71,7 +71,7 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
   };
 
   module.generateMap = function (mapScale, obstacleDensity, obstacleSize) {
-    if (mapScale && obstacleDensity && obstacleSize) {
+    if (mapScale !== undefined) {
       mapConfiguration = {
         mapScale: mapScale,
         obstacleDensity: obstacleDensity,
