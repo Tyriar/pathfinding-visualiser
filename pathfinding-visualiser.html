@@ -221,6 +221,7 @@
     },
 
     generateMap: function () {
+      this.$.infoCard.clear();
       pathfindingVisualiser.generateMap(this.$.mapScale.value,
         this.$.obstacleDensity.value, this.$.obstacleSize.value);
     },
