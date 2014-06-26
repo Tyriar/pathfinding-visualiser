@@ -22,7 +22,7 @@ var aStar = (function (core, canvasHelper, BinaryHeap) {
         canvasHelper.draw(closed, openList, start, current.value);
         callback('Map size = ' + core.MAP_WIDTH + 'x' + core.MAP_HEIGHT + '<br />' +
                  'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
-                 //'Number of nodes in open list = ' + openList.size() + '<br />' +
+                 'Number of nodes in open list = ' + openList.size() + '<br />' +
                  'Number of nodes in closed list = ' + Object.keys(closedList).length);
         return;
       }

@@ -2,6 +2,7 @@ body {
   background-color:#2D2D30;
   color:#FFF;
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+  margin: 0;
 }
 
 #astar {

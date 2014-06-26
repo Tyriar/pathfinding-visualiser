@@ -16,17 +16,21 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
   var goal;
   var isMouseDown;
   var algorithmDelegate;
+  var mapConfiguration;
 
   module.init = function (canvasElement) {
     canvasHelper.setCanvas(canvasElement);
+    core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
 
     map = [];
     start = new core.Node(0, 0);
     goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
     isMouseDown = false;
 
-    registerEvents(canvasElement);
+    //registerEvents(canvasElement);
     module.clear();
+
+    window.addEventListener('resize', resizeWindow);
   };
 
   module.setAlgorithm = function (algorithm) {
@@ -50,46 +54,52 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     algorithmDelegate.run(map, start, goal, callback);
   };
 
-  function registerEvents(canvasElement) {
-    canvasElement.addEventListener('mousedown', canvasMouseDown);
-    canvasElement.addEventListener('mousemove', canvasMouseMove);
-    canvasElement.addEventListener('mouseup', canvasMouseUp);
+  module.generateMap = function (mapScale, obstacleDensity, obstacleSize) {
+    if (mapScale && obstacleDensity && obstacleSize) {
+      mapConfiguration = {
+        mapScale: mapScale,
+        obstacleDensity: obstacleDensity,
+        obstacleSize: obstacleSize,
+      };
+    }
+    core.setMapScale(mapConfiguration.mapScale);
+    module.clear();
+    goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
+
+    var nodesInMap = core.MAP_WIDTH * core.MAP_HEIGHT;
+    var desiredObstacleCount = Math.floor(nodesInMap * mapConfiguration.obstacleDensity / 100)
+    var obstacles = 0;
+
+    while (obstacles < desiredObstacleCount) {
+      var x = Math.floor(Math.random() * core.MAP_WIDTH);
+      var y = Math.floor(Math.random() * core.MAP_HEIGHT);
+      obstacles += placeObstacles(x, y, mapConfiguration.obstacleSize);
+    }
   }
 
-  function canvasMouseDown(e) {
-    isMouseDown = true;
-    placeObstacles(e);
-  }
-
-  function canvasMouseUp() {
-    isMouseDown = false;
-  }
-
-  function canvasMouseMove(e) {
-    if (isMouseDown)
-      placeObstacles(e);
-  }
-
-  function placeObstacles(e) {
+  function placeObstaclesWithMouse(e) {
     var mouse = getPosition(e);
     mouse.x = Math.floor(mouse.x / core.MAP_SCALE);
     mouse.y = Math.floor(mouse.y / core.MAP_SCALE);
 
-    for (var x = mouse.x - 2; x <= mouse.x + 2; x++) {
-      for (var y = mouse.y - 2; y <= mouse.y + 2; y++) {
-        if (e.which == 1) { // left-click
-          if (isOnMap(x, y) && map[x][y]) {
-            map[x][y] = false;
-            canvasHelper.drawObstacle(x, y);
-          }
-        } else if (e.which == 3) { // right-click
-          if (isOnMap(x, y) && !map[x][y]) {
-            map[x][y] = true;
-            canvasHelper.clearObstacle(x, y);
-          }
+    placeObstacles(x, y, 5);
+  }
+
+  function placeObstacles(x, y, size) {
+    var obstacleCount = 0;
+    var lower = Math.floor(size / 2);
+    var upper = Math.ceil(size / 2);
+
+    for (var _x = x - lower; _x <= x + upper; _x++) {
+      for (var _y = y - lower; _y <= y + upper; _y++) {
+        if (isOnMap(_x, _y) && map[_x][_y]) {
+          map[_x][_y] = false;
+          canvasHelper.drawObstacle(_x, _y);
+          obstacleCount++;
         }
       }
     }
+    return obstacleCount;
   }
 
   function isOnMap(x, y) {
@@ -111,6 +121,20 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     var y = e.pageY - target.offsetTop;
 
     return { 'x': x, 'y': y };
+  }
+
+  var resizeTimeout;
+
+  function resizeWindow(e) {
+    window.clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resizeMap, 200);
+  }
+
+  function resizeMap() {
+    core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
+    module.clear();
+    module.generateMap();
+    goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
   }
 
   return module;
