@@ -213,6 +213,11 @@
       pathfindingVisualiser.init(this.$.canvas);
       this.setAStarBinaryHeap();
       this.generateMap();
+      var element = this;
+      this.$.canvas.addEventListener('click', function (e) {
+        pathfindingVisualiser.setGoalToMouse(e);
+        element.run();
+      });
     },
 
     clear: function () {

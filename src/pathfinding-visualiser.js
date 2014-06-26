@@ -36,6 +36,18 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     algorithmDelegate = algorithm;
   };
 
+  module.setGoalToMouse = function (e) {
+    var position = getPosition(e);
+    // Convert from mouse to map coords
+    position.x = Math.floor(position.x / core.MAP_SCALE);
+    position.y = Math.floor(position.y / core.MAP_SCALE);
+    // Only set goal if the coords map to a node
+    if (isOnMap(position.x, position.y)) {
+      goal.x = position.x;
+      goal.y = position.y;
+    }
+  };
+
   module.clear = function () {
     canvasHelper.clearCanvas();
 
