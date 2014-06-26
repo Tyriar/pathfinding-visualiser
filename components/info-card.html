@@ -1,0 +1,57 @@
+<polymer-element name="info-card" attributes="z">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+      }
+
+      #container {
+        visibility: hidden;
+        transition: top 0.5s ease-in-out, visibility 0s linear 0.5s;
+        position: relative;
+        top: 20em;
+      }
+
+      #container.visible {
+        visibility: visible;
+        transition-delay: 0s;
+        top: 0em;
+      }
+
+      #content {
+        background-color: #FFF;
+        opacity: .9;
+        transition: opacity .2s;
+        padding: .5em 1em;
+      }
+
+      #content:hover {
+        opacity: .6;
+      }
+    </style>
+    <div id="container">
+      <paper-shadow z="{{z}}"></paper-shadow>
+      <div id="content">
+        <content></content>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer('info-card', {
+      publish: {
+        z: { 
+          value: 1, 
+          reflect: true
+        }
+      },
+      clear: function () {
+        this.$.container.classList.remove('visible');
+      },
+      show: function (html) {
+        this.$.container.classList.add('visible');
+        this.innerHTML = html;
+      }
+    });
+  </script>
+</polymer-element>
