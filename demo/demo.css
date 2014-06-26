@@ -1,0 +1,18 @@
+body {
+  background-color:#2D2D30;
+  color:#FFF;
+  font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+}
+
+#astar {
+  margin:20px auto;
+  display:block;
+}
+
+#astar:hover {
+  cursor:crosshair;
+}
+
+#astar-info {
+  border:1px #000 solid;
+}

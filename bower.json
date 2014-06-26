@@ -1,0 +1,24 @@
+{
+  "name": "pathfinding-visualiser",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Tyriar/pathfinding-visualiser",
+  "authors": [
+    "Daniel Imms (http://www.growingwiththeweb.com)"
+  ],
+  "description": "An app that visualises pathfinding algorithms.",
+  "main": "canvas-astar.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "platform": "Polymer/platform#~0.3.3",
+    "paper-elements": "Polymer/paper-elements#~0.3.3",
+    "polymer": "Polymer/polymer#~0.3.3"
+  }
+}

@@ -1,11 +1,11 @@
-﻿-﻿/* 
-  * canvas-astar.js
-- * MIT licensed
-- *
-- * Created by Daniel Imms, http://www.growingwiththeweb.com
-- */
+﻿/* 
+ * canvas-astar.js
+ * MIT licensed
+ *
+ * Created by Daniel Imms, http://www.growingwiththeweb.com
+ */
 
-(function () {
+var pathfindingVisualiser = (function () {
   var CANVAS_WIDTH = 640;
   var CANVAS_HEIGHT = 480;
   var COST_STRAIGHT = 1;
@@ -22,19 +22,17 @@
 
   var canvas;
   var context;
+  var info;
   var map;
   var start;
   var goal;
   var isMouseDown;
 
-  init();
-
-  function init() {
-    canvas = document.getElementById('astar');
+  function init(canvasElement, infoElement) {
+    canvas = canvasElement;
+    info = infoElement;
     if (canvas && canvas.getContext) {
       context = canvas.getContext('2d');
-      canvas.width = CANVAS_WIDTH;
-      canvas.height = CANVAS_HEIGHT;
 
       map = [];
       start = new Node(0, 0);
@@ -50,8 +48,6 @@
     canvas.addEventListener('mousedown', canvasMouseDown);
     canvas.addEventListener('mousemove', canvasMouseMove);
     canvas.addEventListener('mouseup', canvasMouseUp);
-    document.getElementById('run').addEventListener('click', runAStar);
-    document.getElementById('clear').addEventListener('click', clearMap);
   }
 
   function Node(x, y, parent, cost) {
@@ -80,10 +76,11 @@
   }
 
   function runAStar() {
-    this.setAttribute('disabled', 'disabled');
+    // TODO: Disable button while running again, move to pathfinding-visualiser.html
+    //this.setAttribute('disabled', 'disabled');
     clearPath();
     aStar(start, goal);
-    this.removeAttribute('disabled');
+    //this.removeAttribute('disabled');
   }
 
   function placeObstacles(e) {
@@ -147,11 +144,10 @@
 
       if (nodeCompare(current, goal)) {
         draw(closed, open, current);
-        var info = 'Map size = ' + MAP_WIDTH + 'x' + MAP_HEIGHT + '<br />' +
-                   'Total number of nodes = ' + MAP_WIDTH * MAP_HEIGHT + '<br />' +
-                   'Number of nodes in open list = ' + open.length + '<br />' +
-                   'Number of nodes in closed list = ' + closed.length;
-        document.getElementById('info').innerHTML = info;
+        info.innerHTML = 'Map size = ' + MAP_WIDTH + 'x' + MAP_HEIGHT + '<br />' +
+                         'Total number of nodes = ' + MAP_WIDTH * MAP_HEIGHT + '<br />' +
+                         'Number of nodes in open list = ' + open.length + '<br />' +
+                         'Number of nodes in closed list = ' + closed.length;
         return;
       }
 
@@ -174,7 +170,7 @@
       }
     }
 
-    document.getElementById('info').innerHTML = 'No path exists';
+    info.innerHTML = 'No path exists';
   }
 
   function indexOfNode(array, node) {
@@ -315,4 +311,10 @@
     context.fillStyle = color;
     context.fillRect(x * MAP_SCALE, y * MAP_SCALE, MAP_SCALE, MAP_SCALE);
   }
+
+  return {
+    init: init,
+    clear: clearMap,
+    run: runAStar
+  };
 })();
