@@ -60,9 +60,14 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
   };
 
   module.run = function (callback) {
+    var startTime = performance.now()
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
-    algorithmDelegate.run(map, start, goal, callback);
+    algorithmDelegate.run(map, start, goal, function (result) {
+      var duration = performance.now() - startTime;
+      result += '<br>Operation took ' + duration.toFixed(2) + 'ms';
+      callback(result);
+    });
   };
 
   module.generateMap = function (mapScale, obstacleDensity, obstacleSize) {
