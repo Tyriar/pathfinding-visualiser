@@ -19,7 +19,13 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
       var current = openList.extractMinimum();
 
       if (current.value.equals(goal)) {
-        canvasHelper.draw(closed, openList, start, current.value);
+        // TODO: This should be outside of the timed section.
+        // Convert binary heap to regular array for reporting
+        var list = openList.list;
+        for (var i = 0; i < list.length; i++) {
+          list[i] = list[i].value;
+        }
+        canvasHelper.draw(closed, openList.list, start, current.value);
         callback('Map size = ' + core.MAP_WIDTH + 'x' + core.MAP_HEIGHT + '<br />' +
                  'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
                  'Number of nodes in open list = ' + openList.size() + '<br />' +

@@ -8,6 +8,7 @@ var canvasHelper = (function (core) {
   var OBSTACLE_COLOR   = '#2D2D30';
   var PATH_COLOR       = '#0C0';
   var VISITED_COLOR    = '#44F';
+  var OPEN_LIST_COLOR  = '#88F';
 
   var canvas
   var context;
@@ -41,6 +42,10 @@ var canvasHelper = (function (core) {
     module.drawNode(x, y, VISITED_COLOR);
   };
 
+  module.drawOpenListNode = function (x, y) {
+    module.drawNode(x, y, OPEN_LIST_COLOR);
+  };
+
   module.drawStartGoal = function (x, y) {
     module.drawNode(x, y, PATH_COLOR);
   };
@@ -55,7 +60,7 @@ var canvasHelper = (function (core) {
     context.fillRect(0, 0, core.CANVAS_WIDTH, core.CANVAS_HEIGHT);
   };
 
-  module.draw = function (closed, open, startNode, goalNode) {
+  module.draw = function (closedList, openList, startNode, goalNode) {
     canvasHelper.drawStartGoal(goalNode.x, goalNode.y);
     canvasHelper.drawStartGoal(startNode.x, startNode.y);
 
@@ -65,6 +70,10 @@ var canvasHelper = (function (core) {
     while (goalNode.parent) {
       goalNode = goalNode.parent;
       context.lineTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
+    }
+
+    for (var i = 0; i < openList.length; i++) {
+      canvasHelper.drawOpenListNode(openList[i].x, openList[i].y);
     }
 
     context.strokeStyle = PATH_COLOR;
