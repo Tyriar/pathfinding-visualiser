@@ -38,17 +38,35 @@
     <canvas id="canvas" width="640" height="480" oncontextmenu="return false;"></canvas>
     <div id="info"></div>
     <paper-slider pin value="50"></paper-slider>
-    <paper-button raisedbutton class="colored" label="Clear" role="button" tabindex="0" aria-label="colored" on-click="{{ clear }}"></paper-button>
-    <paper-button raisedbutton class="colored" label="Run" role="button" tabindex="0" aria-label="colored" on-click="{{ run }}"></paper-button>
+    <paper-button raisedbutton class="colored" label="Clear" role="button" tabindex="0" aria-label="colored" id="clearButton" on-click="{{ clear }}"></paper-button>
+    <paper-button raisedbutton class="colored" label="Run" role="button" tabindex="0" aria-label="colored" id="runButton" on-click="{{ run }}"></paper-button>
   </template>
+  <script src="core.js" type="text/javascript"></script>
+  <script src="canvas-helper.js" type="text/javascript"></script>
+  <script src="algorithms/a-star.js" type="text/javascript"></script>
   <script src="pathfinding-visualiser.js" type="text/javascript"></script>
   <script>
   Polymer("pathfinding-visualiser", {
+
     ready: function () {
-      pathfindingVisualiser.init(this.$.canvas, this.$.info);
+      pathfindingVisualiser.init(this.$.canvas);
+      pathfindingVisualiser.setAlgorithm(aStar);
     },
+
     clear: pathfindingVisualiser.clear,
-    run: pathfindingVisualiser.run
+
+    run: function () {
+      var button = this.$.runButton;
+      if (button.disabled)
+        return;
+      var info = this.$.info;
+      button.disabled = true;
+      pathfindingVisualiser.run(function (result) {
+        info.innerHTML = result;
+        button.disabled = false;
+      });
+    }
+
   });
   </script>
 </polymer-element>
