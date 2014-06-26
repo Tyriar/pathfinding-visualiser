@@ -1,4 +1,4 @@
-var canvasHelper = (function () {
+var canvasHelper = (function (core) {
   'use strict';
 
   var module = {};
@@ -84,4 +84,4 @@ var canvasHelper = (function () {
   };
 
   return module;
-})();
+})(core);

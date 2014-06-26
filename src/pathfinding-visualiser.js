@@ -5,7 +5,7 @@
  * Created by Daniel Imms, http://www.growingwiththeweb.com
  */
 
-var pathfindingVisualiser = (function (core, canvasHelper) {
+var pathfindingVisualiser = (function (core, canvasHelper, Node) {
   'use strict';
 
   var module = {};
@@ -23,8 +23,8 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
 
     map = [];
-    start = new core.Node(0, 0);
-    goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
+    start = new Node(0, 0);
+    goal = new Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
     isMouseDown = false;
 
     module.clear();
@@ -80,7 +80,8 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     }
     core.setMapScale(mapConfiguration.mapScale);
     module.clear();
-    goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
+    goal.x = core.MAP_WIDTH - 1;
+    goal.y = core.MAP_HEIGHT - 1;
 
     var nodesInMap = core.MAP_WIDTH * core.MAP_HEIGHT;
     var desiredObstacleCount = Math.floor(nodesInMap * mapConfiguration.obstacleDensity / 100)
@@ -154,8 +155,9 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
     core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
     module.clear();
     module.generateMap();
-    goal = new core.Node(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
+    goal.x = core.MAP_WIDTH - 1;
+    goal.y = core.MAP_HEIGHT - 1;
   }
 
   return module;
-})(core, canvasHelper);
+})(core, canvasHelper, MapNode);
