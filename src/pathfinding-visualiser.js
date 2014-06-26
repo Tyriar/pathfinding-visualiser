@@ -109,11 +109,16 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
 
     for (var _x = x - lower; _x <= x + upper; _x++) {
       for (var _y = y - lower; _y <= y + upper; _y++) {
-        if (isOnMap(_x, _y) && map[_x][_y]) {
-          map[_x][_y] = false;
-          canvasHelper.drawObstacle(_x, _y);
-          obstacleCount++;
+        if (!isOnMap(_x, _y) || !map[_x][_y]) {
+          continue;
         }
+        if ((_x == start.x && _y == start.y) ||
+            (_x == goal.x && _y == goal.y)) {
+          continue;
+        }
+        map[_x][_y] = false;
+        canvasHelper.drawObstacle(_x, _y);
+        obstacleCount++;
       }
     }
     return obstacleCount;
