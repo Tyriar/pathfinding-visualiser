@@ -27,11 +27,11 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
 
     registerEvents(canvasElement);
     module.clear();
-  }
+  };
 
   module.setAlgorithm = function (algorithm) {
     algorithmDelegate = algorithm;
-  }
+  };
 
   module.clear = function () {
     canvasHelper.clearCanvas();
@@ -42,13 +42,13 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
         map[x][y] = true;
       }
     }
-  }
+  };
 
   module.run = function (callback) {
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
     algorithmDelegate.run(map, start, goal, callback);
-  }
+  };
 
   function registerEvents(canvasElement) {
     canvasElement.addEventListener('mousedown', canvasMouseDown);
@@ -97,18 +97,18 @@ var pathfindingVisualiser = (function (core, canvasHelper) {
   }
 
   function getPosition(e) {
-    var targ;
+    var target;
     if (!e)
       e = window.event;
     if (e.target)
-      targ = e.target;
+      target = e.target;
     else if (e.srcElement)
-      targ = e.srcElement;
-    if (targ.nodeType == 3)
-      targ = targ.parentNode;
+      target = e.srcElement;
+    if (target.nodeType == 3)
+      target = target.parentNode;
 
-    var x = e.pageX - targ.offsetLeft;
-    var y = e.pageY - targ.offsetTop;
+    var x = e.pageX - target.offsetLeft;
+    var y = e.pageY - target.offsetTop;
 
     return { 'x': x, 'y': y };
   }

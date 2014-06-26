@@ -19,6 +19,7 @@
   "dependencies": {
     "platform": "Polymer/platform#~0.3.3",
     "paper-elements": "Polymer/paper-elements#~0.3.3",
-    "polymer": "Polymer/polymer#~0.3.3"
+    "polymer": "Polymer/polymer#~0.3.3",
+    "js-data-structures": "*"
   }
 }
