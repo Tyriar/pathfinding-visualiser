@@ -13,12 +13,12 @@ var core = (function () {
     module.CANVAS_WIDTH  = width;
     module.CANVAS_HEIGHT = height;
     updateMapDimensions();
-  }
+  };
 
   module.setMapScale = function (mapScale) {
     core.MAP_SCALE = mapScale;
     updateMapDimensions();
-  }
+  };
 
   function updateMapDimensions() {
     module.MAP_WIDTH  = Math.floor(module.CANVAS_WIDTH / module.MAP_SCALE);

@@ -10,7 +10,7 @@ var canvasHelper = (function (core) {
   var VISITED_COLOR    = '#44F';
   var OPEN_LIST_COLOR  = '#88F';
 
-  var canvas
+  var canvas;
   var context;
 
   module.setCanvas = function (canvasElement) {

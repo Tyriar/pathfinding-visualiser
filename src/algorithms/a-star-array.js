@@ -7,6 +7,7 @@ var aStarArray = (function (core, canvasHelper, Node) {
   var module = {};
 
   module.run = function (map, start, goal, callback) {
+    var i;
     var closed = [];
     var open = [start];
     var cameFrom = [];
@@ -15,7 +16,7 @@ var aStarArray = (function (core, canvasHelper, Node) {
 
     while (open.length > 0) {
       var lowestF = 0;
-      for (var i = 1; i < open.length; i++) {
+      for (i = 1; i < open.length; i++) {
         if (open[i].f < open[lowestF].f) {
           lowestF = i;
         }
@@ -36,7 +37,7 @@ var aStarArray = (function (core, canvasHelper, Node) {
       canvasHelper.drawVisited(current.x, current.y);
 
       var neighbors = neighborNodes(map, current);
-      for (var i = 0; i < neighbors.length; i++) {
+      for (i = 0; i < neighbors.length; i++) {
         if (indexOfNode(closed, neighbors[i]) == -1) { // Skip if in closed list
           var index = indexOfNode(open, neighbors[i]);
           if (index == -1) {
@@ -94,7 +95,6 @@ var aStarArray = (function (core, canvasHelper, Node) {
       neighbors[count++] = new Node(n.x, n.y + 1, n, COST_STRAIGHT);
     }
 
-    neighbors[count++]
     return neighbors;
   }
 

@@ -7,6 +7,7 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
   var module = {};
 
   module.run = function (map, start, goal, callback) {
+    var i;
     var cameFrom = [];
     var closedList = {};
     var openHash = {};
@@ -22,7 +23,7 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
         // TODO: This should be outside of the timed section.
         // Convert binary heap to regular array for reporting
         var list = openList.list;
-        for (var i = 0; i < list.length; i++) {
+        for (i = 0; i < list.length; i++) {
           list[i] = list[i].value;
         }
         canvasHelper.draw(closed, openList.list, start, current.value);
@@ -38,7 +39,7 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
       canvasHelper.drawVisited(current.value.x, current.value.y);
 
       var neighbors = neighborNodes(map, current.value);
-      for (var i = 0; i < neighbors.length; i++) {
+      for (i = 0; i < neighbors.length; i++) {
         var key = neighbors[i].x + ',' + neighbors[i].y;
         if (!(key in closedList)) { // Skip if in closed list
           var nodeByHash = openHash[key];
@@ -50,7 +51,7 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
             }
           } else {
             neighbors[i].f = neighbors[i].g + heuristic(neighbors[i], goal);
-            openHash[key] = openList.insert(neighbors[i].f, neighbors[i]);;
+            openHash[key] = openList.insert(neighbors[i].f, neighbors[i]);
           }
         }
       }
@@ -99,7 +100,6 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
       neighbors[count++] = new Node(n.x, n.y + 1, n, COST_STRAIGHT);
     }
 
-    neighbors[count++]
     return neighbors;
   }
 

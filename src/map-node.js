@@ -10,11 +10,11 @@ var MapNode = (function () {
     if (parent) {
       this.g = parent.g + cost;
     }
-  };
+  }
 
   MapNode.prototype.equals = function (other) {
     return this.x == other.x && this.y == other.y;
-  }
+  };
 
   return MapNode;
 })();

@@ -60,7 +60,7 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
   };
 
   module.run = function (callback) {
-    var startTime = performance.now()
+    var startTime = performance.now();
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
     algorithmDelegate.run(map, start, goal, function (result) {
@@ -84,7 +84,7 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
     goal.y = core.MAP_HEIGHT - 1;
 
     var nodesInMap = core.MAP_WIDTH * core.MAP_HEIGHT;
-    var desiredObstacleCount = Math.floor(nodesInMap * mapConfiguration.obstacleDensity / 100)
+    var desiredObstacleCount = Math.floor(nodesInMap * mapConfiguration.obstacleDensity / 100);
     var obstacles = 0;
 
     while (obstacles < desiredObstacleCount) {
@@ -92,7 +92,7 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
       var y = Math.floor(Math.random() * core.MAP_HEIGHT);
       obstacles += placeObstacles(x, y, mapConfiguration.obstacleSize);
     }
-  }
+  };
 
   function placeObstaclesWithMouse(e) {
     var mouse = getPosition(e);
