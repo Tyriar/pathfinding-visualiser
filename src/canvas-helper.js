@@ -1,3 +1,4 @@
+/*! pathfinding-visualiser | (c) 2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
 // UMD pattern: https://github.com/umdjs/umd/blob/master/returnExports.js
 (function (root, factory) {
   'use strict';
