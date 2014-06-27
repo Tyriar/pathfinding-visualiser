@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('core'), require('canvas-helper'), require('map-node'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./map-node'));
   } else {
     root.aStarArray = factory(core, canvasHelper, MapNode);
   }

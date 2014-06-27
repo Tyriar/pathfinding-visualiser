@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'map'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('core'), require('canvas-helper'), require('map'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./map'));
   } else {
     root.canvasHelper = factory(core, canvasHelper, Map);
   }

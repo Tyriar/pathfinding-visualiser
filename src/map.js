@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     define(['map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('map-node'));
+    module.exports = factory(require('./map-node'));
   } else {
     root.Map = factory(MapNode);
   }
@@ -17,6 +17,7 @@
     this.start         = new MapNode(0, 0);
     this.goal          = new MapNode(width - 1, height - 1);
     this.configuration = undefined;
+    this.clear();
   }
 
   Map.prototype = Array.prototype;
@@ -37,6 +38,10 @@
   };
 
   Map.prototype.generate = function (width, height, obstacleDensity, obstacleSize) {
+    if (obstacleSize <= 0 || obstacleDensity > 90) {
+      return
+    }
+
     if (obstacleDensity !== undefined) {
       this.configuration = {
         obstacleDensity: obstacleDensity,

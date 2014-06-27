@@ -4,7 +4,7 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'binary-heap', 'map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('core'), require('canvas-helper'), require('binary-heap'), require('map-node'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./binary-heap'), require('./map-node'));
   } else {
     root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode);
   }
