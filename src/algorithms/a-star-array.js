@@ -1,4 +1,8 @@
-var aStarArray = (function (core, canvasHelper, Node) {
+define([
+  'core', 
+  'canvas-helper', 
+  'map-node'
+], function (core, canvasHelper, Node) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -130,4 +134,4 @@ var aStarArray = (function (core, canvasHelper, Node) {
   }
 
   return module;
-})(core, canvasHelper, MapNode);
+});

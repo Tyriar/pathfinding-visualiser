@@ -117,8 +117,8 @@ SOFTWARE.
     }
 
     #sidebar {
-      margin: 1em 2em;
-      padding: 0;
+      margin: 0;
+      padding: 1em 2em;
     }
 
     menu {
@@ -153,9 +153,10 @@ SOFTWARE.
       <div flex layout horizontal>
         <canvas id="canvas" oncontextmenu="return false;" flex two></canvas>
 
-        <info-card z="2" id="infoCard"></info-card>
+        <info-card id="infoCard"></info-card>
 
         <div id="sidebar" layout vertical>
+          <paper-shadow z="1"></paper-shadow>
           <menu flex two>
             <div>
               <h1>Map</h1>
@@ -221,59 +222,78 @@ SOFTWARE.
     </div>
   </template>
 
-  <script src="bower_components/js-data-structures/src/binary-heap.js" type="text/javascript"></script>
+  <script src="bower_components/requirejs/require.js" type="text/javascript"></script>
+  <!--<script src="bower_components/js-data-structures/src/binary-heap.js" type="text/javascript"></script>
   <script src="src/core.js" type="text/javascript"></script>
   <script src="src/map-node.js" type="text/javascript"></script>
   <script src="src/canvas-helper.js" type="text/javascript"></script>
   <script src="src/algorithms/a-star-array.js" type="text/javascript"></script>
   <script src="src/algorithms/a-star-binary-heap.js" type="text/javascript"></script>
-  <script src="src/pathfinding-visualiser.js" type="text/javascript"></script>
+  <script src="src/pathfinding-visualiser.js" type="text/javascript"></script>-->
 
   <script>
-  Polymer("pathfinding-visualiser", {
+  require.config({
+    paths: {
+      'binary-heap': 'bower_components/js-data-structures/src/binary-heap',
+      'core': 'src/core',
+      'map-node': 'src/map-node',
+      'canvas-helper': 'src/canvas-helper',
+      'a-star-array': 'src/algorithms/a-star-array',
+      'a-star-binary-heap': 'src/algorithms/a-star-binary-heap',
+      'pathfinding-visualiser': 'src/pathfinding-visualiser'
+    }
+  });
 
-    ready: function () {
-      pathfindingVisualiser.init(this.$.canvas);
-      this.setAStarBinaryHeap();
-      this.generateMap();
-      var element = this;
-      this.$.canvas.addEventListener('click', function (e) {
-        pathfindingVisualiser.setGoalToMouse(e);
-        element.run();
-      });
-    },
+  require([
+    'pathfinding-visualiser',
+    'a-star-array',
+    'a-star-binary-heap'
+  ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap) {
+    Polymer("pathfinding-visualiser", {
 
-    clear: function () {
-      this.$.infoCard.clear();
-      pathfindingVisualiser.clear();
-    },
+      ready: function () {
+        pathfindingVisualiser.init(this.$.canvas);
+        this.setAStarBinaryHeap();
+        this.generateMap();
+        var element = this;
+        this.$.canvas.addEventListener('click', function (e) {
+          pathfindingVisualiser.setGoalToMouse(e);
+          element.run();
+        });
+      },
 
-    generateMap: function () {
-      this.$.infoCard.clear();
-      pathfindingVisualiser.generateMap(this.$.mapScale.value,
-        this.$.obstacleDensity.value, this.$.obstacleSize.value);
-    },
+      clear: function () {
+        this.$.infoCard.clear();
+        pathfindingVisualiser.clear();
+      },
 
-    run: function () {
-      var button = this.$.runButton;
-      if (button.disabled)
-        return;
-      var infoCard = this.$.infoCard;
-      button.disabled = true;
-      pathfindingVisualiser.run(function (result) {
-        infoCard.show(result);
-        button.disabled = false;
-      });
-    },
+      generateMap: function () {
+        this.$.infoCard.clear();
+        pathfindingVisualiser.generateMap(this.$.mapScale.value,
+          this.$.obstacleDensity.value, this.$.obstacleSize.value);
+      },
 
-    setAStarArray: function () {
-      pathfindingVisualiser.setAlgorithm(aStarArray);
-    },
+      run: function () {
+        var button = this.$.runButton;
+        if (button.disabled)
+          return;
+        var infoCard = this.$.infoCard;
+        button.disabled = true;
+        pathfindingVisualiser.run(function (result) {
+          infoCard.show(result);
+          button.disabled = false;
+        });
+      },
 
-    setAStarBinaryHeap: function () {
-      pathfindingVisualiser.setAlgorithm(aStarBinaryHeap);
-    },
+      setAStarArray: function () {
+        pathfindingVisualiser.setAlgorithm(aStarArray);
+      },
 
+      setAStarBinaryHeap: function () {
+        pathfindingVisualiser.setAlgorithm(aStarBinaryHeap);
+      },
+
+    });
   });
   </script>
 </polymer-element>

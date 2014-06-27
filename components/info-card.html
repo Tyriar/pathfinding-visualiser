@@ -1,4 +1,6 @@
-<polymer-element name="info-card" attributes="z">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="info-card">
   <template>
     <style>
       :host {
@@ -31,7 +33,7 @@
       }
     </style>
     <div id="container">
-      <paper-shadow z="{{z}}"></paper-shadow>
+      <paper-shadow z="2"></paper-shadow>
       <div id="content">
         <content></content>
       </div>
@@ -39,12 +41,6 @@
   </template>
   <script>
     Polymer('info-card', {
-      publish: {
-        z: { 
-          value: 1, 
-          reflect: true
-        }
-      },
       clear: function () {
         this.$.container.classList.remove('visible');
       },

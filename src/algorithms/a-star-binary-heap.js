@@ -1,4 +1,9 @@
-var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
+define([
+  'core', 
+  'canvas-helper', 
+  'binary-heap',
+  'map-node'
+], function (core, canvasHelper, BinaryHeap, Node) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -135,4 +140,4 @@ var aStarBinaryHeap = (function (core, canvasHelper, BinaryHeap, Node) {
   }
 
   return module;
-})(core, canvasHelper, BinaryHeap, MapNode);
+});

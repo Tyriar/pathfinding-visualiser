@@ -5,7 +5,11 @@
  * Created by Daniel Imms, http://www.growingwiththeweb.com
  */
 
-var pathfindingVisualiser = (function (core, canvasHelper, Node) {
+define([
+  'core', 
+  'canvas-helper', 
+  'map-node'
+], function (core, canvasHelper, Node) {
   'use strict';
 
   var module = {};
@@ -165,4 +169,4 @@ var pathfindingVisualiser = (function (core, canvasHelper, Node) {
   }
 
   return module;
-})(core, canvasHelper, MapNode);
+});

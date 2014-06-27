@@ -1,4 +1,6 @@
-var canvasHelper = (function (core) {
+define([
+  'core'
+], function (core) {
   'use strict';
 
   var module = {};
@@ -61,8 +63,8 @@ var canvasHelper = (function (core) {
   };
 
   module.draw = function (closedList, openList, startNode, goalNode) {
-    canvasHelper.drawStartGoal(goalNode.x, goalNode.y);
-    canvasHelper.drawStartGoal(startNode.x, startNode.y);
+    module.drawStartGoal(goalNode.x, goalNode.y);
+    module.drawStartGoal(startNode.x, startNode.y);
 
     context.beginPath();
     context.moveTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
@@ -73,7 +75,7 @@ var canvasHelper = (function (core) {
     }
 
     for (var i = 0; i < openList.length; i++) {
-      canvasHelper.drawOpenListNode(openList[i].x, openList[i].y);
+      module.drawOpenListNode(openList[i].x, openList[i].y);
     }
 
     context.strokeStyle = PATH_COLOR;
@@ -93,4 +95,4 @@ var canvasHelper = (function (core) {
   };
 
   return module;
-})(core);
+});

@@ -1,4 +1,4 @@
-var MapNode = (function () {
+define([], function () {
   'use strict';
 
   function MapNode(x, y, parent, cost) {
@@ -17,4 +17,4 @@ var MapNode = (function () {
   };
 
   return MapNode;
-})();
+});

@@ -1,4 +1,4 @@
-var core = (function () {
+define([], function () {
   'use strict';
 
   var module = {};
@@ -16,7 +16,7 @@ var core = (function () {
   };
 
   module.setMapScale = function (mapScale) {
-    core.MAP_SCALE = mapScale;
+    module.MAP_SCALE = mapScale;
     updateMapDimensions();
   };
 
@@ -26,4 +26,4 @@ var core = (function () {
   }
 
   return module;
-})();
+});
