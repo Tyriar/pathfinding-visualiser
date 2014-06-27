@@ -8,7 +8,7 @@
   } else {
     root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode);
   }
-}(this, function (core, canvasHelper, BinaryHeap, Node) {
+}(this, function (core, canvasHelper, BinaryHeap, MapNode) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -78,50 +78,41 @@
 
     if (n.x > 0) {
       if (map[n.x - 1][n.y]) {
-        neighbors[count++] = new Node(n.x - 1, n.y, n, COST_STRAIGHT);
+        neighbors[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
       }
       if (n.y > 0 && map[n.x - 1][n.y - 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new Node(n.x - 1, n.y - 1, n, COST_DIAGONAL);
+          neighbors[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new Node(n.x - 1, n.y + 1, n, COST_DIAGONAL);
+          neighbors[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.x < core.MAP_WIDTH - 1) {
       if (map[n.x + 1][n.y])
-        neighbors[count++] = new Node(n.x + 1, n.y, n, COST_STRAIGHT);
+        neighbors[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
       if (n.y > 0 && map[n.x + 1][n.y - 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new Node(n.x + 1, n.y - 1, n, COST_DIAGONAL);
+          neighbors[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new Node(n.x + 1, n.y + 1, n, COST_DIAGONAL);
+          neighbors[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.y > 0 && map[n.x][n.y - 1]) {
-      neighbors[count++] = new Node(n.x, n.y - 1, n, COST_STRAIGHT);
+      neighbors[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
     }
     if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
-      neighbors[count++] = new Node(n.x, n.y + 1, n, COST_STRAIGHT);
+      neighbors[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
     }
 
     return neighbors;
-  }
-
-  function indexOfNode(array, node) {
-    for (var i = 0; i < array.length; i++) {
-      if (node.equals(array[i])) {
-        return i;
-      }
-    }
-    return -1;
   }
 
   function heuristic(node, goal) {
