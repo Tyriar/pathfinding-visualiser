@@ -1,15 +1,16 @@
-﻿/* 
- * canvas-astar.js
- * MIT licensed
- *
- * Created by Daniel Imms, http://www.growingwiththeweb.com
- */
-
-define([
-  'core', 
-  'canvas-helper', 
-  'map-node'
-], function (core, canvasHelper, Node) {
+﻿// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['core', 'canvas-helper', 'map-node'], function (core, canvasHelper, MapNode) {
+      return (root.canvasHelper = factory(core, canvasHelper, MapNode));
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('core'), require('canvas-helper'), require('map-node'));
+  } else {
+    root.canvasHelper = factory(core, canvasHelper, MapNode);
+  }
+}(this, function (core, canvasHelper, Node) {
   'use strict';
 
   var module = {};

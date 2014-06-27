@@ -1,8 +1,16 @@
-define([
-  'core', 
-  'canvas-helper', 
-  'map-node'
-], function (core, canvasHelper, Node) {
+// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['core', 'canvas-helper', 'map-node'], function (core, canvasHelper, MapNode) {
+      return (root.aStarArray = factory(core, canvasHelper, Node));
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('core'), require('canvas-helper'), require('map-node'));
+  } else {
+    root.aStarArray = factory(core, canvasHelper, MapNode);
+  }
+}(this, function (core, canvasHelper, Node) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -134,4 +142,4 @@ define([
   }
 
   return module;
-});
+}));

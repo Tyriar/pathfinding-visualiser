@@ -1,4 +1,16 @@
-define([], function () {
+// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+      return (root.MapNode = factory());
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.MapNode = factory();
+  }
+}(this, function () {
   'use strict';
 
   function MapNode(x, y, parent, cost) {
@@ -17,4 +29,4 @@ define([], function () {
   };
 
   return MapNode;
-});
+}));

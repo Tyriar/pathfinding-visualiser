@@ -1,6 +1,16 @@
-define([
-  'core'
-], function (core) {
+// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['core'], function (core) {
+      return (root.canvasHelper = factory(core));
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('core'));
+  } else {
+    root.canvasHelper = factory(core);
+  }
+}(this, function (core) {
   'use strict';
 
   var module = {};
@@ -95,4 +105,4 @@ define([
   };
 
   return module;
-});
+}));

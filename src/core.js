@@ -1,4 +1,16 @@
-define([], function () {
+// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+(function (root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+      return (root.core = factory());
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.core = factory();
+  }
+}(this, function () {
   'use strict';
 
   var module = {};
@@ -26,4 +38,4 @@ define([], function () {
   }
 
   return module;
-});
+}));
