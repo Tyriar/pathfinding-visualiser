@@ -16,12 +16,14 @@
 
   var module = {};
 
-  module.run = function (map, start, goal, callback) {
+  module.run = function (map, callback) {
     var i;
     var cameFrom = [];
     var closedList = {};
     var openHash = {};
     var openList = new BinaryHeap();
+    var start = map.start;
+    var goal = map.goal;
 
     start.f = start.g + heuristic(start, goal);
     openHash[start.x + ',' + start.y] = openList.insert(start.f, start);

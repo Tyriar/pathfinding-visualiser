@@ -124,8 +124,8 @@
       <div>
         <h1>Algorithm</h1>
         <paper-radio-group selected="1">
-          <paper-radio-button label="A* (array)" id="algorithmAStarArray" on-click="{{ setAStarArray }}"></paper-radio-button>
-          <paper-radio-button label="A* (binary heap)" id="algorithmAStarBinaryHeap" on-click="{{ setAStarBinaryHeap }}"></paper-radio-button>
+          <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}"></paper-radio-button>
+          <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
           <!--<paper-radio-button role="radio" tabindex="0" aria-checked="true" label="A* (binomial heap)"></paper-radio-button>-->
         </paper-radio-group>
       </div>
@@ -174,6 +174,13 @@
         },
         setRunDisabled: function (state) {
           this.$.runButton.disabled = state;
+        },
+        onAlgorithmChange: undefined
+      },
+      algorithmChange: function (e) {
+        if (this.onAlgorithmChange) {
+          var name = e.target.getAttribute('data-algorithm');
+          this.onAlgorithmChange(name);
         }
       },
       run: function () {

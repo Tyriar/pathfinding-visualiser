@@ -77,6 +77,7 @@ SOFTWARE.
     paths: {
       'binary-heap': 'bower_components/js-data-structures/src/binary-heap',
       'core': 'src/core',
+      'map': 'src/map',
       'map-node': 'src/map-node',
       'canvas-helper': 'src/canvas-helper',
       'a-star-array': 'src/algorithms/a-star-array',
@@ -91,6 +92,10 @@ SOFTWARE.
     'a-star-binary-heap'
   ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap) {
     var me;
+    var algorithms = {
+      'a-star-array': aStarArray,
+      'a-star-binary-heap': aStarBinaryHeap
+    }
 
     Polymer("pv-pathfinding-visualiser", {
 
@@ -107,6 +112,11 @@ SOFTWARE.
         this.$.sidebar.publish.clearHandler = this.clear;
         this.$.sidebar.publish.generateHandler = this.generateMap;
         this.$.sidebar.publish.runHandler = this.run;
+        this.$.sidebar.onAlgorithmChange = this.algorithmChange;
+      },
+
+      algorithmChange: function (name) {
+        pathfindingVisualiser.setAlgorithm(algorithms[name]);
       },
 
       clear: function () {

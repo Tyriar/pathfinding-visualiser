@@ -16,13 +16,17 @@
 
   var module = {};
 
-  module.run = function (map, start, goal, callback) {
+  module.run = function (map, callback) {
     var i;
     var closed = [];
-    var open = [start];
+    var open = [];
     var cameFrom = [];
+    var start = map.start;
+    var goal = map.goal;
 
-    open[0].f = open[0].g + heuristic(open[0], goal);
+
+    start.f = start.g + heuristic(start, goal);
+    open.push(start);
 
     while (open.length > 0) {
       var lowestF = 0;
