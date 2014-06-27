@@ -1,5 +1,7 @@
 # pathfinding-visualiser
 
+[![Build Status](https://secure.travis-ci.org/Tyriar/pathfinding-visualiser.png)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
+
 A demonstration of the A* pathfinding algorithm that I made for my blog.
 
  - [Demo][1]
