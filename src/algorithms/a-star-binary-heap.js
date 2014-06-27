@@ -1,10 +1,8 @@
-// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExportsGlobal.js
+// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExports.js
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['core', 'canvas-helper', 'binary-heap', 'map-node'], function (core, canvasHelper, BinaryHeap, MapNode) {
-      return (root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode));
-    });
+    define(['core', 'canvas-helper', 'binary-heap', 'map-node'], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory(require('core'), require('canvas-helper'), require('binary-heap'), require('map-node'));
   } else {

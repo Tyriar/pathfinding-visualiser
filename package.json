@@ -6,7 +6,7 @@
     "jasmine-node": "~1.14.3"
   },
   "scripts": {
-    "test": "jasmine-node ."
+    "test": "jasmine-node ./test/"
   },
   "repository": {
     "type": "git",
