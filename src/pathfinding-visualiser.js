@@ -65,15 +65,8 @@
     core.setMapScale(mapScale);
     canvasHelper.clearCanvas();
     map.generate(core.MAP_WIDTH, core.MAP_HEIGHT, obstacleDensity, obstacleSize);
+    canvasHelper.drawObstacles(map);
   };
-
-  function placeObstaclesWithMouse(e) {
-    var mouse = getPosition(e);
-    mouse.x = Math.floor(mouse.x / core.MAP_SCALE);
-    mouse.y = Math.floor(mouse.y / core.MAP_SCALE);
-
-    placeObstacles(x, y, 5);
-  }
 
   function getPosition(e) {
     var target;

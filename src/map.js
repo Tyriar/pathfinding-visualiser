@@ -2,13 +2,13 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['map-node', 'canvas-helper'], factory);
+    define(['map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('map-node'), require('canvas-helper'));
+    module.exports = factory(require('map-node'));
   } else {
-    root.Map = factory(MapNode, canvasHelper);
+    root.Map = factory(MapNode);
   }
-}(this, function (MapNode, canvasHelper) {
+}(this, function (MapNode) {
   'use strict';
 
   function Map(width, height) {
@@ -84,8 +84,6 @@
           continue;
         }
         this[_x][_y] = false;
-        // TODO: Remove canvasHelper dependency
-        canvasHelper.drawObstacle(_x, _y);
         obstacleCount++;
       }
     }
