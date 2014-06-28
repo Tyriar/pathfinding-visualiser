@@ -51,20 +51,20 @@
       closedList[current.value.x + ',' + current.value.y] = current;
       canvasHelper.drawVisited(current.value.x, current.value.y);
 
-      var neighbors = neighborNodes(map, current.value);
-      for (i = 0; i < neighbors.length; i++) {
-        var key = neighbors[i].x + ',' + neighbors[i].y;
+      var neighbours = neighbourNodes(map, current.value);
+      for (i = 0; i < neighbours.length; i++) {
+        var key = neighbours[i].x + ',' + neighbours[i].y;
         if (!(key in closedList)) { // Skip if in closed list
           var nodeByHash = openHash[key];
           if (nodeByHash) {
-            if (neighbors[i].g < nodeByHash.g) {
-              nodeByHash.g = neighbors[i].g;
-              nodeByHash.parent = neighbors[i].parent;
+            if (neighbours[i].g < nodeByHash.g) {
+              nodeByHash.g = neighbours[i].g;
+              nodeByHash.parent = neighbours[i].parent;
               openList.decreaseKey(nodeByHash, nodeByHash.g + heuristic(nodeByHash, goal));
             }
           } else {
-            neighbors[i].f = neighbors[i].g + heuristic(neighbors[i], goal);
-            openHash[key] = openList.insert(neighbors[i].f, neighbors[i]);
+            neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], goal);
+            openHash[key] = openList.insert(neighbours[i].f, neighbours[i]);
           }
         }
       }
@@ -73,69 +73,55 @@
     callback('No path exists');
   };
 
-  function neighborNodes(map, n) {
-    var neighbors = [];
+  function neighbourNodes(map, n) {
+    var neighbours = [];
     var count = 0;
 
     if (n.x > 0) {
       if (map[n.x - 1][n.y]) {
-        neighbors[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
+        neighbours[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
       }
       if (n.y > 0 && map[n.x - 1][n.y - 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.x < core.MAP_WIDTH - 1) {
-      if (map[n.x + 1][n.y])
-        neighbors[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
+      if (map[n.x + 1][n.y]) {
+        neighbours[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
+      }
       if (n.y > 0 && map[n.x + 1][n.y - 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.y > 0 && map[n.x][n.y - 1]) {
-      neighbors[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
+      neighbours[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
     }
     if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
-      neighbors[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
+      neighbours[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
     }
 
-    return neighbors;
+    return neighbours;
   }
 
   function heuristic(node, goal) {
-    return diagonalDistance(node, goal);
-  }
-
-  function manhattanDistance(node, goal) {
-    return Math.abs(node.x - goal.x) + Math.abs(node.y - goal.y);
-  }
-
-  function diagonalUniformDistance(node, goal) {
-    return Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-  }
-
-  function diagonalDistance(node, goal) {
+    // Diagonal distance
     var dmin = Math.min(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
     var dmax = Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
     return COST_DIAGONAL * dmin + COST_STRAIGHT * (dmax - dmin);
-  }
-
-  function euclideanDistance(node, goal) {
-    return Math.sqrt(Math.abs(node.x - goal.x) ^ 2 + Math.abs(node.y - goal.y) ^ 2);
   }
 
   return module;

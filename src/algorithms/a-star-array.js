@@ -19,98 +19,102 @@
 
   module.run = function (map, callback) {
     var i;
-    var closed = [];
-    var open = [];
-    var cameFrom = [];
+    var closedList = [];
+    var openList = [];
     var start = map.start;
     var goal = map.goal;
 
 
     start.f = start.g + heuristic(start, goal);
-    open.push(start);
+    openList.push(start);
 
-    while (open.length > 0) {
+    while (openList.length > 0) {
       var lowestF = 0;
-      for (i = 1; i < open.length; i++) {
-        if (open[i].f < open[lowestF].f) {
+      for (i = 1; i < openList.length; i++) {
+        if (openList[i].f < openList[lowestF].f) {
           lowestF = i;
         }
       }
-      var current = open[lowestF];
+      var current = openList[lowestF];
 
       if (current.equals(goal)) {
-        canvasHelper.draw(closed, open, start, current);
+        canvasHelper.draw(closedList, openList, start, current);
         callback('Map size = ' + core.MAP_WIDTH + 'x' + core.MAP_HEIGHT + '<br />' +
                  'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
-                 'Number of nodes in open list = ' + open.length + '<br />' +
-                 'Number of nodes in closed list = ' + closed.length);
+                 'Number of nodes in open list = ' + openList.length + '<br />' +
+                 'Number of nodes in closed list = ' + closedList.length);
         return;
       }
 
-      open.splice(lowestF, 1);
-      closed[closed.length] = current;
+      openList.splice(lowestF, 1);
+      closedList.push(current);
       canvasHelper.drawVisited(current.x, current.y);
 
-      var neighbors = neighborNodes(map, current);
-      for (i = 0; i < neighbors.length; i++) {
-        if (indexOfNode(closed, neighbors[i]) == -1) { // Skip if in closed list
-          var index = indexOfNode(open, neighbors[i]);
-          if (index == -1) {
-            neighbors[i].f = neighbors[i].g + heuristic(neighbors[i], goal);
-            open[open.length] = neighbors[i];
-          } else if (neighbors[i].g < open[index].g) {
-            neighbors[i].f = neighbors[i].g + heuristic(neighbors[i], goal);
-            open[index] = neighbors[i];
-          }
-        }
-      }
+      addNodeNeighboursToOpenList(map, openList, closedList, current);
     }
 
     callback('No path exists');
   };
 
-  function neighborNodes(map, n) {
-    var neighbors = [];
+  function addNodeNeighboursToOpenList(map, openList, closedList, node) {
+    var neighbours = neighbourNodes(map, node);
+    for (var i = 0; i < neighbours.length; i++) {
+      // Skip if in closed list
+      if (indexOfNode(closedList, neighbours[i]) === -1) {
+        var index = indexOfNode(openList, neighbours[i]);
+        if (index === -1) {
+          neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], map.goal);
+          openList.push(neighbours[i]);
+        } else if (neighbours[i].g < openList[index].g) {
+          neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], map.goal);
+          openList[index] = neighbours[i];
+        }
+      }
+    }
+  }
+
+  function neighbourNodes(map, n) {
+    var neighbours = [];
     var count = 0;
 
     if (n.x > 0) {
       if (map[n.x - 1][n.y]) {
-        neighbors[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
+        neighbours[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
       }
       if (n.y > 0 && map[n.x - 1][n.y - 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
         if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.x < core.MAP_WIDTH - 1) {
       if (map[n.x + 1][n.y]) {
-        neighbors[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
+        neighbours[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
       }
       if (n.y > 0 && map[n.x + 1][n.y - 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
-          neighbors[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
         }
       }
       if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
         if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
-          neighbors[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
+          neighbours[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
         }
       }
     }
     if (n.y > 0 && map[n.x][n.y - 1]) {
-      neighbors[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
+      neighbours[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
     }
     if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
-      neighbors[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
+      neighbours[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
     }
 
-    return neighbors;
+    return neighbours;
   }
 
   function indexOfNode(array, node) {
@@ -123,25 +127,10 @@
   }
 
   function heuristic(node, goal) {
-    return diagonalDistance(node, goal);
-  }
-
-  function manhattanDistance(node, goal) {
-    return Math.abs(node.x - goal.x) + Math.abs(node.y - goal.y);
-  }
-
-  function diagonalUniformDistance(node, goal) {
-    return Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-  }
-
-  function diagonalDistance(node, goal) {
+    // Diagonal distance
     var dmin = Math.min(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
     var dmax = Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
     return COST_DIAGONAL * dmin + COST_STRAIGHT * (dmax - dmin);
-  }
-
-  function euclideanDistance(node, goal) {
-    return Math.sqrt(Math.abs(node.x - goal.x) ^ 2 + Math.abs(node.y - goal.y) ^ 2);
   }
 
   return module;
