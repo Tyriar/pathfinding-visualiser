@@ -12,9 +12,6 @@
 }(this, function (core, canvasHelper, BinaryHeap, MapNode, aStarCommon) {
   'use strict';
 
-  var COST_STRAIGHT = 1;
-  var COST_DIAGONAL = 1.414;
-
   var module = {};
 
   module.run = function (map, callback) {
