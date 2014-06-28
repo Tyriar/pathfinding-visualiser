@@ -3,13 +3,13 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['core', 'canvas-helper', 'map-node'], factory);
+    define(['core', 'canvas-helper', 'map-node', 'a-star-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./map-node'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./map-node'), require('./a-star-common'));
   } else {
-    root.aStarArray = factory(core, canvasHelper, MapNode);
+    root.aStarArray = factory(core, canvasHelper, MapNode, aStarCommon);
   }
-}(this, function (core, canvasHelper, MapNode) {
+}(this, function (core, canvasHelper, MapNode, aStarCommon) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -25,7 +25,7 @@
     var goal = map.goal;
 
 
-    start.f = start.g + heuristic(start, goal);
+    start.f = start.g + aStarCommon.heuristic(start, goal);
     openList.push(start);
 
     while (openList.length > 0) {
@@ -50,71 +50,29 @@
       closedList.push(current);
       canvasHelper.drawVisited(current.x, current.y);
 
-      addNodeNeighboursToOpenList(map, openList, closedList, current);
+      var neighbours = aStarCommon.getNeighbourNodes(map, current);
+      addNodesToOpenList(neighbours, goal, openList, closedList);
     }
 
     callback('No path exists');
   };
 
-  function addNodeNeighboursToOpenList(map, openList, closedList, node) {
-    var neighbours = neighbourNodes(map, node);
-    for (var i = 0; i < neighbours.length; i++) {
+  function addNodesToOpenList(nodes, goal, openList, closedList) {
+    for (var i = 0; i < nodes.length; i++) {
       // Skip if in closed list
-      if (indexOfNode(closedList, neighbours[i]) === -1) {
-        var index = indexOfNode(openList, neighbours[i]);
+      if (indexOfNode(closedList, nodes[i]) === -1) {
+        var index = indexOfNode(openList, nodes[i]);
         if (index === -1) {
-          neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], map.goal);
-          openList.push(neighbours[i]);
-        } else if (neighbours[i].g < openList[index].g) {
-          neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], map.goal);
-          openList[index] = neighbours[i];
+          nodes[i].f = nodes[i].g +
+              aStarCommon.heuristic(nodes[i], goal);
+          openList.push(nodes[i]);
+        } else if (nodes[i].g < openList[index].g) {
+          nodes[i].f = nodes[i].g +
+              aStarCommon.heuristic(nodes[i], goal);
+          openList[index] = nodes[i];
         }
       }
     }
-  }
-
-  function neighbourNodes(map, n) {
-    var neighbours = [];
-    var count = 0;
-
-    if (n.x > 0) {
-      if (map[n.x - 1][n.y]) {
-        neighbours[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
-      }
-      if (n.y > 0 && map[n.x - 1][n.y - 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
-          neighbours[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
-        }
-      }
-      if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
-          neighbours[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
-        }
-      }
-    }
-    if (n.x < core.MAP_WIDTH - 1) {
-      if (map[n.x + 1][n.y]) {
-        neighbours[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
-      }
-      if (n.y > 0 && map[n.x + 1][n.y - 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
-          neighbours[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
-        }
-      }
-      if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
-          neighbours[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
-        }
-      }
-    }
-    if (n.y > 0 && map[n.x][n.y - 1]) {
-      neighbours[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
-    }
-    if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
-      neighbours[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
-    }
-
-    return neighbours;
   }
 
   function indexOfNode(array, node) {
@@ -124,13 +82,6 @@
       }
     }
     return -1;
-  }
-
-  function heuristic(node, goal) {
-    // Diagonal distance
-    var dmin = Math.min(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    var dmax = Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    return COST_DIAGONAL * dmin + COST_STRAIGHT * (dmax - dmin);
   }
 
   return module;

@@ -3,13 +3,13 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['core', 'canvas-helper', 'binary-heap', 'map-node'], factory);
+    define(['core', 'canvas-helper', 'binary-heap', 'map-node', 'a-star-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./binary-heap'), require('./map-node'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./binary-heap'), require('./map-node'), require('./a-star-common'));
   } else {
-    root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode);
+    root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode, aStarCommon);
   }
-}(this, function (core, canvasHelper, BinaryHeap, MapNode) {
+}(this, function (core, canvasHelper, BinaryHeap, MapNode, aStarCommon) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -18,14 +18,13 @@
   var module = {};
 
   module.run = function (map, callback) {
-    var i;
     var closedList = {};
     var openHash = {};
     var openList = new BinaryHeap();
     var start = map.start;
     var goal = map.goal;
 
-    start.f = start.g + heuristic(start, goal);
+    start.f = start.g + aStarCommon.heuristic(start, goal);
     openHash[start.x + ',' + start.y] = openList.insert(start.f, start);
 
     while (!openList.isEmpty()) {
@@ -35,7 +34,7 @@
         // TODO: This should be outside of the timed section.
         // Convert binary heap to regular array for reporting
         var list = openList.list;
-        for (i = 0; i < list.length; i++) {
+        for (var i = 0; i < list.length; i++) {
           list[i] = list[i].value;
         }
         canvasHelper.draw(closed, openList.list, start, current.value);
@@ -50,77 +49,37 @@
       closedList[current.value.x + ',' + current.value.y] = current;
       canvasHelper.drawVisited(current.value.x, current.value.y);
 
-      var neighbours = neighbourNodes(map, current.value);
-      for (i = 0; i < neighbours.length; i++) {
-        var key = neighbours[i].x + ',' + neighbours[i].y;
-        if (!(key in closedList)) { // Skip if in closed list
-          var nodeByHash = openHash[key];
-          if (nodeByHash) {
-            if (neighbours[i].g < nodeByHash.g) {
-              nodeByHash.g = neighbours[i].g;
-              nodeByHash.parent = neighbours[i].parent;
-              openList.decreaseKey(nodeByHash, nodeByHash.g + heuristic(nodeByHash, goal));
-            }
-          } else {
-            neighbours[i].f = neighbours[i].g + heuristic(neighbours[i], goal);
-            openHash[key] = openList.insert(neighbours[i].f, neighbours[i]);
-          }
-        }
-      }
+      var neighbours = aStarCommon.getNeighbourNodes(map, current.value);
+      addNodesToOpenList(neighbours, openList, openHash, closedList, goal);
     }
 
     callback('No path exists');
   };
 
-  function neighbourNodes(map, n) {
-    var neighbours = [];
-    var count = 0;
+  function addNodesToOpenList(nodes, openList, openHash, closedList, goal) {
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].x + ',' + nodes[i].y;
 
-    if (n.x > 0) {
-      if (map[n.x - 1][n.y]) {
-        neighbours[count++] = new MapNode(n.x - 1, n.y, n, COST_STRAIGHT);
+      // Skip if in closed list
+      if (key in closedList) {
+        continue;
       }
-      if (n.y > 0 && map[n.x - 1][n.y - 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y - 1]) {
-          neighbours[count++] = new MapNode(n.x - 1, n.y - 1, n, COST_DIAGONAL);
-        }
-      }
-      if (n.y < core.MAP_HEIGHT && map[n.x - 1][n.y + 1]) {
-        if (map[n.x - 1][n.y] && map[n.x][n.y + 1]) {
-          neighbours[count++] = new MapNode(n.x - 1, n.y + 1, n, COST_DIAGONAL);
-        }
-      }
-    }
-    if (n.x < core.MAP_WIDTH - 1) {
-      if (map[n.x + 1][n.y]) {
-        neighbours[count++] = new MapNode(n.x + 1, n.y, n, COST_STRAIGHT);
-      }
-      if (n.y > 0 && map[n.x + 1][n.y - 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y - 1]) {
-          neighbours[count++] = new MapNode(n.x + 1, n.y - 1, n, COST_DIAGONAL);
-        }
-      }
-      if (n.y < core.MAP_HEIGHT && map[n.x + 1][n.y + 1]) {
-        if (map[n.x + 1][n.y] && map[n.x][n.y + 1]) {
-          neighbours[count++] = new MapNode(n.x + 1, n.y + 1, n, COST_DIAGONAL);
-        }
-      }
-    }
-    if (n.y > 0 && map[n.x][n.y - 1]) {
-      neighbours[count++] = new MapNode(n.x, n.y - 1, n, COST_STRAIGHT);
-    }
-    if (n.y < core.MAP_HEIGHT - 1 && map[n.x][n.y + 1]) {
-      neighbours[count++] = new MapNode(n.x, n.y + 1, n, COST_STRAIGHT);
-    }
 
-    return neighbours;
-  }
+      var nodeByHash = openHash[key];
 
-  function heuristic(node, goal) {
-    // Diagonal distance
-    var dmin = Math.min(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    var dmax = Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    return COST_DIAGONAL * dmin + COST_STRAIGHT * (dmax - dmin);
+      if (nodeByHash) {
+        if (nodes[i].g < nodeByHash.g) {
+          nodeByHash.g = nodes[i].g;
+          nodeByHash.parent = nodes[i].parent;
+          openList.decreaseKey(nodeByHash, nodeByHash.g +
+              aStarCommon.heuristic(nodeByHash, goal));
+        }
+      } else {
+        nodes[i].f = nodes[i].g +
+            aStarCommon.heuristic(nodes[i], goal);
+        openHash[key] = openList.insert(nodes[i].f, nodes[i]);
+      }
+    }
   }
 
   return module;
