@@ -78,13 +78,13 @@
     context.beginPath();
     context.moveTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
 
+    for (var i = 0; i < openList.length; i++) {
+      module.drawOpenListNode(openList[i].x, openList[i].y);
+    }
+
     while (goalNode.parent) {
       goalNode = goalNode.parent;
       context.lineTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
-    }
-
-    for (var i = 0; i < openList.length; i++) {
-      module.drawOpenListNode(openList[i].x, openList[i].y);
     }
 
     context.strokeStyle = PATH_COLOUR;
