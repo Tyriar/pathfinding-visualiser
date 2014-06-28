@@ -68,6 +68,7 @@ SOFTWARE.
   require.config({
     paths: {
       'binary-heap': 'bower_components/js-data-structures/src/binary-heap',
+      'fibonacci-heap': 'bower_components/js-data-structures/src/fibonacci-heap',
       'core': 'src/core',
       'map': 'src/map',
       'map-node': 'src/map-node',
@@ -75,6 +76,7 @@ SOFTWARE.
       'a-star-common': 'src/algorithms/a-star-common',
       'a-star-array': 'src/algorithms/a-star-array',
       'a-star-binary-heap': 'src/algorithms/a-star-binary-heap',
+      'a-star-fibonacci-heap': 'src/algorithms/a-star-fibonacci-heap',
       'pathfinding-visualiser': 'src/pathfinding-visualiser'
     }
   });
@@ -82,12 +84,14 @@ SOFTWARE.
   require([
     'pathfinding-visualiser',
     'a-star-array',
-    'a-star-binary-heap'
-  ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap) {
+    'a-star-binary-heap',
+    'a-star-fibonacci-heap'
+  ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap, aStarFibonacciHeap) {
     var me;
     var algorithms = {
       'a-star-array': aStarArray,
-      'a-star-binary-heap': aStarBinaryHeap
+      'a-star-binary-heap': aStarBinaryHeap,
+      'a-star-fibonacci-heap': aStarFibonacciHeap
     };
 
     Polymer("pv-pathfinding-visualiser", {
@@ -95,7 +99,7 @@ SOFTWARE.
       ready: function () {
         me = this;
         pathfindingVisualiser.init(this.$.canvas);
-        this.setAStarBinaryHeap();
+        this.algorithmChange('a-star-binary-heap');
         this.generateMap();
         var element = this;
         this.$.canvas.addEventListener('click', function (e) {
@@ -134,15 +138,7 @@ SOFTWARE.
           me.$.infoCard.show(result);
           me.$.sidebar.setRunDisabled(false);
         });
-      },
-
-      setAStarArray: function () {
-        pathfindingVisualiser.setAlgorithm(aStarArray);
-      },
-
-      setAStarBinaryHeap: function () {
-        pathfindingVisualiser.setAlgorithm(aStarBinaryHeap);
-      },
+      }
 
     });
   });

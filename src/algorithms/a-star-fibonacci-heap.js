@@ -3,13 +3,13 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['core', 'canvas-helper', 'binary-heap', 'map-node', 'a-star-common'], factory);
+    define(['core', 'canvas-helper', 'fibonacci-heap', 'map-node', 'a-star-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./binary-heap'), require('./map-node'), require('./a-star-common'));
+    module.exports = factory(require('./core'), require('./canvas-helper'), require('./fibonacci-heap'), require('./map-node'), require('./a-star-common'));
   } else {
-    root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode, aStarCommon);
+    root.aStarFibonacciHeap = factory(core, canvasHelper, FibonacciHeap, MapNode, aStarCommon);
   }
-}(this, function (core, canvasHelper, BinaryHeap, MapNode, aStarCommon) {
+}(this, function (core, canvasHelper, FibonacciHeap, MapNode, aStarCommon) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -20,7 +20,7 @@
   module.run = function (map, callback) {
     var closedList = {};
     var openHash = {};
-    var openList = new BinaryHeap();
+    var openList = new FibonacciHeap();
     var start = map.start;
     var goal = map.goal;
 
@@ -35,9 +35,9 @@
                  'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
                  'Number of nodes in open list = ' + openList.size() + '<br />' +
                  'Number of nodes in closed list = ' + Object.keys(closedList).length);
-        var list = openList.list;
-        for (var i = 0; i < list.length; i++) {
-          list[i] = list[i].value;
+        var list = [];
+        while (!openList.isEmpty()) {
+          list.push(openList.extractMinimum().value);
         }
         canvasHelper.draw(closed, list, start, current.value);
         return;

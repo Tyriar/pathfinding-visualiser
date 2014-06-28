@@ -38,11 +38,11 @@
       var current = openList[lowestF];
 
       if (current.equals(goal)) {
-        canvasHelper.draw(closedList, openList, start, current);
         callback('Map size = ' + core.MAP_WIDTH + 'x' + core.MAP_HEIGHT + '<br />' +
                  'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
                  'Number of nodes in open list = ' + openList.length + '<br />' +
                  'Number of nodes in closed list = ' + closedList.length);
+        canvasHelper.draw(closedList, openList, start, current);
         return;
       }
 
