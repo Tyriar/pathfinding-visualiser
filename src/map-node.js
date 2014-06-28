@@ -24,7 +24,7 @@
   }
 
   MapNode.prototype.equals = function (other) {
-    return this.x == other.x && this.y == other.y;
+    return this.x === other.x && this.y === other.y;
   };
 
   return MapNode;

@@ -14,20 +14,15 @@
 
   var module = {};
 
-  var context;
   var map;
-  var start;
-  var goal;
-  var isMouseDown;
   var algorithmDelegate;
-  var mapConfiguration;
+  var resizeTimeout;
 
   module.init = function (canvasElement) {
     canvasHelper.setCanvas(canvasElement);
     core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
 
     map = new Map(core.MAP_WIDTH, core.MAP_HEIGHT);
-    isMouseDown = false;
 
     module.clear();
 
@@ -80,7 +75,7 @@
     else if (e.srcElement) {
       target = e.srcElement;
     }
-    if (target.nodeType == 3) {
+    if (target.nodeType === 3) {
       target = target.parentNode;
     }
 
@@ -90,9 +85,7 @@
     return { 'x': x, 'y': y };
   }
 
-  var resizeTimeout;
-
-  function resizeWindow(e) {
+  function resizeWindow() {
     window.clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(resizeMap, 200);
   }

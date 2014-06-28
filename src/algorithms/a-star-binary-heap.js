@@ -19,7 +19,6 @@
 
   module.run = function (map, callback) {
     var i;
-    var cameFrom = [];
     var closedList = {};
     var openHash = {};
     var openList = new BinaryHeap();

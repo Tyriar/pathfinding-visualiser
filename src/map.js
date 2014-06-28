@@ -40,7 +40,7 @@
 
   Map.prototype.generate = function (width, height, obstacleDensity, obstacleSize) {
     if (obstacleSize <= 0 || obstacleDensity > 90) {
-      return
+      return;
     }
 
     if (obstacleDensity !== undefined) {
@@ -85,8 +85,8 @@
         if (!this.isOnMap(_x, _y) || !this[_x][_y]) {
           continue;
         }
-        if ((_x == this.start.x && _y == this.start.y) ||
-            (_x == this.goal.x  && _y == this.goal.y)) {
+        if ((_x === this.start.x && _y === this.start.y) ||
+            (_x === this.goal.x  && _y === this.goal.y)) {
           continue;
         }
         this[_x][_y] = false;
@@ -94,7 +94,7 @@
       }
     }
     return obstacleCount;
-  }
+  };
 
   return Map;
 }));
