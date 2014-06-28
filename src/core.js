@@ -27,8 +27,10 @@
   };
 
   module.setMapScale = function (mapScale) {
-    module.MAP_SCALE = mapScale;
-    updateMapDimensions();
+    if (mapScale !== undefined) {
+      module.MAP_SCALE = mapScale;
+      updateMapDimensions();
+    }
   };
 
   function updateMapDimensions() {

@@ -49,17 +49,18 @@
         obstacleSize: obstacleSize,
       };
     }
+    
     this.width = width;
     this.height = height;
     this.clear();
 
-    var nodesInMap = width * height;
+    var nodesInMap = this.width * this.height;
     var desiredObstacleCount = Math.floor(nodesInMap * this.configuration.obstacleDensity / 100);
     var obstacles = 0;
 
     while (obstacles < desiredObstacleCount) {
-      var x = Math.floor(Math.random() * width);
-      var y = Math.floor(Math.random() * height);
+      var x = Math.floor(Math.random() * this.width);
+      var y = Math.floor(Math.random() * this.height);
       obstacles += this.placeObstacles(x, y, this.configuration.obstacleSize);
     }
   };

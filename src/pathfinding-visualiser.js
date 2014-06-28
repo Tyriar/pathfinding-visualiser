@@ -94,8 +94,7 @@
     core.setCanvasDimensions(canvasHelper.getCanvasWidth(), canvasHelper.getCanvasHeight());
     module.clear();
     module.generateMap();
-    goal.x = core.MAP_WIDTH - 1;
-    goal.y = core.MAP_HEIGHT - 1;
+    map.setGoal(core.MAP_WIDTH - 1, core.MAP_HEIGHT - 1);
   }
 
   return module;
