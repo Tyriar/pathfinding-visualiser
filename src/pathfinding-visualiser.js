@@ -50,10 +50,20 @@
     var startTime = performance.now();
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
-    algorithmDelegate.run(map, function (result) {
-      var duration = performance.now() - startTime;
-      result += '<br>Operation took ' + duration.toFixed(2) + 'ms';
-      callback(result);
+    algorithmDelegate.run(map, function (results) {
+      var message = '';
+      var duration = performance.now() - startTime
+      results.push({ result: 'Operation took ' + duration.toFixed(2) + 'ms' });
+      for (var i = 0; i < results.length; i++) {
+        var r = results[i];
+        if (r.colour) {
+          message += '<pv-summary-line hascolour colour="' + r.colour + '">' +
+              r.result + '</pv-summary-line>';
+        } else {
+          message += '<pv-summary-line>' + r.result + '</pv-summary-line>';
+        }
+      }
+      callback(message);
     });
   };
 

@@ -41,10 +41,15 @@
   };
 
   module.buildSummaryMessage = function (map, openSize, closedSize) {
-    return 'Map size = ' + map.width + 'x' + map.height + 
-             ' (' + map.width * map.height + ' nodes)<br />' +
-           'Number of nodes in open list = ' + openSize + '<br />' +
-           'Number of nodes in closed list = ' + closedSize
+    return [{ 
+      result: 'Map size = ' + map.width + 'x' + map.height
+    }, {
+      result: 'Number of nodes in open list = ' + openSize,
+      colour: '#88F'
+    }, {
+      result: 'Number of nodes in closed list = ' + closedSize,
+      colour: '#44F'
+    }];
   };
 
   return module;

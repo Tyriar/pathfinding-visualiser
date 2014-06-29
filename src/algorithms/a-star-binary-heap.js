@@ -48,7 +48,7 @@
       addNodesToOpenList(neighbours, openList, openHash, closedList, goal);
     }
 
-    callback('No path exists');
+    callback([{ result: 'No path exists' }]);
   };
 
   function addNodesToOpenList(nodes, openList, openHash, closedList, goal) {

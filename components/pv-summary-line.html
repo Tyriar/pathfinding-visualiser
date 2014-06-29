@@ -20,47 +20,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<link rel="import" href="pv-card.html">
-<link rel="import" href="pv-summary-line.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
 
-<polymer-element name="pv-summary">
+<polymer-element name="pv-summary-line" attributes="hascolour">
   <template>
     <style>
       :host {
         display: block;
-        position: relative;
+        line-height: 1.5;
       }
 
-      #container {
+      :host(:not([hascolour])) #colour {
         visibility: hidden;
-        transition: top 0.5s ease-in-out, visibility 0s linear 0.5s, opacity .2s;
-        position: relative;
-        top: 20em;
-        opacity: .9;
       }
 
-      #container.visible {
-        visibility: visible;
-        transition-delay: 0s;
-        top: 0em;
-      }
-
-      #container:hover {
-        opacity: .6;
+      #colour {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
       }
     </style>
-    <pv-card id="container" z="2">
-      <content></content>
-    </pv-card>
+    <div id="colour" style="background-color: {{ colour }}">
+      <paper-shadow z="1"></paper-shadow>
+    </div>
+    <content></content>
   </template>
   <script>
-    Polymer('pv-summary', {
-      clear: function () {
-        this.$.container.classList.remove('visible');
-      },
-      show: function (html) {
-        this.$.container.classList.add('visible');
-        this.innerHTML = html;
+    Polymer('pv-summary-line', {
+      publish: {
+        colour: 'transparent'
       }
     });
   </script>
