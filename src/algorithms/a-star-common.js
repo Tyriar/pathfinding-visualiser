@@ -37,10 +37,7 @@
   };
 
   module.heuristic = function (node, goal) {
-    // Diagonal distance
-    var dmin = Math.min(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    var dmax = Math.max(Math.abs(node.x - goal.x), Math.abs(node.y - goal.y));
-    return COST_DIAGONAL * dmin + COST_STRAIGHT * (dmax - dmin);
+    return Math.abs(node.x - goal.x) + Math.abs(node.y - goal.y);
   };
 
   module.buildSummaryMessage = function (map, openSize, closedSize) {
