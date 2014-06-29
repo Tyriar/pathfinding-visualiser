@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<link rel="import" href="components/pv-info-card.html">
+<link rel="import" href="components/pv-summary.html">
 <link rel="import" href="components/pv-sidebar.html">
 
 <polymer-element name="pv-pathfinding-visualiser">
@@ -47,7 +47,7 @@ SOFTWARE.
         overflow: hidden;
       }
 
-      #infoCard {
+      #summary {
         position: absolute;
         bottom: 1em;
         left: 0.5em;
@@ -57,7 +57,7 @@ SOFTWARE.
     <div id="container" layout vertical>
       <div flex layout horizontal>
         <canvas id="canvas" oncontextmenu="return false;" flex two></canvas>
-        <pv-info-card id="infoCard"></pv-info-card>
+        <pv-summary id="summary"></pv-summary>
         <pv-sidebar id="sidebar"></pv-sidebar>
       </div>
     </div>
@@ -117,12 +117,12 @@ SOFTWARE.
       },
 
       clear: function () {
-        me.$.infoCard.clear();
+        me.$.summary.clear();
         pathfindingVisualiser.clear();
       },
 
       generateMap: function () {
-        me.$.infoCard.clear();
+        me.$.summary.clear();
         pathfindingVisualiser.generateMap(
           me.$.sidebar.publish.mapScale,
           me.$.sidebar.publish.obstacleDensity,
@@ -135,7 +135,7 @@ SOFTWARE.
         }
         me.$.sidebar.setRunDisabled(true);
         pathfindingVisualiser.run(function (result) {
-          me.$.infoCard.show(result);
+          me.$.summary.show(result);
           me.$.sidebar.setRunDisabled(false);
         });
       }
