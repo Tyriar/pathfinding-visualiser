@@ -28,10 +28,8 @@
       var current = openList.extractMinimum();
 
       if (current.value.equals(goal)) {
-        callback('Map size = ' + core.MAP_WIDTH + 'x' + core.MAP_HEIGHT + '<br />' +
-                 'Total number of nodes = ' + core.MAP_WIDTH * core.MAP_HEIGHT + '<br />' +
-                 'Number of nodes in open list = ' + openList.size() + '<br />' +
-                 'Number of nodes in closed list = ' + Object.keys(closedList).length);
+        callback(aStarCommon.buildSummaryMessage(
+            map, openList.size(), Object.keys(closedList).length));
         var list = [];
         while (!openList.isEmpty()) {
           list.push(openList.extractMinimum().value);
