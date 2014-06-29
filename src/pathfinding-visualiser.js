@@ -17,6 +17,7 @@
   var map;
   var algorithmDelegate;
   var resizeTimeout;
+  var paintNodesTimeout;
 
   module.init = function (canvasElement) {
     canvasHelper.setCanvas(canvasElement);
@@ -42,17 +43,24 @@
   };
 
   module.clear = function () {
+    if (paintNodesTimeout) {
+      clearTimeout(paintNodesTimeout);
+    }
     canvasHelper.clearCanvas();
     map.clear();
   };
 
-  module.run = function (callback) {
-    var startTime = performance.now();
+  module.run = function (callback, getSpeed) {
+    if (paintNodesTimeout) {
+      clearTimeout(paintNodesTimeout);
+    }
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
-    algorithmDelegate.run(map, function (results) {
+
+    var startTime = performance.now();
+    algorithmDelegate.run(map, function (results, queuedPaints, goalNode, openList, finish) {
       var message = '';
-      var duration = performance.now() - startTime
+      var duration = finish - startTime;
       results.push({ result: 'Operation took ' + duration.toFixed(2) + 'ms' });
       for (var i = 0; i < results.length; i++) {
         var r = results[i];
@@ -63,16 +71,52 @@
           message += '<pv-summary-line>' + r.result + '</pv-summary-line>';
         }
       }
+
+      canvasHelper.drawStartGoal(map.start.x, map.start.y);
+      paintNodes(queuedPaints, goalNode, openList, getSpeed ? getSpeed : 0);
+
       callback(message);
     });
   };
 
   module.generateMap = function (mapScale, obstacleDensity, obstacleSize) {
+    if (paintNodesTimeout) {
+      clearTimeout(paintNodesTimeout);
+    }
     core.setMapScale(mapScale);
     canvasHelper.clearCanvas();
     map.generate(core.MAP_WIDTH, core.MAP_HEIGHT, obstacleDensity, obstacleSize);
     canvasHelper.drawObstacles(map);
   };
+
+  function paintNodes(queuedPaints, goalNode, openList, getSpeed) {
+    var paint = queuedPaints.shift();
+    if (paint.x !== map.start.x || paint.y !== map.start.y) {
+      paint.f.call(null, paint.x, paint.y);
+    }
+    if (queuedPaints.length) {
+      if (getSpeed) {
+        paintNodesTimeout = setTimeout(function () {
+          paintNodes(queuedPaints, goalNode, openList, getSpeed);
+        }, getSpeed());
+      } else {
+        if (queuedPaints.length % 200 === 0) {
+          // HACK: Prevent max call stack
+          setTimeout(function () {
+            paintNodes(queuedPaints, goalNode, openList, getSpeed);
+          }, 1);
+        } else {
+          paintNodes(queuedPaints, goalNode, openList, getSpeed);
+        }
+      }
+    } else {
+      // Only draw the path if a path was found
+      if (goalNode) {
+        canvasHelper.drawStartGoal(goalNode.x, goalNode.y);
+        canvasHelper.drawPath(goalNode, openList);
+      }
+    }
+  }
 
   function getPosition(e) {
     var target;

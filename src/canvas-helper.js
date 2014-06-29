@@ -93,6 +93,21 @@
     context.closePath();
   };
 
+  module.drawPath = function (goalNode, openList) {
+    context.beginPath();
+    context.moveTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
+
+    while (goalNode.parent) {
+      goalNode = goalNode.parent;
+      context.lineTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
+    }
+
+    context.strokeStyle = PATH_COLOUR;
+    context.lineWidth = PATH_WIDTH;
+    context.stroke();
+    context.closePath();
+  };
+
   module.getCanvasWidth = function () {
     canvas.setAttribute('width', canvas.clientWidth);
     return canvas.clientWidth;

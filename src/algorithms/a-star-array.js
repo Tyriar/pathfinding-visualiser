@@ -20,7 +20,7 @@
     var openList = [];
     var start = map.start;
     var goal = map.goal;
-
+    var queuedPaints = [];
 
     start.f = start.g + aStarCommon.heuristic(start, goal);
     openList.push(start);
@@ -35,24 +35,30 @@
       var current = openList[lowestF];
 
       if (current.equals(goal)) {
-        callback(aStarCommon.buildSummaryMessage(
-            map, openList.length, closedList.length));
-        canvasHelper.draw(closedList, openList, start, current);
+        var finish = performance.now();
+        var message = aStarCommon.buildSummaryMessage(
+            map, openList.length, closedList.length);
+        callback(message, queuedPaints, current, openList, finish);
         return;
       }
 
       openList.splice(lowestF, 1);
       closedList.push(current);
-      canvasHelper.drawVisited(current.x, current.y);
+
+      queuedPaints.push({
+        f: canvasHelper.drawVisited,
+        x: current.x,
+        y: current.y
+      });
 
       var neighbours = aStarCommon.getNeighbourNodes(map, current);
-      addNodesToOpenList(neighbours, goal, openList, closedList);
+      addNodesToOpenList(neighbours, goal, openList, closedList, queuedPaints);
     }
 
-    callback([{ result: 'No path exists' }]);
+    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, performance.now());
   };
 
-  function addNodesToOpenList(nodes, goal, openList, closedList) {
+  function addNodesToOpenList(nodes, goal, openList, closedList, queuedPaints) {
     for (var i = 0; i < nodes.length; i++) {
       // Skip if in closed list
       if (indexOfNode(closedList, nodes[i]) === -1) {
@@ -61,6 +67,11 @@
           nodes[i].f = nodes[i].g +
               aStarCommon.heuristic(nodes[i], goal);
           openList.push(nodes[i]);
+          queuedPaints.push({
+            f: canvasHelper.drawOpenListNode,
+            x: nodes[i].x,
+            y: nodes[i].y
+          });
         } else if (nodes[i].g < openList[index].g) {
           nodes[i].f = nodes[i].g +
               aStarCommon.heuristic(nodes[i], goal);

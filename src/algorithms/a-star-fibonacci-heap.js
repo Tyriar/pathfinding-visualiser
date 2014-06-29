@@ -20,6 +20,7 @@
     var openList = new FibonacciHeap();
     var start = map.start;
     var goal = map.goal;
+    var queuedPaints = [];
 
     start.f = start.g + aStarCommon.heuristic(start, goal);
     openHash[start.x + ',' + start.y] = openList.insert(start.f, start);
@@ -28,13 +29,14 @@
       var current = openList.extractMinimum();
 
       if (current.value.equals(goal)) {
-        callback(aStarCommon.buildSummaryMessage(
-            map, openList.size(), Object.keys(closedList).length));
+        var finish = performance.now();
+        var message = aStarCommon.buildSummaryMessage(
+            map, openList.size(), Object.keys(closedList).length);
         var list = [];
         while (!openList.isEmpty()) {
           list.push(openList.extractMinimum().value);
         }
-        canvasHelper.draw(closed, list, start, current.value);
+        callback(message, queuedPaints, current.value, list, finish);
         return;
       }
 
@@ -42,16 +44,20 @@
       openHash[currentKey] = undefined;
       closedList[currentKey] = current;
 
-      canvasHelper.drawVisited(current.value.x, current.value.y);
+      queuedPaints.push({
+        f: canvasHelper.drawVisited,
+        x: current.value.x,
+        y: current.value.y
+      });
 
       var neighbours = aStarCommon.getNeighbourNodes(map, current.value);
-      addNodesToOpenList(neighbours, openList, openHash, closedList, goal);
+      addNodesToOpenList(neighbours, openList, openHash, closedList, goal, queuedPaints);
     }
 
-    callback([{ result: 'No path exists' }]);
+    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, performance.now());
   };
 
-  function addNodesToOpenList(nodes, openList, openHash, closedList, goal) {
+  function addNodesToOpenList(nodes, openList, openHash, closedList, goal, queuedPaints) {
     for (var i = 0; i < nodes.length; i++) {
       var key = nodes[i].x + ',' + nodes[i].y;
 
@@ -73,6 +79,11 @@
         nodes[i].f = nodes[i].g +
             aStarCommon.heuristic(nodes[i], goal);
         openHash[key] = openList.insert(nodes[i].f, nodes[i]);
+        queuedPaints.push({
+          f: canvasHelper.drawOpenListNode,
+          x: nodes[i].x,
+          y: nodes[i].y
+        });
       }
     }
   }

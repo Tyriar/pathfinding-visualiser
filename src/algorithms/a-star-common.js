@@ -41,7 +41,7 @@
   };
 
   module.buildSummaryMessage = function (map, openSize, closedSize) {
-    return [{ 
+    return [{
       result: 'Map size = ' + map.width + 'x' + map.height
     }, {
       result: 'Number of nodes in open list = ' + openSize,

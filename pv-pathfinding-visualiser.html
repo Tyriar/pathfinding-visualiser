@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<link rel="import" href="components/pv-summary.html">
 <link rel="import" href="components/pv-sidebar.html">
+<link rel="import" href="components/pv-summary.html">
 
 <polymer-element name="pv-pathfinding-visualiser">
   <template>
@@ -134,10 +134,13 @@ SOFTWARE.
           return;
         }
         me.$.sidebar.setRunDisabled(true);
+        var getSpeed = !me.$.sidebar.animationEnabled ? undefined : function () {
+          return me.$.sidebar.speedMax - me.$.sidebar.speed + 1;
+        };
         pathfindingVisualiser.run(function (result) {
           me.$.summary.show(result);
           me.$.sidebar.setRunDisabled(false);
-        });
+        }, getSpeed);
       }
 
     });
