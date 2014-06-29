@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="bower_components/paper-dialog/paper-dialog-transition.html">
-<link rel="import" href="components/pv-sidebar.html">
-<link rel="import" href="components/pv-summary.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog-transition.html">
+<link rel="import" href="../polymer_components/pv-sidebar.html">
+<link rel="import" href="../polymer_components/pv-summary.html">
 
 <polymer-element name="pv-pathfinding-visualiser">
   <template>
@@ -90,21 +90,20 @@ SOFTWARE.
     </paper-dialog>
   </template>
 
-  <script src="bower_components/requirejs/require.js" type="text/javascript"></script>
   <script>
   require.config({
     paths: {
-      'binary-heap': 'bower_components/js-data-structures/src/binary-heap',
-      'fibonacci-heap': 'bower_components/js-data-structures/src/fibonacci-heap',
-      'core': 'src/core',
-      'map': 'src/map',
-      'map-node': 'src/map-node',
-      'canvas-helper': 'src/canvas-helper',
-      'a-star-common': 'src/algorithms/a-star-common',
-      'a-star-array': 'src/algorithms/a-star-array',
-      'a-star-binary-heap': 'src/algorithms/a-star-binary-heap',
-      'a-star-fibonacci-heap': 'src/algorithms/a-star-fibonacci-heap',
-      'pathfinding-visualiser': 'src/pathfinding-visualiser'
+      'binary-heap': '../bower_components/js-data-structures/src/binary-heap',
+      'fibonacci-heap': '../bower_components/js-data-structures/src/fibonacci-heap',
+      'core': '../src/core',
+      'map': '../src/map',
+      'map-node': '../src/map-node',
+      'canvas-helper': '../src/canvas-helper',
+      'a-star-common': '../src/algorithms/a-star-common',
+      'a-star-array': '../src/algorithms/a-star-array',
+      'a-star-binary-heap': '../src/algorithms/a-star-binary-heap',
+      'a-star-fibonacci-heap': '../src/algorithms/a-star-fibonacci-heap',
+      'pathfinding-visualiser': '../src/pathfinding-visualiser'
     }
   });
 
