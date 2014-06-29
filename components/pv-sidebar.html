@@ -28,6 +28,7 @@ SOFTWARE.
 <link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="pv-svg-icons.html">
 
 <polymer-element name="pv-sidebar">
   <template>
@@ -179,13 +180,10 @@ SOFTWARE.
     <nav>
       <ul layout horizontal center>
         <li flex>
-          <paper-icon-button icon="favorite" role="button" tabindex="0" class=""></paper-icon-button>
-        </li>
-        <li flex two>
-          <paper-icon-button icon="info" role="button" tabindex="0" class=""></paper-icon-button>
+          <paper-icon-button icon="favorite" data-dialog-id="share" on-click="{{ toggleDialog }}"></paper-icon-button>
         </li>
         <li flex>
-          <paper-icon-button icon="help" role="button" tabindex="0" class=""></paper-icon-button>
+          <paper-icon-button icon="info" data-dialog-id="info" on-click="{{ toggleDialog }}"></paper-icon-button>
         </li>
       </ul>
     </nav>
@@ -202,6 +200,7 @@ SOFTWARE.
         runHandler: undefined,
         generateHandler: undefined,
         clearHandler: undefined,
+        toggleDialogHandler: undefined,
         isRunDisabled: function () {
           return this.$.runButton.disabled;
         },
@@ -224,6 +223,9 @@ SOFTWARE.
       },
       clear: function () {
         if (this.publish.clearHandler) this.publish.clearHandler();
+      },
+      toggleDialog: function (e) {
+        if (this.publish.toggleDialogHandler) this.publish.toggleDialogHandler(e);
       }
     });
   </script>

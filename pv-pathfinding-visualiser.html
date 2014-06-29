@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog-transition.html">
 <link rel="import" href="components/pv-sidebar.html">
 <link rel="import" href="components/pv-summary.html">
 
@@ -61,6 +63,31 @@ SOFTWARE.
         <pv-sidebar id="sidebar"></pv-sidebar>
       </div>
     </div>
+
+    <paper-dialog heading="Share" id="share" transition="paper-dialog-transition-bottom">
+      <p></p>
+
+      <paper-button label="Dismiss" affirmative default></paper-button>
+    </paper-dialog>
+
+    <paper-dialog heading="What is this?" id="info" transition="paper-dialog-transition-bottom">
+      <p>This app demonstrates various pathfinding algorithms by visualising and animating how they work. It's built on <a href="http://www.polymer-project.org/">Polymer</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a> and <a href="https://github.com/Tyriar/pathfinding-visualiser">open source</a>!.</p>
+
+      <p>My articles on pathfinding:</p>
+      <ul>
+        <li><a href="http://www.growingwiththeweb.com/2012/06/a-pathfinding-algorithm.html">A* pathfinding algorithm</a></li>
+      </ul>
+
+      <p>
+        By Daniel Imms -
+        <a href="http://www.growingwiththeweb.com">Blog</a> |
+        <a href="https://github.com/Tyriar">GitHub</a> |
+        <a href="https://plus.google.com/+DanielImms?rel=author">Google+</a> |
+        <a href="https://twitter.com/Tyriar">Twitter</a>
+      </p>
+
+      <paper-button label="Dismiss" affirmative default></paper-button>
+    </paper-dialog>
   </template>
 
   <script src="bower_components/requirejs/require.js" type="text/javascript"></script>
@@ -109,6 +136,7 @@ SOFTWARE.
         this.$.sidebar.publish.clearHandler = this.clear;
         this.$.sidebar.publish.generateHandler = this.generateMap;
         this.$.sidebar.publish.runHandler = this.run;
+        this.$.sidebar.publish.toggleDialogHandler = this.toggleDialog;
         this.$.sidebar.onAlgorithmChange = this.algorithmChange;
       },
 
@@ -141,6 +169,20 @@ SOFTWARE.
           me.$.summary.show(result);
           me.$.sidebar.setRunDisabled(false);
         }, getSpeed);
+      },
+
+      toggleDialog: function (e) {
+        var dialog = me.$[e.target.getAttribute('data-dialog-id')];
+        var allDialogs = [
+          me.$.share,
+          me.$.info
+        ];
+        for (var i = 0; i < allDialogs.length; i++) {
+          if (allDialogs[i].id != dialog.id) {
+            allDialogs[i].opened = false;
+          }
+        }
+        dialog.toggle();
       }
 
     });
