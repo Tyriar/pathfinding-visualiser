@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/Tyriar/pathfinding-visualiser.png)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
 [![Code climate](https://codeclimate.com/github/Tyriar/pathfinding-visualiser.png)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
+[![Dependency Status](https://gemnasium.com/Tyriar/js-data-structures.svg)](https://gemnasium.com/Tyriar/js-data-structures)
 
 A demonstration of the A* pathfinding algorithm that I made for my blog.
 
