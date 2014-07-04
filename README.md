@@ -13,6 +13,20 @@ A demonstration of the A* pathfinding algorithm that I made for my blog.
 
 ```
 bower install
+npm install -g vulcanize
+npm install
+```
+
+## Building
+
+```
+grunt
+```
+
+## Testing
+
+```
+npm test
 ```
 
 ## Running locally
@@ -24,8 +38,8 @@ Due to browser security features, HTML imports don't work when runnign a page fr
 python -m SimpleHTTPServer 8000
 # Windows
 python -m http.server 8000
-``` 
- 
- 
+```
+
+
   [1]: http://www.growingwiththeweb.com/p/html5-demo.html
   [2]: http://www.growingwiththeweb.com/2012/06/a-pathfinding-algorithm.html
