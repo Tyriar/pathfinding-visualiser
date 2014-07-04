@@ -61,10 +61,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks(tasks[i]);
   }
 
-  grunt.registerTask('default', [
+  grunt.registerTask('build', [
     'uglify:dist',
     'vulcanize:dist',
     'copy:dist',
     'clean:dist'
+  ]);
+
+  grunt.registerTask('default', [
+    'build'
   ]);
 };

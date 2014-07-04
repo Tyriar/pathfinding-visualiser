@@ -12,4 +12,4 @@ install:
   - npm install
   - bower install
 before_script:
-  - grunt
+  - grunt build
