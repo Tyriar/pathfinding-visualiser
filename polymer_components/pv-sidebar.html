@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<link rel="import" href="../bower_components/core-icons/core-icons.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
@@ -123,69 +122,81 @@ SOFTWARE.
       }
 
       li {
-        display: inline-block;
+        display: block;
+        margin-top:.5em;
         text-align: center;
+      }
+
+      .paper-shadow {
+        pointer-events: none;
       }
     </style>
     <paper-shadow z="1"></paper-shadow>
-    <menu flex two>
-      <div>
-        <h1>Map</h1>
+    <div flex layout vertical>
+      <menu flex two>
+        <div>
+          <h1>Map</h1>
+
+          <div>
+            <div>Scale</div>
+            <paper-slider pin min="1" max="20" value="{{ publish.mapScale }}" id="mapScale"></paper-slider>
+          </div>
+
+          <div>
+            <div>Obstacle density</div>
+            <paper-slider pin min="0" max="50" value="{{ publish.obstacleDensity }}" id="obstacleDensity"></paper-slider>
+          </div>
+
+          <div>
+            <div>Obstacles size</div>
+            <paper-slider pin min="1" max="10" value="{{ publish.obstacleSize }}" id="obstacleSize"></paper-slider>
+          </div>
+
+          <paper-button raisedbutton class="colored" label="Generate" id="generateMap" on-click="{{ generate }}"></paper-button>
+        </div>
 
         <div>
-          <div>Scale</div>
-          <paper-slider pin min="1" max="20" value="{{ publish.mapScale }}" id="mapScale"></paper-slider>
+          <h1>Algorithm</h1>
+          <paper-radio-group selected="1">
+            <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}"></paper-radio-button>
+            <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
+            <paper-radio-button label="A* (Fibonacci heap)" data-algorithm="a-star-fibonacci-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
+          </paper-radio-group>
         </div>
 
         <div>
-          <div>Obstacle density</div>
-          <paper-slider pin min="0" max="50" value="{{ publish.obstacleDensity }}" id="obstacleDensity"></paper-slider>
+          <h1>Animation</h1>
+
+          <div center horizontal layout class="spacer">
+            <div flex>Enabled</div>
+            <paper-toggle-button checked="{{ animationEnabled }}"></paper-toggle-button>
+          </div>
+
+          <div>Speed</div>
+          <paper-slider pin min="1" max="{{ speedMax }}" value="{{ speed }}" id="animationSpeed"></paper-slider>
         </div>
 
-        <div>
-          <div>Obstacles size</div>
-          <paper-slider pin min="1" max="10" value="{{ publish.obstacleSize }}" id="obstacleSize"></paper-slider>
-        </div>
+        <paper-button raisedbutton class="colored" label="Clear" id="clearButton" on-click="{{ clear }}"></paper-button>
+        <paper-button raisedbutton class="colored" label="Run" id="runButton" on-click="{{ run }}"></paper-button>
+      </menu>
 
-        <paper-button raisedbutton class="colored" label="Generate" id="generateMap" on-click="{{ generate }}"></paper-button>
-      </div>
-
-      <div>
-        <h1>Algorithm</h1>
-        <paper-radio-group selected="1">
-          <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}"></paper-radio-button>
-          <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
-          <paper-radio-button label="A* (Fibonacci heap)" data-algorithm="a-star-fibonacci-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
-          <!--<paper-radio-button role="radio" tabindex="0" aria-checked="true" label="A* (binomial heap)"></paper-radio-button>-->
-        </paper-radio-group>
-      </div>
-
-      <div>
-        <h1>Animation</h1>
-
-        <div center horizontal layout class="spacer">
-          <div flex>Enabled</div>
-          <paper-toggle-button checked="{{ animationEnabled }}"></paper-toggle-button>
-        </div>
-
-        <div>Speed</div>
-        <paper-slider pin min="1" max="{{ speedMax }}" value="{{ speed }}" id="animationSpeed"></paper-slider>
-      </div>
-
-      <paper-button raisedbutton class="colored" label="Clear" id="clearButton" on-click="{{ clear }}"></paper-button>
-      <paper-button raisedbutton class="colored" label="Run" id="runButton" on-click="{{ run }}"></paper-button>
-    </menu>
-
-    <nav>
-      <ul layout horizontal center>
-        <li flex>
-          <paper-icon-button icon="favorite" data-dialog-id="share" on-click="{{ toggleDialog }}"></paper-icon-button>
-        </li>
-        <li flex>
-          <paper-icon-button icon="info" data-dialog-id="info" on-click="{{ toggleDialog }}"></paper-icon-button>
-        </li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li>
+            <a href="http://www.growingwiththeweb.com">Home</a>
+          </li>
+          <li>
+            <a href="https://github.com/Tyriar/pathfinding-visualiser">View source</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/share?text=Pathfinding%20visualiser%20by%20@tyriar&url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html&related=tyriar">Tweet</a>
+          </li>
+          <li>
+            <a href="https://plus.google.com/share?url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html">Share to Google+</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </template>
   <script>
     Polymer('pv-sidebar', {
@@ -222,9 +233,6 @@ SOFTWARE.
       },
       clear: function () {
         if (this.publish.clearHandler) this.publish.clearHandler();
-      },
-      toggleDialog: function (e) {
-        if (this.publish.toggleDialogHandler) this.publish.toggleDialogHandler(e);
       }
     });
   </script>
