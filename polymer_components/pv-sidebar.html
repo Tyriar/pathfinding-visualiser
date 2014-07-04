@@ -119,11 +119,11 @@ SOFTWARE.
       ul {
         list-style: none;
         padding: 0;
+        margin: 0;
       }
 
       li {
         display: block;
-        margin-top:.5em;
         text-align: center;
       }
 
@@ -181,18 +181,26 @@ SOFTWARE.
       </menu>
 
       <nav>
-        <ul>
-          <li>
-            <a href="http://www.growingwiththeweb.com">Home</a>
+        <ul layout horizontal center>
+          <li flex>
+            <a href="/" title="Home">
+              <img src="../images/logo.svg"/>
+            </a>
           </li>
-          <li>
-            <a href="https://github.com/Tyriar/pathfinding-visualiser">View source</a>
+          <li flex>
+            <a href="https://twitter.com/share?text=Pathfinding%20visualiser%20by%20@tyriar&url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html&related=tyriar" title="Tweet">
+              <img src="../images/twitter.svg"/>
+            </a>
           </li>
-          <li>
-            <a href="https://twitter.com/share?text=Pathfinding%20visualiser%20by%20@tyriar&url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html&related=tyriar">Tweet</a>
+          <li flex>
+            <a href="https://plus.google.com/share?url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html" title="Share on Google+">
+              <img src="../images/google-plus.svg"/>
+            </a>
           </li>
-          <li>
-            <a href="https://plus.google.com/share?url=http://www.growingwiththeweb.com/demos/pathfinding-visualiser.html">Share to Google+</a>
+          <li flex>
+            <a href="https://github.com/Tyriar/pathfinding-visualiser" title="View source on GitHub">
+              <img src="../images/github.svg"/>
+            </a>
           </li>
         </ul>
       </nav>
