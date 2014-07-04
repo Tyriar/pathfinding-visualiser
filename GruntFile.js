@@ -42,11 +42,16 @@ module.exports = function(grunt) {
           dest: 'dist/'
         }]
       }
+    },
+    clean: {
+      dist: [
+        'dist.html'
+      ]
     }
   });
 
   var tasks = [
-    'grunt-contrib-commands',
+    'grunt-contrib-clean',
     'grunt-contrib-copy',
     'grunt-contrib-uglify',
     'grunt-vulcanize'
@@ -59,6 +64,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'uglify:dist',
     'vulcanize:dist',
-    'copy:dist'
+    'copy:dist',
+    'clean:dist'
   ]);
 };
