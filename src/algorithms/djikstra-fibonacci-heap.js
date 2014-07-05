@@ -30,20 +30,6 @@
 
     queue.insert(0, map.start);
 
-    /*for (x = 0; x < map.width; x++) {
-      for (y = 0; y < map.height; y++) {
-        if (map.isOnMap(x, y)) {
-          var key = x + ',' + y;
-          if (distance[key] === undefined) {
-            distance[key] = Number.MAX_VALUE;
-          }
-          var node = new MapNode(x, y);
-          var heapNode = queue.insert(distance[key], node);
-          queueNodes[key] = heapNode;
-        }
-      }
-    }*/
-
     while (!queue.isEmpty()) {
       var min = queue.extractMinimum();
       var minKey = min.value.getHashKey();
