@@ -20,8 +20,16 @@ module.exports = function(grunt) {
         },
         files: {
           'dist.html': 'index.html'
-        },
+        }
       },
+      dev: {
+        options: {
+          inline: true
+        },
+        files: {
+          'dist.html': 'index.html'
+        }
+      }
     },
     copy: {
       dist: {
@@ -40,6 +48,13 @@ module.exports = function(grunt) {
         }, {
           src: 'images/**/*.svg',
           dest: 'dist/'
+        }]
+      },
+      dev: {
+        files: [{
+          expand: true,
+          src: 'src/**/*.js',
+          dest: 'dist'
         }]
       }
     },
@@ -61,14 +76,21 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks(tasks[i]);
   }
 
-  grunt.registerTask('build', [
+  grunt.registerTask('dist', [
     'uglify:dist',
     'vulcanize:dist',
     'copy:dist',
     'clean:dist'
   ]);
 
+  grunt.registerTask('dev', [
+    'vulcanize:dev',
+    'copy:dist',
+    'copy:dev',
+    'clean:dist'
+  ]);
+
   grunt.registerTask('default', [
-    'build'
+    'dev'
   ]);
 };
