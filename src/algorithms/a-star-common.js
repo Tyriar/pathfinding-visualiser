@@ -3,13 +3,13 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['map-node'], factory);
+    define(['canvas-helper', 'map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('map-node'));
+    module.exports = factory(require('canvas-helper'), require('map-node'));
   } else {
-    root.aStarCommon = factory(MapNode);
+    root.aStarCommon = factory(canvasHelper, MapNode);
   }
-}(this, function (MapNode) {
+}(this, function (canvasHelper, MapNode) {
   'use strict';
 
   var COST_STRAIGHT = 1;
@@ -44,11 +44,11 @@
     return [{
       result: 'Map size = ' + map.width + 'x' + map.height
     }, {
-      result: 'Number of nodes in open list = ' + openSize,
-      colour: '#88F'
-    }, {
       result: 'Number of nodes in closed list = ' + closedSize,
-      colour: '#44F'
+      colour: canvasHelper.CLOSED_LIST_COLOUR
+    }, {
+      result: 'Number of nodes in open list = ' + openSize,
+      colour: canvasHelper.OPEN_LIST_COLOUR
     }];
   };
 

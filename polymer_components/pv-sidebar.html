@@ -48,23 +48,23 @@ SOFTWARE.
       }
 
       paper-button.colored {
-        color: #9b59bf;
-        fill: #9b59bf;
+        color: #4285f4;
+        fill: #4285f4;
       }
 
       paper-button[raisedButton].colored {
-        background: #9b59bf;
+        background: #4285f4;
         color: #fff;
       }
 
       paper-button[raisedButton].colored #ripple,
       paper-button[raisedButton].colored::shadow #ripple {
-        color: #e0544c;
+        color: #000;
       }
 
       paper-button[raisedButton].colored #focusBg,
       paper-button[raisedButton].colored::shadow #focusBg {
-        background: #3367d6;
+        background: #000;
       }
 
       paper-button,
@@ -75,6 +75,12 @@ SOFTWARE.
         user-select: none;
       }
 
+      paper-slider::shadow #sliderBar::shadow #activeProgress,
+      paper-slider::shadow #sliderKnobInner,
+      paper-slider::shadow #sliderKnobInner::before {
+        background-color: #0F9D58;
+      }
+
       paper-radio-button {
         display: block;
       }
@@ -83,20 +89,9 @@ SOFTWARE.
         color: #4285f4;
       }
 
-      paper-toggle-button::shadow paper-radio-button::shadow #onRadio {
-        background-color: #4285f4;
-      }
-
+      paper-toggle-button::shadow paper-radio-button::shadow #onRadio,
       paper-toggle-button::shadow #toggleBar[checked] {
-        background-color: #4285f4;
-      }
-
-      paper-icon-button::shadow core-icon {
-        fill: #1e1e38;
-      }
-
-      paper-icon-button::shadow core-icon:hover {
-        fill: #e0544c;
+        background-color: #0F9D58;
       }
 
       menu {

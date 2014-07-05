@@ -14,12 +14,13 @@
 
   var module = {};
 
-  var PATH_WIDTH        = 4;
-  var BACKGROUND_COLOUR = '#EEE';
-  var OBSTACLE_COLOUR   = '#2D2D30';
-  var PATH_COLOUR       = '#0C0';
-  var VISITED_COLOUR    = '#44F';
-  var OPEN_LIST_COLOUR  = '#88F';
+  var PATH_WIDTH            = 4;
+  var BACKGROUND_COLOUR     = '#F5F5F5';
+  var OBSTACLE_COLOUR       = '#212121';
+  var PATH_COLOUR           = '#12c700';
+
+  module.CLOSED_LIST_COLOUR = '#01579b';
+  module.OPEN_LIST_COLOUR   = '#29b6f6';
 
   var canvas;
   var context;
@@ -50,11 +51,11 @@
   };
 
   module.drawVisited = function (x, y) {
-    module.drawNode(x, y, VISITED_COLOUR);
+    module.drawNode(x, y, module.CLOSED_LIST_COLOUR);
   };
 
   module.drawOpenListNode = function (x, y) {
-    module.drawNode(x, y, OPEN_LIST_COLOUR);
+    module.drawNode(x, y, module.OPEN_LIST_COLOUR);
   };
 
   module.drawStartGoal = function (x, y) {
