@@ -19,7 +19,7 @@
     var queue = new Heap();
     var queueNodes = {};
     var queuedPaints = [];
-    var x, y, i;
+    var i;
 
     var startKey = map.start.getHashKey();
     distance[startKey] = 0;
@@ -30,6 +30,11 @@
       var min = queue.extractMinimum();
       var minKey = min.value.getHashKey();
       var neighbours = dijkstraCommon.getNeighbourNodes(map, min.value, queueNodes);
+      queuedPaints.push({
+        f: canvasHelper.drawVisited,
+        x: min.value.x,
+        y: min.value.y
+      });
 
       for (i = 0; i < neighbours.length; i++) {
         var neighbour = neighbours[i];
@@ -56,11 +61,6 @@
           }
 
           if (typeof queueNodes[neighbourKey] === 'undefined') {
-            queuedPaints.push({
-              f: canvasHelper.drawVisited,
-              x: neighbours[i].x,
-              y: neighbours[i].y
-            });
             queue.insert(alt, neighbour);
           } else {
             queue.decreaseKey(queueNodes[neighbourKey], alt);
