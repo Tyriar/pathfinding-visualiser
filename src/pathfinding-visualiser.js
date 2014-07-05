@@ -90,6 +90,9 @@
   };
 
   function paintNodes(queuedPaints, goalNode, openList, getSpeed) {
+    if (!queuedPaints.length) {
+      return;
+    }
     var paint = queuedPaints.shift();
     if (paint.x !== map.start.x || paint.y !== map.start.y) {
       paint.f.call(null, paint.x, paint.y);
