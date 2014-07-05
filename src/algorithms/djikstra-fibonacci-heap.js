@@ -19,23 +19,24 @@
   var module = {};
 
   module.run = function (map, callback) {
-    var dist = {};
+    var distance = {};
     var queue = new FibonacciHeap();
     var queueNodes = {};
     var queuedPaints = [];
-    var key, x, y, i;
+    var x, y, i;
 
-    var startKey = map.start.x + ',' + map.start.y;
-    dist[startKey] = 0;
+    var startKey = map.start.getHashKey();
+    distance[startKey] = 0;
+
     for (x = 0; x < map.width; x++) {
       for (y = 0; y < map.height; y++) {
         if (map.isOnMap(x, y)) {
-          key = x + ',' + y;
-          if (dist[key] === undefined) {
-            dist[key] = Number.MAX_VALUE;
+          var key = x + ',' + y;
+          if (distance[key] === undefined) {
+            distance[key] = Number.MAX_VALUE;
           }
           var node = new MapNode(x, y);
-          var heapNode = queue.insert(dist[key], node);
+          var heapNode = queue.insert(distance[key], node);
           queueNodes[key] = heapNode;
         }
       }
@@ -43,25 +44,29 @@
 
     while (!queue.isEmpty()) {
       var min = queue.extractMinimum();
-      console.log('min=', min.value.key);
+      var minKey = min.getHashKey();
       var neighbours = djikstraCommon.getNeighbourNodes(map, min.value, queueNodes);
+
       for (i = 0; i < neighbours.length; i++) {
-        key = neighbours[i].x + ',' + neighbours[i].y;
-        var alt = dist[min.value.x + ',' + min.value.y] + neighbours[i].g;
-        if (alt < dist[key]) {
-          dist[key] = alt;
-          neighbours[i].parent = min.value;
-          if (neighbours[i].equals(map.goal)) {
+        var neighbour = neighbours[i];
+        var neighbourKey = neighbour.getHashKey();
+        var alt = distance[minKey] + neighbour.g;
+
+        if (alt < distance[neighbourKey]) {
+          distance[neighbourKey] = alt;
+          neighbour.parent = min.value;
+
+          if (neighbour.equals(map.goal)) {
             var finish = core.timeNow();
             var visitedNodeCount = 0;
-            var distKeys = Object.keys(dist);
-            for (var j = 0; j < distKeys.length; j++) {
-              if (dist[distKeys[j]] < Number.MAX_VALUE) {
+            var distanceKeys = Object.keys(distance);
+            for (var j = 0; j < distanceKeys.length; j++) {
+              if (distance[distanceKeys[j]] < Number.MAX_VALUE) {
                 visitedNodeCount++;
               }
             }
             var message = djikstraCommon.buildSummaryMessage(map, visitedNodeCount);
-            callback(message, queuedPaints, neighbours[i], [], finish);
+            callback(message, queuedPaints, neighbour, [], finish);
             return;
           }
 
@@ -70,7 +75,7 @@
             x: neighbours[i].x,
             y: neighbours[i].y
           });
-          queue.decreaseKey(queueNodes[key], alt);
+          queue.decreaseKey(queueNodes[neighbourKey], alt);
         }
       }
     }

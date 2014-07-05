@@ -27,5 +27,9 @@
     return this.x === other.x && this.y === other.y;
   };
 
+  MapNode.prototype.getHashKey = function () {
+    return this.x + ',' + this.y;
+  };
+
   return MapNode;
 }));
