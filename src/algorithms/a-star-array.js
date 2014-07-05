@@ -5,7 +5,10 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'map-node', 'a-star-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./map-node'), require('./a-star-common'));
+    module.exports = factory(require('../core'),
+                             require('../canvas-helper'),
+                             require('../map-node'),
+                             require('./a-star-common'));
   } else {
     root.aStarArray = factory(core, canvasHelper, MapNode, aStarCommon);
   }
@@ -35,7 +38,7 @@
       var current = openList[lowestF];
 
       if (current.equals(goal)) {
-        var finish = performance.now();
+        var finish = (performance ? performance.now() : 0);
         var message = aStarCommon.buildSummaryMessage(
             map, openList.length, closedList.length);
         callback(message, queuedPaints, current, openList, finish);

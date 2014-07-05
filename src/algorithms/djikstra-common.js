@@ -5,7 +5,8 @@
   if (typeof define === 'function' && define.amd) {
     define(['canvas-helper', 'map-node'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('canvas-helper'), require('map-node'));
+    module.exports = factory(require('../canvas-helper'),
+                             require('../map-node'));
   } else {
     root.djikstraCommon = factory(canvasHelper, MapNode);
   }

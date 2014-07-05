@@ -5,7 +5,11 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'fibonacci-heap', 'map-node', 'djikstra-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./fibonacci-heap'), require('./map-node'), require('./djikstra-common'));
+    module.exports = factory(require('../core'),
+                             require('../canvas-helper'),
+                             require('../../bower_components/js-data-structures/src/fibonacci-heap'),
+                             require('../map-node'),
+                             require('./djikstra-common'));
   } else {
     root.djikstraFibonacciHeap = factory(core, canvasHelper, FibonacciHeap, MapNode, aStarCommon);
   }
@@ -45,7 +49,7 @@
           dist[key] = alt;
           neighbours[i].parent = min.value;
           if (neighbours[i].equals(map.goal)) {
-            var finish = performance.now();
+            var finish = (performance ? performance.now() : 0);
             var visitedNodeCount = 0;
             var distKeys = Object.keys(dist);
             for (var j = 0; j < distKeys.length; j++) {

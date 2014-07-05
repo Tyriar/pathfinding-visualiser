@@ -5,7 +5,11 @@
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'binary-heap', 'map-node', 'a-star-common'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('./core'), require('./canvas-helper'), require('./binary-heap'), require('./map-node'), require('./a-star-common'));
+    module.exports = factory(require('../core'),
+                             require('../canvas-helper'),
+                             require('../../bower_components/js-data-structures/src/binary-heap'),
+                             require('../map-node'),
+                             require('./a-star-common'));
   } else {
     root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode, aStarCommon);
   }
@@ -29,7 +33,7 @@
       var current = openList.extractMinimum();
 
       if (current.value.equals(goal)) {
-        var finish = performance.now();
+        var finish = (performance ? performance.now() : 0);
         var message = aStarCommon.buildSummaryMessage(
             map, openList.size(), Object.keys(closedList).length);
         var list = openList.list;
