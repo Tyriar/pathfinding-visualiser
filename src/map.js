@@ -49,7 +49,7 @@
         obstacleSize: obstacleSize,
       };
     }
-    
+
     this.width = width;
     this.height = height;
     this.clear();
@@ -78,8 +78,8 @@
 
   Map.prototype.placeObstacles = function (x, y, size) {
     var obstacleCount = 0;
-    var lower = Math.floor(size / 2);
-    var upper = Math.ceil(size / 2);
+    var lower = Math.floor((size - 1) / 2);
+    var upper = Math.ceil((size - 1) / 2);
 
     for (var _x = x - lower; _x <= x + upper; _x++) {
       for (var _y = y - lower; _y <= y + upper; _y++) {
