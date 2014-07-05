@@ -27,7 +27,6 @@
 
     var startKey = map.start.x + ',' + map.start.y;
     dist[startKey] = 0;
-    queueNodes[startKey] = queue.insert(0, map.start);
     for (x = 0; x < map.width; x++) {
       for (y = 0; y < map.height; y++) {
         if (map.isOnMap(x, y)) {
