@@ -49,7 +49,7 @@
           dist[key] = alt;
           neighbours[i].parent = min.value;
           if (neighbours[i].equals(map.goal)) {
-            var finish = core.timeNow());
+            var finish = core.timeNow();
             var visitedNodeCount = 0;
             var distKeys = Object.keys(dist);
             for (var j = 0; j < distKeys.length; j++) {
