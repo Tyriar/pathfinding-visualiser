@@ -76,6 +76,9 @@ SOFTWARE.
       'a-star-array': 'src/algorithms/a-star-array',
       'a-star-binary-heap': 'src/algorithms/a-star-binary-heap',
       'a-star-fibonacci-heap': 'src/algorithms/a-star-fibonacci-heap',
+      'djikstra-common': 'src/algorithms/djikstra-common',
+      'djikstra-binary-heap': 'src/algorithms/djikstra-binary-heap',
+      'djikstra-fibonacci-heap': 'src/algorithms/djikstra-fibonacci-heap',
       'pathfinding-visualiser': 'src/pathfinding-visualiser'
     }
   });
@@ -84,13 +87,17 @@ SOFTWARE.
     'pathfinding-visualiser',
     'a-star-array',
     'a-star-binary-heap',
-    'a-star-fibonacci-heap'
-  ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap, aStarFibonacciHeap) {
+    'a-star-fibonacci-heap',
+    'djikstra-binary-heap',
+    'djikstra-fibonacci-heap'
+  ], function (pathfindingVisualiser, aStarArray, aStarBinaryHeap, aStarFibonacciHeap, djikstraBinaryHeap, djikstraFibonacciHeap) {
     var me;
     var algorithms = {
       'a-star-array': aStarArray,
       'a-star-binary-heap': aStarBinaryHeap,
-      'a-star-fibonacci-heap': aStarFibonacciHeap
+      'a-star-fibonacci-heap': aStarFibonacciHeap,
+      'djikstra-binary-heap': djikstraBinaryHeap,
+      'djikstra-fibonacci-heap': djikstraFibonacciHeap
     };
 
     Polymer("pv-pathfinding-visualiser", {
