@@ -33,6 +33,14 @@
     }
   };
 
+  module.timeNow = function () {
+    if (typeof performance !== 'undefined' && performance && performance.now) {
+      return performance.now;
+    }
+    // Fake performance for node.js
+    return function () { return 0; };
+  };
+
   function updateMapDimensions() {
     module.MAP_WIDTH  = Math.floor(module.CANVAS_WIDTH / module.MAP_SCALE);
     module.MAP_HEIGHT = Math.floor(module.CANVAS_HEIGHT / module.MAP_SCALE);

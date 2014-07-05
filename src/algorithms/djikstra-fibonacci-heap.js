@@ -49,7 +49,7 @@
           dist[key] = alt;
           neighbours[i].parent = min.value;
           if (neighbours[i].equals(map.goal)) {
-            var finish = (performance ? performance.now() : 0);
+            var finish = core.timeNow();
             var visitedNodeCount = 0;
             var distKeys = Object.keys(dist);
             for (var j = 0; j < distKeys.length; j++) {
@@ -72,7 +72,7 @@
       }
     }
 
-    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, performance.now());
+    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, core.timeNow());
   };
 
   return module;

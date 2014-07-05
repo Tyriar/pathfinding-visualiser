@@ -15,7 +15,7 @@ module.exports = function (algorithm) {
       };
       spyOn(wrapper, 'callback');
       algorithm.run(map, wrapper.callback);
-      expect(callback).toHaveBeenCalled();
+      expect(wrapper.callback).toHaveBeenCalled();
     });
   });
 

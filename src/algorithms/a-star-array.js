@@ -38,7 +38,7 @@
       var current = openList[lowestF];
 
       if (current.equals(goal)) {
-        var finish = (performance ? performance.now() : 0);
+        var finish = core.timeNow();
         var message = aStarCommon.buildSummaryMessage(
             map, openList.length, closedList.length);
         callback(message, queuedPaints, current, openList, finish);
@@ -58,7 +58,7 @@
       addNodesToOpenList(neighbours, goal, openList, closedList, queuedPaints);
     }
 
-    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, performance.now());
+    callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, core.timeNow());
   };
 
   function addNodesToOpenList(nodes, goal, openList, closedList, queuedPaints) {
