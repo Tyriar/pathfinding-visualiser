@@ -85,7 +85,7 @@ module.exports = function (algorithm) {
   describe("given a map densely populated with obstacles with a path between start and goal", function () {
     beforeEach(function () {
       map = new Map(20, 20);
-      //map.placeObstacles();
+      map.placeObstacles(19, 0, 30);
     });
 
     it("should return a path from goal to start", function () {
@@ -100,9 +100,10 @@ module.exports = function (algorithm) {
     });
   });
 
-  /*describe("given a map where the start node is surrounded in obstacles", function () {
+  describe("given a map where the start node is surrounded in obstacles", function () {
     beforeEach(function () {
-      map = new Map(2, 2);
+      map = new Map(50, 50);
+      map.placeObstacles(map.start.x, map.start.y, 20);
     });
 
     it("should not return a path", function () {
@@ -113,7 +114,8 @@ module.exports = function (algorithm) {
 
   describe("given a map where the goal node is surrounded in obstacles", function () {
     beforeEach(function () {
-      map = new Map(2, 2);
+      map = new Map(50, 50);
+      map.placeObstacles(map.goal.x, map.goal.y, 20);
     });
 
     it("should not return a path", function () {
@@ -124,12 +126,17 @@ module.exports = function (algorithm) {
 
   describe("given a map with obstacles blocking the middle", function () {
     beforeEach(function () {
-      map = new Map(2, 2);
+      map = new Map(50, 50);
+      for (var x = 0; x < map.width; x++) {
+        for (var y = map.height - 1; y >= 0; y--) {
+          map.placeObstacles(x, y, 10);
+        }
+      }
     });
 
     it("should not return a path", function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).not.toBeDefined();
     });
-  });*/
+  });
 };
