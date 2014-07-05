@@ -1,13 +1,10 @@
 ﻿/*! pathfinding-visualiser | (c) 2012-2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
-// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExports.js
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
     define(['core', 'canvas-helper', 'map'], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./core'), require('./canvas-helper'), require('./map'));
-  } else {
-    root.canvasHelper = factory(core, canvasHelper, Map);
   }
 }(this, function (core, canvasHelper, Map) {
   'use strict';

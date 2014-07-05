@@ -1,5 +1,4 @@
 /*! pathfinding-visualiser | (c) 2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
-// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExports.js
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -10,8 +9,6 @@
                              require('../../bower_components/js-data-structures/src/fibonacci-heap'),
                              require('../map-node'),
                              require('./a-star-common'));
-  } else {
-    root.aStarFibonacciHeap = factory(core, canvasHelper, FibonacciHeap, MapNode, aStarCommon);
   }
 }(this, function (core, canvasHelper, FibonacciHeap, MapNode, aStarCommon) {
   'use strict';

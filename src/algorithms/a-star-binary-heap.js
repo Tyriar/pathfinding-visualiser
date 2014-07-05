@@ -1,5 +1,4 @@
 /*! pathfinding-visualiser | (c) 2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
-// UMD pattern: https://github.com/umdjs/umd/blob/master/returnExports.js
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -10,8 +9,6 @@
                              require('../../bower_components/js-data-structures/src/binary-heap'),
                              require('../map-node'),
                              require('./a-star-common'));
-  } else {
-    root.aStarBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode, aStarCommon);
   }
 }(this, function (core, canvasHelper, BinaryHeap, MapNode, aStarCommon) {
   'use strict';
