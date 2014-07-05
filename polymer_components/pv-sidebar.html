@@ -48,12 +48,12 @@ SOFTWARE.
       }
 
       paper-button.colored {
-        color: #4285f4;
-        fill: #4285f4;
+        color: #455ede;
+        fill: #455ede;
       }
 
       paper-button[raisedButton].colored {
-        background: #4285f4;
+        background: #455ede;
         color: #fff;
       }
 
@@ -77,7 +77,9 @@ SOFTWARE.
 
       paper-slider::shadow #sliderBar::shadow #activeProgress,
       paper-slider::shadow #sliderKnobInner,
-      paper-slider::shadow #sliderKnobInner::before {
+      paper-slider::shadow #sliderKnobInner::before,
+      paper-toggle-button::shadow paper-radio-button::shadow #onRadio,
+      paper-toggle-button::shadow #toggleBar[checked] {
         background-color: #0F9D58;
       }
 
@@ -85,13 +87,9 @@ SOFTWARE.
         display: block;
       }
 
+      paper-toggle-button::shadow paper-radio-button::shadow #ink,
       paper-toggle-button::shadow paper-radio-button::shadow #ink[checked] {
-        color: #4285f4;
-      }
-
-      paper-toggle-button::shadow paper-radio-button::shadow #onRadio,
-      paper-toggle-button::shadow #toggleBar[checked] {
-        background-color: #0F9D58;
+        color: #0F9D58;
       }
 
       menu {
@@ -204,11 +202,11 @@ SOFTWARE.
   <script>
     Polymer('pv-sidebar', {
       publish: {
-        mapScale: 10,
-        obstacleDensity: 10,
+        mapScale: 8,
+        obstacleDensity: 25,
         obstacleSize: 4,
-        animationEnabled: false,
-        speed: 10,
+        animationEnabled: true,
+        speed: 50,
         speedMax: 50,
         runHandler: undefined,
         generateHandler: undefined,
