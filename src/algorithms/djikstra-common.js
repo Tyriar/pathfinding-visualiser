@@ -31,7 +31,12 @@
         }
         var cost = (x === node.x || y === node.y ? COST_STRAIGHT : COST_DIAGONAL);
         var key = x + ',' + y;
-        var neighbour = queueNodes[key].value;
+        var neighbour;
+        if (typeof queueNodes[key] === 'undefined') {
+          neighbour = new MapNode(x, y);
+        } else {
+          neighbour = queueNodes[key].value;
+        }
         neighbour.g = cost;
         neighbours.push(neighbour);
       }

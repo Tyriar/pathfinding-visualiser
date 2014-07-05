@@ -28,7 +28,9 @@
     var startKey = map.start.getHashKey();
     distance[startKey] = 0;
 
-    for (x = 0; x < map.width; x++) {
+    queue.insert(0, map.start);
+
+    /*for (x = 0; x < map.width; x++) {
       for (y = 0; y < map.height; y++) {
         if (map.isOnMap(x, y)) {
           var key = x + ',' + y;
@@ -40,11 +42,11 @@
           queueNodes[key] = heapNode;
         }
       }
-    }
+    }*/
 
     while (!queue.isEmpty()) {
       var min = queue.extractMinimum();
-      var minKey = min.getHashKey();
+      var minKey = min.value.getHashKey();
       var neighbours = djikstraCommon.getNeighbourNodes(map, min.value, queueNodes);
 
       for (i = 0; i < neighbours.length; i++) {
@@ -52,7 +54,8 @@
         var neighbourKey = neighbour.getHashKey();
         var alt = distance[minKey] + neighbour.g;
 
-        if (alt < distance[neighbourKey]) {
+        if (typeof queueNodes[neighbourKey] === 'undefined' &&
+            (typeof distance[neighbourKey] === 'undefined' || alt < distance[neighbourKey])) {
           distance[neighbourKey] = alt;
           neighbour.parent = min.value;
 
@@ -70,12 +73,16 @@
             return;
           }
 
-          queuedPaints.push({
-            f: canvasHelper.drawVisited,
-            x: neighbours[i].x,
-            y: neighbours[i].y
-          });
-          queue.decreaseKey(queueNodes[neighbourKey], alt);
+          if (typeof queueNodes[neighbourKey] === 'undefined') {
+            queuedPaints.push({
+              f: canvasHelper.drawVisited,
+              x: neighbours[i].x,
+              y: neighbours[i].y
+            });
+            queue.insert(alt, neighbour);
+          } else {
+            queue.decreaseKey(queueNodes[neighbourKey], alt);
+          }
         }
       }
     }
