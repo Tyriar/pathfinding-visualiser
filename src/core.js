@@ -34,11 +34,11 @@
   };
 
   module.timeNow = function () {
-    if (typeof performance !== 'undefined' && performance && performance.now) {
-      return performance.now;
+    if (typeof performance !== 'undefined') {
+      return performance.now();
     }
     // Fake performance for node.js
-    return function () { return 0; };
+    return 0;
   };
 
   function updateMapDimensions() {
