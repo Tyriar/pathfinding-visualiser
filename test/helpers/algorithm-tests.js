@@ -122,6 +122,42 @@ module.exports = function (algorithm) {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).not.toBeDefined();
     });
+
+    it("should visit all non-obstacle nodes", function () {
+      var x, y, i;
+
+      algorithm.run(map, wrapper.callback);
+
+      visitedMap = [];
+      for (x = 0; x < map.width; x++) {
+        visitedMap[x] = [];
+        for (y = 0; y < map.height; y++) {
+          // false = obstacle
+
+          visitedMap[x][y] = false;
+        }
+      }
+      visitedMap[map.start.x][map.start.y] = true;
+      visitedMap[map.goal.x][map.goal.y] = true;
+
+      // Assume if a paint occured on a point that it was visited
+      for (i = 0; i < queuedPaints.length; i++) {
+        var paint = queuedPaints[i];
+        visitedMap[paint.x][paint.y] = true;
+      }
+
+      // validate map
+      var matches = true;
+      for (x = 0; x < map.width; x++) {
+        for (y = 0; y < map.height; y++) {
+          if (map[x][y] !== visitedMap[x][y]) {
+            matches = false;
+          }
+        }
+      }
+
+      expect(matches).toBe(true);
+    });
   });
 
   describe("given a map with obstacles blocking the middle", function () {

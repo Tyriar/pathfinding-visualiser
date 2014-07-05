@@ -25,17 +25,20 @@
     var queuedPaints = [];
     var key, x, y, i;
 
-    dist[map.start.x + ',' + map.start.y] = 0;
-    queue.insert(0, map.start);
+    var startKey = map.start.x + ',' + map.start.y;
+    dist[startKey] = 0;
+    queueNodes[startKey] = queue.insert(0, map.start);
     for (x = 0; x < map.width; x++) {
       for (y = 0; y < map.height; y++) {
-        key = x + ',' + y;
-        if (dist[key] === undefined) {
-          dist[key] = Number.MAX_VALUE;
+        if (map.isOnMap(x, y)) {
+          key = x + ',' + y;
+          if (dist[key] === undefined) {
+            dist[key] = Number.MAX_VALUE;
+          }
+          var node = new MapNode(x, y);
+          var heapNode = queue.insert(dist[key], node);
+          queueNodes[key] = heapNode;
         }
-        var node = new MapNode(x, y);
-        var heapNode = queue.insert(dist[key], node);
-        queueNodes[key] = heapNode;
       }
     }
 
