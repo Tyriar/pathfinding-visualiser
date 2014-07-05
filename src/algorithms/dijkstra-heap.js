@@ -23,13 +23,13 @@
 
     var startKey = map.start.getHashKey();
     distance[startKey] = 0;
-
     queue.insert(0, map.start);
 
     while (!queue.isEmpty()) {
       var min = queue.extractMinimum();
       var minKey = min.value.getHashKey();
       var neighbours = dijkstraCommon.getNeighbourNodes(map, min.value, queueNodes);
+
       queuedPaints.push({
         f: canvasHelper.drawVisited,
         x: min.value.x,
@@ -48,13 +48,7 @@
 
           if (neighbour.equals(map.goal)) {
             var finish = core.timeNow();
-            var visitedNodeCount = 0;
-            var distanceKeys = Object.keys(distance);
-            for (var j = 0; j < distanceKeys.length; j++) {
-              if (distance[distanceKeys[j]] < Number.MAX_VALUE) {
-                visitedNodeCount++;
-              }
-            }
+            var visitedNodeCount = calculateVisitedNodeCount(distance);
             var message = dijkstraCommon.buildSummaryMessage(map, visitedNodeCount);
             callback(message, queuedPaints, neighbour, [], finish);
             return;
@@ -71,6 +65,17 @@
 
     callback([{ result: 'No path exists' }], queuedPaints, undefined, undefined, core.timeNow());
   };
+
+  function calculateVisitedNodeCount(distanceMap) {
+    var visitedNodeCount = 0;
+    var distanceKeys = Object.keys(distanceMap);
+    for (var j = 0; j < distanceKeys.length; j++) {
+      if (distanceMap[distanceKeys[j]] < Number.MAX_VALUE) {
+        visitedNodeCount++;
+      }
+    }
+    return visitedNodeCount;
+  }
 
   return module;
 }));
