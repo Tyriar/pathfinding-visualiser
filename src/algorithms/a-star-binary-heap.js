@@ -27,7 +27,7 @@
     var queuedPaints = [];
 
     start.f = start.g + aStarCommon.heuristic(start, goal);
-    openHash[start.x + ',' + start.y] = openList.insert(start.f, start);
+    openHash[start.getHashKey()] = openList.insert(start.f, start);
 
     while (!openList.isEmpty()) {
       var current = openList.extractMinimum();
@@ -44,7 +44,7 @@
         return;
       }
 
-      var currentKey = current.value.x + ',' + current.value.y;
+      var currentKey = current.value.getHashKey();
       openHash[currentKey] = undefined;
       closedList[currentKey] = current;
 
@@ -63,7 +63,7 @@
 
   function addNodesToOpenList(nodes, openList, openHash, closedList, goal, queuedPaints) {
     for (var i = 0; i < nodes.length; i++) {
-      var key = nodes[i].x + ',' + nodes[i].y;
+      var key = nodes[i].getHashKey();
 
       // Skip if in closed list
       if (key in closedList) {
