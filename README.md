@@ -13,7 +13,6 @@ Visualises pathfinding algorithms.
 
 ```
 bower install
-npm install -g vulcanize
 npm install
 ```
 
@@ -36,6 +35,7 @@ Due to browser security features, HTML imports don't work when runnign a page fr
 ```
 # Non-Windows
 python -m SimpleHTTPServer 8000
+
 # Windows
 python -m http.server 8000
 ```
