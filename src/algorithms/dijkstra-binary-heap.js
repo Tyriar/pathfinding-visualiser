@@ -3,24 +3,24 @@
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
-    define(['core', 'canvas-helper', 'fibonacci-heap', 'map-node', 'djikstra-common'], factory);
+    define(['core', 'canvas-helper', 'binary-heap', 'map-node', 'dijkstra-common'], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory(require('../core'),
                              require('../canvas-helper'),
-                             require('../../bower_components/js-data-structures/src/fibonacci-heap'),
+                             require('../../bower_components/js-data-structures/src/binary-heap'),
                              require('../map-node'),
-                             require('./djikstra-common'));
+                             require('./dijkstra-common'));
   } else {
-    root.djikstraFibonacciHeap = factory(core, canvasHelper, FibonacciHeap, MapNode, aStarCommon);
+    root.dijkstraBinaryHeap = factory(core, canvasHelper, BinaryHeap, MapNode, aStarCommon);
   }
-}(this, function (core, canvasHelper, FibonacciHeap, MapNode, djikstraCommon) {
+}(this, function (core, canvasHelper, BinaryHeap, MapNode, dijkstraCommon) {
   'use strict';
 
   var module = {};
 
   module.run = function (map, callback) {
     var distance = {};
-    var queue = new FibonacciHeap();
+    var queue = new BinaryHeap();
     var queueNodes = {};
     var queuedPaints = [];
     var x, y, i;
@@ -33,7 +33,7 @@
     while (!queue.isEmpty()) {
       var min = queue.extractMinimum();
       var minKey = min.value.getHashKey();
-      var neighbours = djikstraCommon.getNeighbourNodes(map, min.value, queueNodes);
+      var neighbours = dijkstraCommon.getNeighbourNodes(map, min.value, queueNodes);
 
       for (i = 0; i < neighbours.length; i++) {
         var neighbour = neighbours[i];
@@ -54,7 +54,7 @@
                 visitedNodeCount++;
               }
             }
-            var message = djikstraCommon.buildSummaryMessage(map, visitedNodeCount);
+            var message = dijkstraCommon.buildSummaryMessage(map, visitedNodeCount);
             callback(message, queuedPaints, neighbour, [], finish);
             return;
           }

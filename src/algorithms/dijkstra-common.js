@@ -8,7 +8,7 @@
     module.exports = factory(require('../canvas-helper'),
                              require('../map-node'));
   } else {
-    root.djikstraCommon = factory(canvasHelper, MapNode);
+    root.dijkstraCommon = factory(canvasHelper, MapNode);
   }
 }(this, function (canvasHelper, MapNode) {
   'use strict';
