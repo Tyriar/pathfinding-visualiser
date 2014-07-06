@@ -123,8 +123,8 @@ describe("map", function () {
       expect(map.height).toBe(50);
     });
 
-    it("should create approximately <obstacleDensity>% obstacles on the map", function () {
-      map.generate(1000, 1000, 30, 1);
+    it("should create <obstacleDensity>% obstacles on the map", function () {
+      map.generate(10, 10, 30, 1);
       var count = 0;
       for (var x = 0; x < map.width; x++) {
         for (var y = 0; y < map.height; y++) {
@@ -133,8 +133,8 @@ describe("map", function () {
           }
         }
       }
-      var expectedCount = map.width * map.height * .3;
-      expect(count / 100).toBeCloseTo(expectedCount / 100, 1);
+      var expectedCount = map.width * map.height * 0.3;
+      expect(count).toBe(expectedCount);
     });
 
     it("should not lock up with an obstacleSize of 0", function () {
