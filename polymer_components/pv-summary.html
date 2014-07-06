@@ -33,15 +33,18 @@ SOFTWARE.
 
       #container {
         visibility: hidden;
-        transition: top 1s cubic-bezier(.37,0,.21,1), visibility 0s linear 1s, opacity .2s linear;
+        transition: top 1s cubic-bezier(.37,0,.21,1) 0s, visibility 0s linear 1s, opacity .2s linear;
         position: relative;
         top: 20em;
         opacity: .9;
       }
 
+      #container.exiting {
+        transition: top 1s cubic-bezier(.63,0,.79,1) 0s, visibility 0s linear 1s, opacity .2s linear;
+      }
+
       #container.visible {
         visibility: visible;
-        transition-delay: 0s;
         top: 0em;
       }
 
@@ -56,9 +59,11 @@ SOFTWARE.
   <script>
     Polymer('pv-summary', {
       clear: function () {
+        this.$.container.classList.add('exiting');
         this.$.container.classList.remove('visible');
       },
       show: function (html) {
+      this.$.container.classList.remove('exiting');
         this.$.container.classList.add('visible');
         this.innerHTML = html;
       }
