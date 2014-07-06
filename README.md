@@ -12,16 +12,18 @@ Visualises pathfinding algorithms allowing customisation of algorithm, map gener
 ## Setup
 
 ```
+# if grunt or bower aren't installed
+npm install -g grunt-cli
+npm install -g bower
+
 bower install
 npm install
+
 ```
 
 ## Building
 
 ```
-# if grunt isn't installed
-npm install -g grunt-cli
-
 # dev build
 grunt
 
@@ -33,6 +35,9 @@ grunt dist
 
 ```
 npm test
+
+# generate coverage report in ./coverage/
+grunt coverage
 ```
 
 ## Contributing

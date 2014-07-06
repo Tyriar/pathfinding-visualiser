@@ -2,14 +2,6 @@
   "name": "pathfinding-visualiser",
   "version": "1.2.0",
   "description": "A Polymer element that visualises various pathfinding algorithms",
-  "devDependencies": {
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-uglify": "^0.5.0",
-    "grunt-vulcanize": "^0.3.0",
-    "jasmine-node": "~1.14.3",
-    "jasmine-reporters": ">=0.2.0 <2.0.0"
-  },
   "scripts": {
     "test": "jasmine-node ./test/"
   },
@@ -31,5 +23,17 @@
   "bugs": {
     "url": "https://github.com/Tyriar/pathfinding-visualiser/issues"
   },
-  "homepage": "https://github.com/Tyriar/pathfinding-visualiser"
+  "homepage": "https://github.com/Tyriar/pathfinding-visualiser",
+  "dependencies": {
+    "js-data-structures": "^1.0.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.0",
+    "grunt-jasmine-node-coverage": "^0.1.11",
+    "grunt-vulcanize": "^0.3.0",
+    "jasmine-node": "~1.14.3",
+    "jasmine-reporters": ">=0.2.0 <2.0.0"
+  }
 }

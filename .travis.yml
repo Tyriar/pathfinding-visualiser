@@ -22,4 +22,5 @@ before_script:
   - grunt dist
 
 after_script:
-  - cat lcov.info | codeclimate
+  - grunt coverage
+  - cat coverage/lcov.info | codeclimate
