@@ -62,8 +62,6 @@ module.exports = function(grunt) {
     jasmine_node: {
       coverage: { },
       options: {
-        match: '.',
-        matchall: false,
         extensions: 'js',
         specNameMatcher: '.*-spec',
         captureExceptions: true
