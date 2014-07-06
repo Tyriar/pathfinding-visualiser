@@ -151,11 +151,11 @@ SOFTWARE.
         <div>
           <h1>Algorithm</h1>
           <paper-radio-group selected="1">
-            <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}"></paper-radio-button>
-            <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
-            <paper-radio-button label="A* (Fibonacci heap)" data-algorithm="a-star-fibonacci-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
-            <paper-radio-button label="Dijkstra (binary heap)" data-algorithm="dijkstra-binary-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
-            <paper-radio-button label="Dijkstra (Fibonacci heap)" data-algorithm="dijkstra-fibonacci-heap" on-click="{{ algorithmChange }}"></paper-radio-button>
+            <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using arrays for all collections"></paper-radio-button>
+            <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a binary heap for the open list and hashmaps for the open and closed lists to track whether the items are in either"></paper-radio-button>
+            <paper-radio-button label="A* (Fibonacci heap)" data-algorithm="a-star-fibonacci-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a Fibonacci heap for the open list and hashmaps for the open and closed lists to track whether the items are in either"></paper-radio-button>
+            <paper-radio-button label="Dijkstra (binary heap)" data-algorithm="dijkstra-binary-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a binary heap"></paper-radio-button>
+            <paper-radio-button label="Dijkstra (Fibonacci heap)" data-algorithm="dijkstra-fibonacci-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a Fibonacci heap"></paper-radio-button>
           </paper-radio-group>
         </div>
 
