@@ -46,7 +46,7 @@ module.exports = function(grunt) {
           src: 'bower_components/js-data-structures/**/*.js',
           dest: 'dist/'
         }, {
-          src: 'images/**/*.svg',
+          src: 'images/**/*.*',
           dest: 'dist/'
         }]
       },
