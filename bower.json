@@ -6,7 +6,7 @@
     "Daniel Imms (http://www.growingwiththeweb.com)"
   ],
   "description": "An app that visualises pathfinding algorithms.",
-  "main": "pathfinding-visualiser.html",
+  "main": "index.html",
   "license": "MIT",
   "private": true,
   "ignore": [
