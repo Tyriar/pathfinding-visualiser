@@ -23,6 +23,7 @@ SOFTWARE.
 <link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
 
 <polymer-element name="pv-card" attributes="z">
+
   <template>
     <style>
       :host {
@@ -34,17 +35,13 @@ SOFTWARE.
         padding: .5em 1em;
       }
     </style>
-    <div>
+
     <paper-shadow z="{{z}}"></paper-shadow>
     <div id="content">
       <content></content>
     </div>
   </template>
-  <script>
-    Polymer('pv-card', {
-      publish: {
-        z: { value: 1, reflect: true }
-      }
-    });
-  </script>
+
+  <script src="pv-card.js" type="text/javascript"></script>
+
 </polymer-element>

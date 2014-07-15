@@ -23,6 +23,7 @@ SOFTWARE.
 <link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
 
 <polymer-element name="pv-summary-line" attributes="hascolour">
+
   <template>
     <style>
       :host {
@@ -40,16 +41,13 @@ SOFTWARE.
         height: 1em;
       }
     </style>
+
     <div id="colour" style="background-color: {{ colour }}">
       <paper-shadow z="1"></paper-shadow>
     </div>
     <content></content>
   </template>
-  <script>
-    Polymer('pv-summary-line', {
-      publish: {
-        colour: 'transparent'
-      }
-    });
-  </script>
+
+  <script src="pv-summary-line.js" type="text/javascript"></script>
+
 </polymer-element>
