@@ -37,16 +37,12 @@ module.exports = function(grunt) {
           src: 'dist.html',
           dest: 'dist/index.html'
         }, {
-          src: 'bower_components/requirejs/**/*.js',
-          dest: 'dist/'
+          expand: true,
+          flatten: true,
+          src: 'node_modules/js-data-structures/src/**/*.js',
+          dest: 'dist/vendor/js-data-structures/'
         }, {
-          src: 'bower_components/platform/**/*.js',
-          dest: 'dist/'
-        }, {
-          src: 'bower_components/js-data-structures/**/*.js',
-          dest: 'dist/'
-        }, {
-          src: 'images/**/*.svg',
+          src: 'images/**/*.*',
           dest: 'dist/'
         }]
       },
@@ -62,6 +58,14 @@ module.exports = function(grunt) {
       dist: [
         'dist.html'
       ]
+    },
+    jasmine_node: {
+      coverage: { },
+      options: {
+        extensions: 'js',
+        specNameMatcher: '.*-spec',
+        captureExceptions: true
+      }
     }
   });
 
@@ -69,6 +73,7 @@ module.exports = function(grunt) {
     'grunt-contrib-clean',
     'grunt-contrib-copy',
     'grunt-contrib-uglify',
+    'grunt-jasmine-node-coverage',
     'grunt-vulcanize'
   ];
 
@@ -88,6 +93,10 @@ module.exports = function(grunt) {
     'copy:dist',
     'copy:dev',
     'clean:dist'
+  ]);
+
+  grunt.registerTask('coverage', [
+    'jasmine_node'
   ]);
 
   grunt.registerTask('default', [

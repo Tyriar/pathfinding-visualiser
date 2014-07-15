@@ -5,7 +5,7 @@
     define(['a-star-heap', 'fibonacci-heap'], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./a-star-heap'),
-                             require('../../bower_components/js-data-structures/src/fibonacci-heap'));
+                             require('../../node_modules/js-data-structures/src/fibonacci-heap'));
   }
 }(this, function (aStarHeap, FibonacciHeap) {
   'use strict';

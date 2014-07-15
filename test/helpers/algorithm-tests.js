@@ -43,7 +43,7 @@ module.exports = function (algorithm) {
 
   describe("given a large map with no obstacles", function () {
     beforeEach(function () {
-      map = new Map(100, 100);
+      map = new Map(20, 20);
     });
 
     it("should return a path from goal to start", function () {
@@ -61,7 +61,7 @@ module.exports = function (algorithm) {
   describe("given a maze-like map with a path between start and goal", function () {
     beforeEach(function () {
       var x, y;
-      map = new Map(100, 100);
+      map = new Map(20, 20);
       for (y = 1; y < map.height - 5; y+=4) {
         for (x = 0; x < map.width - 1; x++) {
           map.placeObstacles(x, y, 1);
@@ -84,8 +84,9 @@ module.exports = function (algorithm) {
 
   describe("given a map densely populated with obstacles with a path between start and goal", function () {
     beforeEach(function () {
-      map = new Map(20, 20);
-      map.placeObstacles(19, 0, 30);
+      map = new Map(5, 5);
+      map.placeObstacles(-1, 3, 5);
+      map.placeObstacles(5, 1, 5);
     });
 
     it("should return a path from goal to start", function () {
@@ -102,8 +103,8 @@ module.exports = function (algorithm) {
 
   describe("given a map where the start node is surrounded in obstacles", function () {
     beforeEach(function () {
-      map = new Map(50, 50);
-      map.placeObstacles(map.start.x, map.start.y, 20);
+      map = new Map(5, 5);
+      map.placeObstacles(map.start.x, map.start.y, 3);
     });
 
     it("should not return a path", function () {
@@ -114,8 +115,8 @@ module.exports = function (algorithm) {
 
   describe("given a map where the goal node is surrounded in obstacles", function () {
     beforeEach(function () {
-      map = new Map(50, 50);
-      map.placeObstacles(map.goal.x, map.goal.y, 20);
+      map = new Map(5, 5);
+      map.placeObstacles(map.goal.x, map.goal.y, 3);
     });
 
     it("should not return a path", function () {
@@ -162,7 +163,7 @@ module.exports = function (algorithm) {
 
   describe("given a map with obstacles blocking the middle", function () {
     beforeEach(function () {
-      map = new Map(50, 50);
+      map = new Map(20, 20);
       for (var x = 0; x < map.width; x++) {
         for (var y = map.height - 1; y >= 0; y--) {
           map.placeObstacles(x, y, 10);

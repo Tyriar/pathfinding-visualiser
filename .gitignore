@@ -168,3 +168,4 @@ pip-log.txt
 bower_components/
 node_modules/
 dist.html
+coverage/
