@@ -1,10 +1,12 @@
-describe("canvas-helper", function () {
+describe('canvas-helper', function () {
+  'use strict';
+
   var canvasHelper;
   var context;
   var canvas;
 
   beforeEach(function () {
-    canvasHelper = require("../src/canvas-helper");
+    canvasHelper = require('../src/canvas-helper');
     context = {
       beginPath: function () {},
       fillPath: function () {},

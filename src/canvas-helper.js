@@ -1,4 +1,5 @@
-/*! pathfinding-visualiser | (c) 2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
+/*! pathfinding-visualiser | (c) 2014 Daniel Imms */
+/*! https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -91,7 +92,7 @@
     context.closePath();
   };
 
-  module.drawPath = function (goalNode, openList) {
+  module.drawPath = function (goalNode) {
     context.beginPath();
     context.moveTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
 

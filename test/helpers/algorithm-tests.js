@@ -1,6 +1,8 @@
-var Map = require("../../src/map");
+var Map = require('../../src/map');
 
 module.exports = function (algorithm) {
+  'use strict';
+
   var map;
   var wrapper;
   var results;
@@ -10,7 +12,7 @@ module.exports = function (algorithm) {
 
   beforeEach(function () {
     wrapper = {
-      callback: function (results_, queuedPaints_, goalNode_, openList_, finish) {
+      callback: function (results_, queuedPaints_, goalNode_, openList_) {
         results = results_;
         queuedPaints = queuedPaints_;
         goalNode = goalNode_;
@@ -24,12 +26,12 @@ module.exports = function (algorithm) {
     expect(wrapper.callback).toHaveBeenCalled();
   });
 
-  describe("given a map of size 2x2 with no obstacles", function () {
+  describe('given a map of size 2x2 with no obstacles', function () {
     beforeEach(function () {
       map = new Map(2, 2);
     });
 
-    it("should return a path from goal to start", function () {
+    it('should return a path from goal to start', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).toBeDefined();
       expect(goalNode.equals(map.goal)).toBe(true);
@@ -41,12 +43,12 @@ module.exports = function (algorithm) {
     });
   });
 
-  describe("given a large map with no obstacles", function () {
+  describe('given a large map with no obstacles', function () {
     beforeEach(function () {
       map = new Map(20, 20);
     });
 
-    it("should return a path from goal to start", function () {
+    it('should return a path from goal to start', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).toBeDefined();
       expect(goalNode.equals(map.goal)).toBe(true);
@@ -58,7 +60,7 @@ module.exports = function (algorithm) {
     });
   });
 
-  describe("given a maze-like map with a path between start and goal", function () {
+  describe('given a maze-like map with a path between start and goal', function () {
     beforeEach(function () {
       var x, y;
       map = new Map(20, 20);
@@ -70,7 +72,7 @@ module.exports = function (algorithm) {
       }
     });
 
-    it("should return a path from goal to start", function () {
+    it('should return a path from goal to start', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).toBeDefined();
       expect(goalNode.equals(map.goal)).toBe(true);
@@ -82,14 +84,14 @@ module.exports = function (algorithm) {
     });
   });
 
-  describe("given a map densely populated with obstacles with a path between start and goal", function () {
+  describe('given a map densely populated with obstacles with a path between start and goal', function () {
     beforeEach(function () {
       map = new Map(5, 5);
       map.placeObstacles(-1, 3, 5);
       map.placeObstacles(5, 1, 5);
     });
 
-    it("should return a path from goal to start", function () {
+    it('should return a path from goal to start', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).toBeDefined();
       expect(goalNode.equals(map.goal)).toBe(true);
@@ -101,30 +103,30 @@ module.exports = function (algorithm) {
     });
   });
 
-  describe("given a map where the start node is surrounded in obstacles", function () {
+  describe('given a map where the start node is surrounded in obstacles', function () {
     beforeEach(function () {
       map = new Map(5, 5);
       map.placeObstacles(map.start.x, map.start.y, 3);
     });
 
-    it("should not return a path", function () {
+    it('should not return a path', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).not.toBeDefined();
     });
   });
 
-  describe("given a map where the goal node is surrounded in obstacles", function () {
+  describe('given a map where the goal node is surrounded in obstacles', function () {
     beforeEach(function () {
       map = new Map(5, 5);
       map.placeObstacles(map.goal.x, map.goal.y, 3);
     });
 
-    it("should not return a path", function () {
+    it('should not return a path', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).not.toBeDefined();
     });
 
-    it("should visit all non-obstacle nodes", function () {
+    it('should visit all non-obstacle nodes', function () {
       var x, y, i;
 
       algorithm.run(map, wrapper.callback);
@@ -161,7 +163,7 @@ module.exports = function (algorithm) {
     });
   });
 
-  describe("given a map with obstacles blocking the middle", function () {
+  describe('given a map with obstacles blocking the middle', function () {
     beforeEach(function () {
       map = new Map(20, 20);
       for (var x = 0; x < map.width; x++) {
@@ -171,7 +173,7 @@ module.exports = function (algorithm) {
       }
     });
 
-    it("should not return a path", function () {
+    it('should not return a path', function () {
       algorithm.run(map, wrapper.callback);
       expect(goalNode).not.toBeDefined();
     });

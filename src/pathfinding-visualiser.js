@@ -1,4 +1,5 @@
-﻿/*! pathfinding-visualiser | (c) 2012-2014 Daniel Imms | https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
+/*! pathfinding-visualiser | (c) 2014 Daniel Imms */
+/*! https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {

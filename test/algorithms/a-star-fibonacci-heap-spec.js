@@ -1,6 +1,8 @@
-var tests = require("../helpers/algorithm-tests");
-var algorithm = require("../../src/algorithms/a-star-fibonacci-heap");
+var tests = require('../helpers/algorithm-tests');
+var algorithm = require('../../src/algorithms/a-star-fibonacci-heap');
 
-describe("a-star-fibonacci-heap", function () {
+describe('a-star-fibonacci-heap', function () {
+  'use strict';
+  
   tests(algorithm);
 });
