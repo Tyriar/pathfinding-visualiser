@@ -102,10 +102,10 @@
         }, getSpeed());
       } else {
         if (queuedPaints.length % 200 === 0) {
-          // HACK: Prevent max call stack
+          // Prevent max call stack and let renderer catch up
           setTimeout(function () {
             paintNodes(queuedPaints, goalNode, openList, getSpeed);
-          }, 1);
+          }, 0);
         } else {
           paintNodes(queuedPaints, goalNode, openList, getSpeed);
         }
