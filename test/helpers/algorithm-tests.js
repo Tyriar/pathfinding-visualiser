@@ -131,7 +131,7 @@ module.exports = function (algorithm) {
 
       algorithm.run(map, wrapper.callback);
 
-      visitedMap = [];
+      var visitedMap = [];
       for (x = 0; x < map.width; x++) {
         visitedMap[x] = [];
         for (y = 0; y < map.height; y++) {
