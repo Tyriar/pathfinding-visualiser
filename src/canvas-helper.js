@@ -13,10 +13,10 @@
   var module = {};
 
   var PATH_WIDTH            = 4;
-  var BACKGROUND_COLOUR     = '#F5F5F5';
-  var OBSTACLE_COLOUR       = '#212121';
-  var PATH_COLOUR           = '#12c700';
 
+  module.BACKGROUND_COLOUR  = '#F5F5F5';
+  module.OBSTACLE_COLOUR    = '#212121';
+  module.PATH_COLOUR        = '#12c700';
   module.CLOSED_LIST_COLOUR = '#01579b';
   module.OPEN_LIST_COLOUR   = '#29b6f6';
 
@@ -41,11 +41,11 @@
   };
 
   module.drawObstacle = function (x, y) {
-    module.drawNode(x, y, OBSTACLE_COLOUR);
+    module.drawNode(x, y, module.OBSTACLE_COLOUR);
   };
 
   module.clearObstacle = function (x, y) {
-    module.drawNode(x, y, BACKGROUND_COLOUR);
+    module.drawNode(x, y, module.BACKGROUND_COLOUR);
   };
 
   module.drawVisited = function (x, y) {
@@ -57,7 +57,7 @@
   };
 
   module.drawStartGoal = function (x, y) {
-    module.drawNode(x, y, PATH_COLOUR);
+    module.drawNode(x, y, module.PATH_COLOUR);
   };
 
   module.drawNode = function (x, y, COLOUR) {
@@ -66,7 +66,7 @@
   };
 
   module.clearCanvas = function () {
-    context.fillStyle = BACKGROUND_COLOUR;
+    context.fillStyle = module.BACKGROUND_COLOUR;
     context.fillRect(0, 0, core.CANVAS_WIDTH, core.CANVAS_HEIGHT);
   };
 
@@ -86,7 +86,7 @@
       context.lineTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
     }
 
-    context.strokeStyle = PATH_COLOUR;
+    context.strokeStyle = module.PATH_COLOUR;
     context.lineWidth = PATH_WIDTH;
     context.stroke();
     context.closePath();
@@ -101,7 +101,7 @@
       context.lineTo((goalNode.x + 0.5) * core.MAP_SCALE, (goalNode.y + 0.5) * core.MAP_SCALE);
     }
 
-    context.strokeStyle = PATH_COLOUR;
+    context.strokeStyle = module.PATH_COLOUR;
     context.lineWidth = PATH_WIDTH;
     context.stroke();
     context.closePath();

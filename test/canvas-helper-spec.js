@@ -42,4 +42,44 @@ describe('canvas-helper', function () {
     //it('should draw based on map scale', function () {
     //});
   });
+
+  describe('drawObstacle', function () {
+    it('should drawNode at (x, y) position provided', function () {
+      spyOn(canvasHelper, 'drawNode');
+      canvasHelper.drawObstacle(2, 3);
+      expect(canvasHelper.drawNode).toHaveBeenCalled();
+      expect(canvasHelper.drawNode.callCount).toBe(1);
+      expect(canvasHelper.drawNode.argsForCall[0]).toEqual([2, 3, canvasHelper.OBSTACLE_COLOUR]);
+    });
+  });
+
+  describe('drawVisited', function () {
+    it('should drawNode at (x, y) position provided', function () {
+      spyOn(canvasHelper, 'drawNode');
+      canvasHelper.drawVisited(2, 3);
+      expect(canvasHelper.drawNode).toHaveBeenCalled();
+      expect(canvasHelper.drawNode.callCount).toBe(1);
+      expect(canvasHelper.drawNode.argsForCall[0]).toEqual([2, 3, canvasHelper.CLOSED_LIST_COLOUR]);
+    });
+  });
+
+  describe('drawOpenListNode', function () {
+    it('should drawNode at (x, y) position provided', function () {
+      spyOn(canvasHelper, 'drawNode');
+      canvasHelper.drawOpenListNode(2, 3);
+      expect(canvasHelper.drawNode).toHaveBeenCalled();
+      expect(canvasHelper.drawNode.callCount).toBe(1);
+      expect(canvasHelper.drawNode.argsForCall[0]).toEqual([2, 3, canvasHelper.OPEN_LIST_COLOUR]);
+    });
+  });
+
+  describe('drawStartGoal', function () {
+    it('should drawNode at (x, y) position provided', function () {
+      spyOn(canvasHelper, 'drawNode');
+      canvasHelper.drawStartGoal(2, 3);
+      expect(canvasHelper.drawNode).toHaveBeenCalled();
+      expect(canvasHelper.drawNode.callCount).toBe(1);
+      expect(canvasHelper.drawNode.argsForCall[0]).toEqual([2, 3, canvasHelper.PATH_COLOUR]);
+    });
+  });
 });
