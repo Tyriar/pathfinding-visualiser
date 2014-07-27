@@ -1,9 +1,9 @@
 # pathfinding-visualiser
 
-[![Build Status](https://secure.travis-ci.org/Tyriar/pathfinding-visualiser.png)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
-[![Code climate](https://codeclimate.com/github/Tyriar/pathfinding-visualiser.png)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
-[![Test coverage](https://codeclimate.com/github/Tyriar/pathfinding-visualiser/coverage.png)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
-[![Dependency Status](https://gemnasium.com/Tyriar/pathfinding-visualiser.svg)](https://gemnasium.com/Tyriar/pathfinding-visualiser)
+[![Build Status](http://img.shields.io/travis/Tyriar/pathfinding-visualiser.svg?style=flat)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
+[![Code climate](http://img.shields.io/codeclimate/github/Tyriar/pathfinding-visualiser.svg?style=flat)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
+[![Test coverage](http://img.shields.io/codeclimate/coverage/github/Tyriar/pathfinding-visualiser.svg?style=flat)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
+[![Dependency Status](http://img.shields.io/gemnasium/Tyriar/pathfinding-visualiser.svg?style=flat)](https://gemnasium.com/Tyriar/pathfinding-visualiser)
 
 Visualises pathfinding algorithms allowing customisation of algorithm, map generation and animation. The UI is build on [Polymer's][5] paper elements.
 
