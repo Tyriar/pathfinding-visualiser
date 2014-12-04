@@ -49,10 +49,10 @@ Make sure there's an [issue open][4] or file one yourself. Try to match the codi
 Due to browser security features, HTML imports don't work when running a page from your file system. A simple server can be started on the current directory with Python like so:
 
 ```
-# Non-Windows
+# Python 2.x
 python -m SimpleHTTPServer 8000
 
-# Windows
+# Python 3.x
 python -m http.server 8000
 ```
 
