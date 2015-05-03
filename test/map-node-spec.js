@@ -1,3 +1,8 @@
+/*!
+ * Copyright 2012 Daniel Imms
+ * Released under the MIT license
+ * http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
+ */
 var MapNode = require('../src/map-node');
 
 describe('map-node', function () {
