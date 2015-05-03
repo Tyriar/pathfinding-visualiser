@@ -12,7 +12,7 @@ Visualises pathfinding algorithms allowing customisation of algorithm, map gener
 
 ## Setup
 
-```
+```bash
 # if grunt or bower aren't installed
 npm install -g grunt-cli
 npm install -g bower
@@ -23,7 +23,7 @@ npm install
 
 ## Building
 
-```
+```bash
 # dev build
 grunt
 
@@ -33,7 +33,7 @@ grunt dist
 
 ## Testing
 
-```
+```bash
 npm test
 
 # generate coverage report in ./coverage/
@@ -48,7 +48,7 @@ Make sure there's an [issue open][4] or file one yourself. Try to match the codi
 
 Due to browser security features, HTML imports don't work when running a page from your file system. A simple server can be started on the current directory with Python like so:
 
-```
+```bash
 # Non-Windows
 python -m SimpleHTTPServer 8000
 
