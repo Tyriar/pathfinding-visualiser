@@ -4,11 +4,8 @@ Released under the MIT license
 http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 -->
 
-<link rel="import" href="../bower_components/core-icons/core-icons.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../polymer_components/pv-sidebar.html">
 <link rel="import" href="../polymer_components/pv-summary.html">
-<link rel="import" href="../polymer_components/pv-toolbar.html">
 
 <polymer-element name="pv-pathfinding-visualiser">
 
@@ -18,10 +15,6 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
         display: block;
         background-color: white;
         color:#000;
-      }
-
-      paper-icon-button::shadow core-icon {
-        fill: #FFF;
       }
 
       #canvas {
@@ -47,10 +40,6 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
     </style>
 
     <div id="container" layout vertical>
-      <pv-toolbar>
-        <paper-icon-button icon="menu"></paper-icon-button>
-        <paper-icon-button iconSrc="images/run.svg"></paper-icon-button>
-      </pv-toolbar>
       <div flex layout horizontal>
         <canvas id="canvas" oncontextmenu="return false;" flex two></canvas>
         <pv-summary id="summary"></pv-summary>
