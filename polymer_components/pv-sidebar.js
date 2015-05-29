@@ -6,25 +6,53 @@
 (function () {
   'use strict';
 
-  Polymer('pv-sidebar', {
-    publish: {
-      mapScale: 8,
-      obstacleDensity: 25,
-      obstacleSize: 6,
-      animationEnabled: true,
-      speed: 50,
-      speedMax: 50,
-      runHandler: undefined,
-      generateHandler: undefined,
-      clearHandler: undefined,
-      toggleDialogHandler: undefined,
-      isRunDisabled: function () {
-        return this.$.runButton.disabled;
+  Polymer({
+    is: 'pv-sidebar',
+    properties: {
+      mapScale: {
+        type: Number,
+        value: 8
       },
-      setRunDisabled: function (state) {
-        this.$.runButton.disabled = state;
+      obstacleDensity: {
+        type: Number,
+        value: 25
       },
-      onAlgorithmChange: undefined
+      obstacleSize:  {
+        type: Number,
+        value: 6
+      },
+      animationEnabled:  {
+        type: Boolean,
+        value: true
+      },
+      speed:  {
+        type: Number,
+        value: 50
+      },
+      speedMax:  {
+        type: Number,
+        value: 50
+      },
+      runHandler: {
+        type: Function,
+        value: undefined
+      },
+      generateHandler: {
+        type: Function,
+        value: undefined
+      },
+      clearHandler: {
+        type: Function,
+        value: undefined
+      },
+      toggleDialogHandler: {
+        type: Function,
+        value: undefined
+      },
+      onAlgorithmChange: {
+        type: Function,
+        value: undefined
+      }
     },
     algorithmChange: function (e) {
       if (this.onAlgorithmChange) {
@@ -32,19 +60,25 @@
         this.onAlgorithmChange(name);
       }
     },
+    isRunDisabled: function () {
+      return this.$.runButton.disabled;
+    },
+    setRunDisabled: function (state) {
+      this.$.runButton.disabled = state;
+    },
     run: function () {
-      if (this.publish.runHandler) {
-        this.publish.runHandler();
+      if (this.runHandler) {
+        this.runHandler();
       }
     },
     generate: function () {
-      if (this.publish.generateHandler) {
-        this.publish.generateHandler();
+      if (this.generateHandler) {
+        this.generateHandler();
       }
     },
     clear: function () {
-      if (this.publish.clearHandler) {
-        this.publish.clearHandler();
+      if (this.clearHandler) {
+        this.clearHandler();
       }
     }
   });

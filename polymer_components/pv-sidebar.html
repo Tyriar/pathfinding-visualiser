@@ -8,148 +8,150 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
-<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
 
-<polymer-element name="pv-sidebar">
+<dom-module id="pv-sidebar">
 
+  <style>
+    :host {
+      display: none;
+      margin: 0;
+      -ms-flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+    }
+
+    paper-material {
+      padding: 1em 2em;
+    }
+
+    paper-button {
+      margin: 1em;
+    }
+
+    paper-button.colored {
+      color: #455ede;
+      fill: #455ede;
+    }
+
+    paper-button[raisedButton].colored {
+      background: #455ede;
+      color: #fff;
+    }
+
+    paper-button[raisedButton].colored #ripple,
+    paper-button[raisedButton].colored::shadow #ripple {
+      color: #000;
+    }
+
+    paper-button[raisedButton].colored #focusBg,
+    paper-button[raisedButton].colored::shadow #focusBg {
+      background: #000;
+    }
+
+    paper-button,
+    paper-radio-button {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    paper-slider::shadow #sliderBar::shadow #activeProgress,
+    paper-slider::shadow #sliderKnobInner,
+    paper-slider::shadow #sliderKnobInner::before,
+    paper-toggle-button::shadow paper-radio-button::shadow #onRadio,
+    paper-toggle-button::shadow #toggleBar[checked] {
+      background-color: #0F9D58;
+    }
+
+    paper-radio-button {
+      display: block;
+    }
+
+    paper-toggle-button::shadow paper-radio-button::shadow #ink,
+    paper-toggle-button::shadow paper-radio-button::shadow #ink[checked] {
+      color: #0F9D58;
+    }
+
+    menu {
+      margin: 0;
+      padding: 0;
+    }
+
+    .pull-right {
+      float: right;
+    }
+
+    h1 {
+      font-size:1.2em;
+    }
+
+    .spacer {
+      margin-bottom: 1em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: block;
+      text-align: center;
+    }
+
+    .paper-shadow {
+      pointer-events: none;
+    }
+  </style>
   <template>
-    <style>
-      :host {
-        display: block;
-        margin: 0;
-        padding: 1em 2em;
-        -ms-flex-direction: column;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-      }
 
-      paper-button {
-        margin: 1em;
-      }
-
-      paper-button.colored {
-        color: #455ede;
-        fill: #455ede;
-      }
-
-      paper-button[raisedButton].colored {
-        background: #455ede;
-        color: #fff;
-      }
-
-      paper-button[raisedButton].colored #ripple,
-      paper-button[raisedButton].colored::shadow #ripple {
-        color: #000;
-      }
-
-      paper-button[raisedButton].colored #focusBg,
-      paper-button[raisedButton].colored::shadow #focusBg {
-        background: #000;
-      }
-
-      paper-button,
-      paper-radio-button {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      paper-slider::shadow #sliderBar::shadow #activeProgress,
-      paper-slider::shadow #sliderKnobInner,
-      paper-slider::shadow #sliderKnobInner::before,
-      paper-toggle-button::shadow paper-radio-button::shadow #onRadio,
-      paper-toggle-button::shadow #toggleBar[checked] {
-        background-color: #0F9D58;
-      }
-
-      paper-radio-button {
-        display: block;
-      }
-
-      paper-toggle-button::shadow paper-radio-button::shadow #ink,
-      paper-toggle-button::shadow paper-radio-button::shadow #ink[checked] {
-        color: #0F9D58;
-      }
-
-      menu {
-        margin: 0;
-        padding: 0;
-      }
-
-      .pull-right {
-        float: right;
-      }
-
-      h1 {
-        font-size:1.2em;
-      }
-
-      .spacer {
-        margin-bottom: 1em;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      li {
-        display: block;
-        text-align: center;
-      }
-
-      .paper-shadow {
-        pointer-events: none;
-      }
-    </style>
-
-    <paper-shadow z="1"></paper-shadow>
-    <div flex layout vertical>
-      <menu flex two>
+    <paper-material elevation="1" class="flex layout vertical">
+      <menu  class="flex two">
         <div>
           <h1>Map</h1>
 
           <div>
             <div>Scale</div>
-            <paper-slider pin min="1" max="20" value="{{ publish.mapScale }}" id="mapScale"></paper-slider>
+            <paper-slider pin min="1" max="20" value="{{ mapScale }}" id="mapScale"></paper-slider>
           </div>
 
           <div>
             <div>Obstacle density</div>
-            <paper-slider pin min="0" max="50" value="{{ publish.obstacleDensity }}" id="obstacleDensity"></paper-slider>
+            <paper-slider pin min="0" max="50" value="{{ obstacleDensity }}" id="obstacleDensity"></paper-slider>
           </div>
 
           <div>
             <div>Obstacles size</div>
-            <paper-slider pin min="1" max="10" value="{{ publish.obstacleSize }}" id="obstacleSize"></paper-slider>
+            <paper-slider pin min="1" max="10" value="{{ obstacleSize }}" id="obstacleSize"></paper-slider>
           </div>
 
-          <paper-button raisedbutton class="colored" label="Generate" id="generateMap" on-click="{{ generate }}"></paper-button>
+          <paper-button raisedbutton class="colored" id="generateMap" on-click="{{ generate }}">Generate</paper-button>
         </div>
 
         <div>
           <h1>Algorithm</h1>
-          <paper-radio-group selected="1">
-            <paper-radio-button label="A* (array)" data-algorithm="a-star-array" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using arrays for all collections"></paper-radio-button>
-            <paper-radio-button label="A* (binary heap)" data-algorithm="a-star-binary-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a binary heap for the open list and hashmaps for the open and closed lists to track whether the items are in either"></paper-radio-button>
-            <paper-radio-button label="A* (Fib heap)" data-algorithm="a-star-fibonacci-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a Fibonacci heap for the open list and hashmaps for the open and closed lists to track whether the items are in either"></paper-radio-button>
-            <paper-radio-button label="Dijkstra (binary heap)" data-algorithm="dijkstra-binary-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a binary heap"></paper-radio-button>
-            <paper-radio-button label="Dijkstra (Fib heap)" data-algorithm="dijkstra-fibonacci-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a Fibonacci heap"></paper-radio-button>
+          <paper-radio-group selected="a-star-binary-heap">
+            <paper-radio-button data-algorithm="a-star-array" name="a-star-array" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using arrays for all collections">A* (array)</paper-radio-button>
+            <paper-radio-button data-algorithm="a-star-binary-heap" name="a-star-binary-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a binary heap for the open list and hashmaps for the open and closed lists to track whether the items are in either">A* (binary heap)</paper-radio-button>
+            <paper-radio-button data-algorithm="a-star-fibonacci-heap" name="a-star-fibonacci-heap" on-click="{{ algorithmChange }}" title="The A* algorithm implemented using a Fibonacci heap for the open list and hashmaps for the open and closed lists to track whether the items are in either">A* (Fib heap)</paper-radio-button>
+            <paper-radio-button data-algorithm="dijkstra-binary-heap" name="dijkstras-binary-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a binary heap">Dijkstra (binary heap)</paper-radio-button>
+            <paper-radio-button data-algorithm="dijkstra-fibonacci-heap" name="dijkstras-fibonacci-heap" on-click="{{ algorithmChange }}" title="Dijkstra's algorithm implemented using a Fibonacci heap">Dijkstra (Fib heap)</paper-radio-button>
           </paper-radio-group>
         </div>
 
         <div>
           <h1>Animation</h1>
 
-          <div center horizontal layout class="spacer">
-            <div flex>Enabled</div>
+          <div class="center horizontal layout spacer">
+            <div class="flex">Enabled</div>
             <paper-toggle-button checked="{{ animationEnabled }}"></paper-toggle-button>
           </div>
 
@@ -157,28 +159,28 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
           <paper-slider pin min="1" max="{{ speedMax }}" value="{{ speed }}" id="animationSpeed"></paper-slider>
         </div>
 
-        <paper-button raisedbutton class="colored" label="Clear" id="clearButton" on-click="{{ clear }}"></paper-button>
-        <paper-button raisedbutton class="colored" label="Run" id="runButton" on-click="{{ run }}"></paper-button>
+        <paper-button raisedbutton class="colored" id="clearButton" on-click="{{ clear }}">Clear</paper-button>
+        <paper-button raisedbutton class="colored" id="runButton" on-click="{{ run }}">Run</paper-button>
       </menu>
 
       <nav>
-        <ul layout horizontal center>
-          <li flex>
+        <ul class="layout horizontal center">
+          <li class="flex">
             <a href="http://www.growingwiththeweb.com/2012/06/a-pathfinding-algorithm.html" title="Go to article">
               <img src="../images/logo.svg"/>
             </a>
           </li>
-          <li flex>
+          <li class="flex">
             <a href="https://twitter.com/share?text=Pathfinding%20visualiser%20by%20@tyriar&url=http://www.growingwiththeweb.com/projects/pathfinding-visualiser/&related=tyriar" title="Tweet">
               <img src="../images/twitter.svg"/>
             </a>
           </li>
-          <li flex>
+          <li class="flex">
             <a href="https://plus.google.com/share?url=http://www.growingwiththeweb.com/projects/pathfinding-visualiser/" title="Share on Google+">
               <img src="../images/google-plus.svg"/>
             </a>
           </li>
-          <li flex>
+          <li class="flex">
             <a href="https://github.com/Tyriar/pathfinding-visualiser" title="View source on GitHub">
               <img src="../images/github.svg"/>
             </a>
@@ -187,7 +189,5 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
       </nav>
     </div>
   </template>
-
-  <script src="pv-sidebar.js" type="text/javascript"></script>
-
-</polymer-element>
+</dom-module>
+<script src="pv-sidebar.js" type="text/javascript"></script>

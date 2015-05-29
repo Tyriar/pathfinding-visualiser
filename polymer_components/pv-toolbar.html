@@ -4,24 +4,24 @@ Released under the MIT license
 http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 -->
 
-<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<!--<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">-->
 
-<polymer-element name="pv-toolbar">
+<dom-module id="pv-toolbar">
 
+  <style>
+    :host {
+      background: #4555a5;
+      position: relative;
+      padding: 0.5em;
+      border-radius: 3px 3px 0 0;
+    }
+  </style>
   <template>
-    <style>
-      :host {
-        background: #4555a5;
-        position: relative;
-        padding: 0.5em;
-        border-radius: 3px 3px 0 0;
-      }
-    </style>
 
-    <paper-shadow z="1"></paper-shadow>
+    <!--<paper-shadow z="1"></paper-shadow>-->
     <content></content>
   </template>
 
-  <script src="pv-toolbar.js" type="text/javascript"></script>
 
-</polymer-element>
+</dom-module>
+<script src="pv-toolbar.js" type="text/javascript"></script>

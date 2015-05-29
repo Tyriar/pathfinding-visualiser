@@ -33,7 +33,6 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-uglify": "^0.5.0",
     "grunt-jasmine-node-coverage": "^0.1.11",
-    "grunt-vulcanize": "^0.3.0",
     "jasmine-node": "~1.14.3",
     "jasmine-reporters": ">=0.2.0 <2.0.0"
   }

@@ -45,7 +45,8 @@
       'dijkstra-fibonacci-heap': dijkstraFibonacciHeap
     };
 
-    Polymer('pv-pathfinding-visualiser', {
+    Polymer({
+      is: 'pv-pathfinding-visualiser',
 
       ready: function () {
         me = this;
@@ -57,10 +58,10 @@
           pathfindingVisualiser.setGoalToMouse(e);
           element.run();
         });
-        this.$.sidebar.publish.clearHandler = this.clear;
-        this.$.sidebar.publish.generateHandler = this.generateMap;
-        this.$.sidebar.publish.runHandler = this.run;
-        this.$.sidebar.publish.toggleDialogHandler = this.toggleDialog;
+        this.$.sidebar.clearHandler = this.clear;
+        this.$.sidebar.generateHandler = this.generateMap;
+        this.$.sidebar.runHandler = this.run;
+        this.$.sidebar.toggleDialogHandler = this.toggleDialog;
         this.$.sidebar.onAlgorithmChange = this.algorithmChange;
       },
 
@@ -76,9 +77,9 @@
       generateMap: function () {
         me.$.summary.clear();
         pathfindingVisualiser.generateMap(
-          me.$.sidebar.publish.mapScale,
-          me.$.sidebar.publish.obstacleDensity,
-          me.$.sidebar.publish.obstacleSize);
+          me.$.sidebar.mapScale,
+          me.$.sidebar.obstacleDensity,
+          me.$.sidebar.obstacleSize);
       },
 
       run: function () {

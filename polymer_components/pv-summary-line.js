@@ -6,9 +6,14 @@
 (function () {
   'use strict';
 
-  Polymer('pv-summary-line', {
-    publish: {
-      colour: 'transparent'
+  Polymer({
+    is: 'pv-summary-line',
+
+    properties: {
+      colour: {
+        type: String,
+        value: 'transparent'
+      }
     }
   });
 })();

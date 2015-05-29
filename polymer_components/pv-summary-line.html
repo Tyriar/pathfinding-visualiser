@@ -4,34 +4,32 @@ Released under the MIT license
 http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 -->
 
-<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
 
-<polymer-element name="pv-summary-line" attributes="hascolour">
+<dom-module id="pv-summary-line" attributes="hascolour">
 
+  <style>
+    :host {
+      display: block;
+      line-height: 1.5;
+    }
+
+    :host(:not([hascolour])) #colour {
+      visibility: hidden;
+    }
+
+    #colour {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+    }
+  </style>
   <template>
-    <style>
-      :host {
-        display: block;
-        line-height: 1.5;
-      }
 
-      :host(:not([hascolour])) #colour {
-        visibility: hidden;
-      }
-
-      #colour {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-      }
-    </style>
-
-    <div id="colour" style="background-color: {{ colour }}">
-      <paper-shadow z="1"></paper-shadow>
-    </div>
+    <paper-material elevation="1" id="colour" style="background-color: {{ colour }}"></paper-material>
     <content></content>
   </template>
 
-  <script src="pv-summary-line.js" type="text/javascript"></script>
 
-</polymer-element>
+</dom-module>
+<script src="pv-summary-line.js" type="text/javascript"></script>

@@ -6,7 +6,8 @@
 (function () {
   'use strict';
 
-  Polymer('pv-summary', {
+  Polymer({
+    is: 'pv-summary',
     clear: function () {
       this.$.container.classList.add('exiting');
       this.$.container.classList.remove('visible');

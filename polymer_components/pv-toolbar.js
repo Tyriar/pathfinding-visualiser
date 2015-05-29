@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  Polymer('pv-toolbar', {
-
+  Polymer({
+    is: 'pv-toolbar'
   });
 })();

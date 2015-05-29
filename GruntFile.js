@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         }]
       }
     },
-    vulcanize: {
+    /*vulcanize: {
       dist: {
         options: {
           strip: true,
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
           'dist.html': 'index.html'
         }
       }
-    },
+    },*/
     copy: {
       dist: {
         files: [{
@@ -51,6 +51,21 @@ module.exports = function(grunt) {
           expand: true,
           src: 'src/**/*.js',
           dest: 'dist'
+        }]
+      },
+      novulcanize: {
+        files: [{
+          src: 'polymer_components/**/*.*',
+          dest: 'dist/'
+        }, {
+          src: 'bower_components/**/*.*',
+          dest: 'dist/'
+        }, {
+          src: 'bower_components/webcomponentsjs/webcomponents-lite.min.js',
+          dest: 'dist/'
+        }, {
+          src: 'index.html',
+          dest: 'dist/'
         }]
       }
     },
@@ -74,7 +89,7 @@ module.exports = function(grunt) {
     'grunt-contrib-copy',
     'grunt-contrib-uglify',
     'grunt-jasmine-node-coverage',
-    'grunt-vulcanize'
+    //'grunt-vulcanize'
   ];
 
   for (var i = 0; i < tasks.length; i++) {
@@ -83,15 +98,17 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dist', [
     'uglify:dist',
-    'vulcanize:dist',
+    //'vulcanize:dist',
     'copy:dist',
+    'copy:novulcanize',
     'clean:dist'
   ]);
 
   grunt.registerTask('dev', [
-    'vulcanize:dev',
+    //'vulcanize:dev',
     'copy:dist',
     'copy:dev',
+    'copy:novulcanize',
     'clean:dist'
   ]);
 
