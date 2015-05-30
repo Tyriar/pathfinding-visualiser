@@ -27,5 +27,8 @@
     "paper-toggle-button": "PolymerElements/paper-toggle-button#~1.0.1",
     "layout": "Polymer/layout",
     "paper-material": "PolymerElements/paper-material#~1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^1.0.0"
   }
 }
