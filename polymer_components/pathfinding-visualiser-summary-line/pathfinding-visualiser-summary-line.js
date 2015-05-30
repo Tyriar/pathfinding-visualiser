@@ -14,6 +14,14 @@
         type: String,
         value: 'transparent'
       }
+    },
+
+    observers: [
+      'colourChanged(colour)'
+    ],
+
+    colourChanged: function (colour) {
+      this.$.colour.style.backgroundColor = colour;
     }
   });
 })();
