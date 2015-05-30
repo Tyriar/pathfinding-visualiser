@@ -63,10 +63,10 @@
       for (var i = 0; i < results.length; i++) {
         var r = results[i];
         if (r.colour) {
-          message += '<pv-summary-line hascolour colour="' + r.colour + '">' +
-              r.result + '</pv-summary-line>';
+          message += '<pathfinding-visualiser-summary-line hascolour colour="' + r.colour + '">' +
+              r.result + '</pathfinding-visualiser-summary-line>';
         } else {
-          message += '<pv-summary-line>' + r.result + '</pv-summary-line>';
+          message += '<pathfinding-visualiser-summary-line>' + r.result + '</pathfinding-visualiser-summary-line>';
         }
       }
 

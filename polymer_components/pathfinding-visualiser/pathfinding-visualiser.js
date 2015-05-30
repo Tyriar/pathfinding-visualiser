@@ -46,7 +46,7 @@
     };
 
     Polymer({
-      is: 'pv-pathfinding-visualiser',
+      is: 'pathfinding-visualiser',
 
       ready: function () {
         me = this;

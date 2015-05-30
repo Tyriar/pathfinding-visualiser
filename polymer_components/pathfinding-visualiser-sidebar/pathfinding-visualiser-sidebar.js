@@ -7,7 +7,7 @@
   'use strict';
 
   Polymer({
-    is: 'pv-sidebar',
+    is: 'pathfinding-visualiser-sidebar',
     properties: {
       mapScale: {
         type: Number,

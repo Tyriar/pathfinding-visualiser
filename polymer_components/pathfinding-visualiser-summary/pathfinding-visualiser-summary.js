@@ -7,7 +7,7 @@
   'use strict';
 
   Polymer({
-    is: 'pv-summary',
+    is: 'pathfinding-visualiser-summary',
     clear: function () {
       this.$.container.classList.add('exiting');
       this.$.container.classList.remove('visible');

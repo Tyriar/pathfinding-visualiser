@@ -7,7 +7,7 @@
   'use strict';
 
   Polymer({
-    is: 'pv-summary-line',
+    is: 'pathfinding-visualiser-summary-line',
 
     properties: {
       colour: {

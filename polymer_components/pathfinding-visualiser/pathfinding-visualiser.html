@@ -4,10 +4,10 @@ Released under the MIT license
 http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 -->
 
-<link rel="import" href="../polymer_components/pv-sidebar.html">
-<link rel="import" href="../polymer_components/pv-summary.html">
+<link rel="import" href="../pathfinding-visualiser-sidebar/pathfinding-visualiser-sidebar.html">
+<link rel="import" href="../pathfinding-visualiser-summary/pathfinding-visualiser-summary.html">
 
-<dom-module id="pv-pathfinding-visualiser">
+<dom-module id="pathfinding-visualiser">
   <style>
     :host {
       display: block;
@@ -40,10 +40,10 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
     <div id="container" class="layout vertical">
       <div class="flex layout horizontal">
         <canvas id="canvas" oncontextmenu="return false;" class="flex two"></canvas>
-        <pv-summary id="summary"></pv-summary>
-        <pv-sidebar id="sidebar"></pv-sidebar>
+        <pathfinding-visualiser-summary id="summary"></pathfinding-visualiser-summary>
+        <pathfinding-visualiser-sidebar id="sidebar"></pathfinding-visualiser-sidebar>
       </div>
     </div>
   </template>
 </dom-module>
-<script src="pv-pathfinding-visualiser.js" type="text/javascript"></script>
+<script src="pathfinding-visualiser.js" type="text/javascript"></script>
