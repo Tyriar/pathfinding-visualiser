@@ -9,8 +9,15 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
   <meta charset="utf-8">
   <title>Pathfinding Visualiser Demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../../requirejs/require.js"></script>
+  <script>
+    require.config({
+      // Set base URL to the repository's root
+      baseUrl: '../',
+    });
+  </script>
   <link href='http://fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&lang=en' rel='stylesheet' type='text/css'>
-  <link rel="import" href="../polymer_components/pathfinding-visualiser/pathfinding-visualiser.html">
+  <link rel="import" href="../pathfinding-visualiser.html">
   <style>
     body {
       font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
