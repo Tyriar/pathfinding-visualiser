@@ -13,9 +13,9 @@
       this.$.container.classList.remove('visible');
     },
     show: function (html) {
-    this.$.container.classList.remove('exiting');
+      this.$.container.classList.remove('exiting');
       this.$.container.classList.add('visible');
-      this.innerHTML = html;
+      this.$.container.innerHTML = html;
     }
   });
 })();

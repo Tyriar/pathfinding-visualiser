@@ -21,6 +21,8 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
       position: relative;
       top: 20em;
       opacity: .9;
+      padding: 1em;
+      background-color: #FFF;
     }
 
     #container.exiting {
@@ -37,9 +39,9 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
     }
   </style>
   <template>
-    <paper-material id="container" elevation="2">
-    </paper-material>
+    <paper-material elevation="2" id="container">
       <content></content>
+    </paper-material>
   </template>
 </dom-module>
 <script src="pv-summary.js" type="text/javascript"></script>
