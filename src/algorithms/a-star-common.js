@@ -1,5 +1,9 @@
-/*! pathfinding-visualiser | (c) 2014 Daniel Imms */
-/*! https://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE */
+/**
+ * @license
+ * pathfinding-visualiser <http://github.com/Tyriar/pathfinding-visualiser>
+ * Copyright 2014 Daniel Imms <http://www.growingwiththeweb.com>
+ * Released under the MIT license <http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE>
+ */
 (function (root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {

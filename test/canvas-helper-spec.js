@@ -1,7 +1,8 @@
-/*!
- * Copyright 2012 Daniel Imms
- * Released under the MIT license
- * http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
+/**
+ * @license
+ * pathfinding-visualiser <http://github.com/Tyriar/pathfinding-visualiser>
+ * Copyright 2014 Daniel Imms <http://www.growingwiththeweb.com>
+ * Released under the MIT license <http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE>
  */
 describe('canvas-helper', function () {
   'use strict';
