@@ -8,22 +8,22 @@
 
   require.config({
     paths: {
-      'pathfinding-visualiser': 'src/pathfinding-visualiser',
-      'core': 'src/core',
-      'canvas-helper': 'src/canvas-helper',
-      'map': 'src/map',
-      'map-node': 'src/map-node',
-      'binary-heap': 'vendor/js-data-structures/binary-heap',
-      'fibonacci-heap': 'vendor/js-data-structures/fibonacci-heap',
-      'a-star-common': 'src/algorithms/a-star-common',
-      'a-star-heap': 'src/algorithms/a-star-heap',
-      'a-star-array': 'src/algorithms/a-star-array',
-      'a-star-binary-heap': 'src/algorithms/a-star-binary-heap',
-      'a-star-fibonacci-heap': 'src/algorithms/a-star-fibonacci-heap',
-      'dijkstra-common': 'src/algorithms/dijkstra-common',
-      'dijkstra-heap': 'src/algorithms/dijkstra-heap',
-      'dijkstra-binary-heap': 'src/algorithms/dijkstra-binary-heap',
-      'dijkstra-fibonacci-heap': 'src/algorithms/dijkstra-fibonacci-heap'
+      'pathfinding-visualiser': '../src/pathfinding-visualiser',
+      'core': '../src/core',
+      'canvas-helper': '../src/canvas-helper',
+      'map': '../src/map',
+      'map-node': '../src/map-node',
+      'binary-heap': '../node_modules/js-data-structures/src/binary-heap',
+      'fibonacci-heap': '../node_modules/js-data-structures/src/fibonacci-heap',
+      'a-star-common': '../src/algorithms/a-star-common',
+      'a-star-heap': '../src/algorithms/a-star-heap',
+      'a-star-array': '../src/algorithms/a-star-array',
+      'a-star-binary-heap': '../src/algorithms/a-star-binary-heap',
+      'a-star-fibonacci-heap': '../src/algorithms/a-star-fibonacci-heap',
+      'dijkstra-common': '../src/algorithms/dijkstra-common',
+      'dijkstra-heap': '../src/algorithms/dijkstra-heap',
+      'dijkstra-binary-heap': '../src/algorithms/dijkstra-binary-heap',
+      'dijkstra-fibonacci-heap': '../src/algorithms/dijkstra-fibonacci-heap'
     }
   });
 
