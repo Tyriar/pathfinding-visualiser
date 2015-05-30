@@ -1,122 +1,39 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    uglify: {
-      dist: {
-        files: [{
-          expand: true,
-          src: 'src/**/*.js',
-          dest: 'dist'
-        }]
-      }
-    },
-    /*vulcanize: {
-      dist: {
-        options: {
-          strip: true,
-          inline: true
-        },
-        files: {
-          'dist.html': 'index.html'
-        }
-      },
-      dev: {
-        options: {
-          inline: true
-        },
-        files: {
-          'dist.html': 'index.html'
-        }
-      }
-    },*/
-    copy: {
-      dist: {
-        files: [{
-          src: 'dist.html',
-          dest: 'dist/index.html'
-        }, {
-          expand: true,
-          flatten: true,
-          src: 'node_modules/js-data-structures/src/**/*.js',
-          dest: 'dist/vendor/js-data-structures/'
-        }, {
-          src: 'images/**/*.*',
-          dest: 'dist/'
-        }]
-      },
-      dev: {
-        files: [{
-          expand: true,
-          src: 'src/**/*.js',
-          dest: 'dist'
-        }]
-      },
-      novulcanize: {
-        files: [{
-          src: 'polymer_components/**/*.*',
-          dest: 'dist/'
-        }, {
-          src: 'bower_components/**/*.*',
-          dest: 'dist/'
-        }, {
-          src: 'bower_components/webcomponentsjs/webcomponents-lite.min.js',
-          dest: 'dist/'
-        }, {
-          src: 'index.html',
-          dest: 'dist/'
-        }]
-      }
-    },
-    clean: {
-      dist: [
-        'dist.html'
-      ]
-    },
     jasmine_node: {
-      coverage: { },
-      options: {
-        extensions: 'js',
-        specNameMatcher: '.*-spec',
-        captureExceptions: true
+      task_name: {
+        options: {
+          coverage: {},
+          forceExit: true,
+          match: '.',
+          matchAll: false,
+          specFolders: ['test'],
+          extensions: 'js',
+          specNameMatcher: 'spec',
+          captureExceptions: true,
+          junitreport: {
+            report: false,
+            savePath : './build/reports/jasmine/',
+            useDotNotation: true,
+            consolidate: true
+          }
+        },
+        src: ['src/**/*.js']
       }
     }
   });
 
   var tasks = [
-    'grunt-contrib-clean',
-    'grunt-contrib-copy',
-    'grunt-contrib-uglify',
     'grunt-jasmine-node-coverage',
-    //'grunt-vulcanize'
   ];
 
   for (var i = 0; i < tasks.length; i++) {
     grunt.loadNpmTasks(tasks[i]);
   }
 
-  grunt.registerTask('dist', [
-    'uglify:dist',
-    //'vulcanize:dist',
-    'copy:dist',
-    'copy:novulcanize',
-    'clean:dist'
-  ]);
-
-  grunt.registerTask('dev', [
-    //'vulcanize:dev',
-    'copy:dist',
-    'copy:dev',
-    'copy:novulcanize',
-    'clean:dist'
-  ]);
-
   grunt.registerTask('coverage', [
     'jasmine_node'
-  ]);
-
-  grunt.registerTask('default', [
-    'dev'
   ]);
 };

@@ -3,7 +3,9 @@
   "version": "1.2.0",
   "description": "A Polymer element that visualises various pathfinding algorithms",
   "scripts": {
-    "test": "jasmine-node ./test/"
+    "coverage": "grunt coverage",
+    "test": "jasmine-node ./test/",
+    "serve": "polyserve"
   },
   "repository": {
     "type": "git",
@@ -29,11 +31,8 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-copy": "^0.5.0",
-    "grunt-contrib-uglify": "^0.5.0",
-    "grunt-jasmine-node-coverage": "^0.1.11",
+    "grunt-jasmine-node-coverage": "^0.4.1",
     "jasmine-node": "~1.14.3",
-    "jasmine-reporters": ">=0.2.0 <2.0.0"
+    "polyserve": "^0.4.0"
   }
 }

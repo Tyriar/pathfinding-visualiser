@@ -10,25 +10,24 @@ Visualises pathfinding algorithms allowing customisation of algorithm, map gener
  - [Live version][1]
  - [A* article][2]
 
-## Setup
+## Installing dependencies
 
 ```bash
-# if grunt or bower aren't installed
-npm install -g grunt-cli
+# if bower is not installed
 npm install -g bower
 
-bower install
 npm install
+bower install
 ```
 
-## Building
+## Running
+
+[polyserve][6] is used to serve the demo so bower dependencies are referenced correctly to enable pathfinding-visualiser to be [reuseable][7].
 
 ```bash
-# dev build
-grunt
+npm run serve
 
-# prod build (minifies, merges polymer elements)
-grunt dist
+# Navigate to http://localhost:8080/components/pathfinding-visualiser/demo/
 ```
 
 ## Testing
@@ -37,20 +36,13 @@ grunt dist
 npm test
 
 # generate coverage report in ./coverage/
-grunt coverage
+npm coverage
 ```
 
 ## Contributing
 
 Make sure there's an [issue open][4] or file one yourself. Try to match the coding style and make sure [jshint][3] shows no warnings.
 
-## Running locally
-
-Due to browser security features, HTML imports don't work when running a page from your file system. A simple server can be started on the current directory with Python like so:
-
-```bash
-python3 -m http.server
-```
 
 
   [1]: http://www.growingwiththeweb.com/projects/pathfinding-visualiser/
@@ -58,3 +50,5 @@ python3 -m http.server
   [3]: http://www.jshint.com/
   [4]: https://github.com/Tyriar/pathfinding-visualiser/issues?state=open
   [5]: http://www.polymer-project.org/
+  [6]: https://github.com/PolymerLabs/polyserve
+  [7]: https://www.polymer-project.org/1.0/docs/start/reusableelements.html
