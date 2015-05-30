@@ -1,6 +1,6 @@
 {
   "name": "pathfinding-visualiser",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A Polymer element that visualises various pathfinding algorithms",
   "scripts": {
     "coverage": "grunt coverage",
