@@ -8,7 +8,7 @@
   "description": "An app that visualises pathfinding algorithms.",
   "main": "index.html",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
