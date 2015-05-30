@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  background-color: white;
+  color:#000;
+}
+
+#canvas {
+  width:100%;
+}
+
+#container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #FFF;
+  /* This prevents the toggle button from going out of screen */
+  overflow: hidden;
+}
+
+#summary {
+  position: absolute;
+  bottom: 1em;
+  left: 0.5em;
+}

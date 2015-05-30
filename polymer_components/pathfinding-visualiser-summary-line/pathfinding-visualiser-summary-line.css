@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  line-height: 1.5;
+}
+
+:host(:not([hascolour])) #colour {
+  visibility: hidden;
+}
+
+#colour {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}

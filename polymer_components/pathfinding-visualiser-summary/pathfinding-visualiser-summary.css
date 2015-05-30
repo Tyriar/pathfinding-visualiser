@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+#container {
+  visibility: hidden;
+  transition: top 1s cubic-bezier(.37,0,.21,1) 0s, visibility 0s linear 1s, opacity .2s linear;
+  position: relative;
+  top: 20em;
+  opacity: .9;
+  padding: 1em;
+  background-color: #FFF;
+}
+
+#container.exiting {
+  transition: top 1s cubic-bezier(.63,0,.79,1) 0s, visibility 0s linear 1s, opacity .2s linear;
+}
+
+#container.visible {
+  visibility: visible;
+  top: 0em;
+}
+
+#container:hover {
+  opacity: .6;
+}

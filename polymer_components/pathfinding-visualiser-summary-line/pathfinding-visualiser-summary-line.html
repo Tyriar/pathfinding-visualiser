@@ -7,22 +7,7 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 
 <dom-module id="pathfinding-visualiser-summary-line" attributes="hascolour">
-  <style>
-    :host {
-      display: block;
-      line-height: 1.5;
-    }
-
-    :host(:not([hascolour])) #colour {
-      visibility: hidden;
-    }
-
-    #colour {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-    }
-  </style>
+  <link rel="import" type="css" href="pathfinding-visualiser-summary-line.css">
   <template>
     <paper-material elevation="1" id="colour"></paper-material>
     <content></content>

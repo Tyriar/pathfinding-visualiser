@@ -8,34 +8,7 @@ http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
 <link rel="import" href="../pathfinding-visualiser-summary/pathfinding-visualiser-summary.html">
 
 <dom-module id="pathfinding-visualiser">
-  <style>
-    :host {
-      display: block;
-      background-color: white;
-      color:#000;
-    }
-
-    #canvas {
-      width:100%;
-    }
-
-    #container {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background-color: #FFF;
-      /* This prevents the toggle button from going out of screen */
-      overflow: hidden;
-    }
-
-    #summary {
-      position: absolute;
-      bottom: 1em;
-      left: 0.5em;
-    }
-  </style>
+  <link rel="import" type="css" href="pathfinding-visualiser.css">
   <template>
     <div id="container" class="layout vertical">
       <div class="flex layout horizontal">
