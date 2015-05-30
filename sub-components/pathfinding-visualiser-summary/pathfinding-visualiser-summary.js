@@ -3,6 +3,7 @@
  * Released under the MIT license
  * http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
  */
+/*global Polymer*/
 (function () {
   'use strict';
 

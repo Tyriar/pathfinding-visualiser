@@ -1,0 +1,12 @@
+{
+  'env': {
+    'amd': true,
+    'browser': true,
+    'node': true
+  },
+  'rules': {
+    'quotes': [1, 'single'],
+    'no-use-before-define': false,
+    'new-cap': false // Polymer is a function
+  }
+}

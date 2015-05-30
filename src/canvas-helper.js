@@ -12,13 +12,13 @@
 
   var module = {};
 
-  var PATH_WIDTH            = 4;
+  var PATH_WIDTH = 4;
 
-  module.BACKGROUND_COLOUR  = '#F5F5F5';
-  module.OBSTACLE_COLOUR    = '#212121';
-  module.PATH_COLOUR        = '#12c700';
+  module.BACKGROUND_COLOUR = '#F5F5F5';
+  module.OBSTACLE_COLOUR = '#212121';
+  module.PATH_COLOUR = '#12c700';
   module.CLOSED_LIST_COLOUR = '#01579b';
-  module.OPEN_LIST_COLOUR   = '#29b6f6';
+  module.OPEN_LIST_COLOUR = '#29b6f6';
 
   var canvas;
   var context;

@@ -3,6 +3,7 @@
  * Released under the MIT license
  * http://github.com/Tyriar/pathfinding-visualiser/blob/master/LICENSE
  */
+/*global Polymer*/
 (function () {
   'use strict';
 
@@ -17,19 +18,19 @@
         type: Number,
         value: 25
       },
-      obstacleSize:  {
+      obstacleSize: {
         type: Number,
         value: 6
       },
-      animationEnabled:  {
+      animationEnabled: {
         type: Boolean,
         value: true
       },
-      speed:  {
+      speed: {
         type: Number,
         value: 50
       },
-      speedMax:  {
+      speedMax: {
         type: Number,
         value: 50
       },

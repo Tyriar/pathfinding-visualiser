@@ -55,7 +55,7 @@
     canvasHelper.clearCanvas();
     canvasHelper.drawObstacles(map);
 
-    var startTime = performance.now();
+    var startTime = window.performance.now();
     algorithmDelegate.run(map, function (results, queuedPaints, goalNode, openList, finish) {
       var message = '';
       var duration = finish - startTime;

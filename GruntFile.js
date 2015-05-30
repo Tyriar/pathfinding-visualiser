@@ -2,6 +2,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    eslint: {
+      dist: {
+        options: {
+          configFile: '.eslintrc',
+        },
+        src: [
+          'pathfinding-visualiser.js',
+          'src/**/*.js',
+          'sub-components/**/*.js'
+        ]
+      }
+    },
+
     jasmine_node: {
       task_name: {
         options: {
@@ -20,12 +33,16 @@ module.exports = function(grunt) {
             consolidate: true
           }
         },
-        src: ['src/**/*.js']
+        src: [
+          'bower_components/requirejs/require.js',
+          'src/**/*.js'
+        ]
       }
     }
   });
 
   var tasks = [
+    'grunt-eslint',
     'grunt-jasmine-node-coverage',
   ];
 
@@ -35,5 +52,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('coverage', [
     'jasmine_node'
+  ]);
+
+  grunt.registerTask('default', [
+    'eslint',
+    'coverage'
   ]);
 };

@@ -11,10 +11,10 @@
   'use strict';
 
   function Map(width, height) {
-    this.width         = width;
-    this.height        = height;
-    this.start         = new MapNode(0, 0);
-    this.goal          = new MapNode(width - 1, height - 1);
+    this.width = width;
+    this.height = height;
+    this.start = new MapNode(0, 0);
+    this.goal = new MapNode(width - 1, height - 1);
     this.configuration = undefined;
     this.clear();
   }
@@ -44,7 +44,7 @@
     if (obstacleDensity !== undefined) {
       this.configuration = {
         obstacleDensity: obstacleDensity,
-        obstacleSize: obstacleSize,
+        obstacleSize: obstacleSize
       };
     }
 
@@ -79,16 +79,16 @@
     var lower = Math.floor((size - 1) / 2);
     var upper = Math.ceil((size - 1) / 2);
 
-    for (var _x = x - lower; _x <= x + upper; _x++) {
-      for (var _y = y - lower; _y <= y + upper; _y++) {
-        if (!this.isOnMap(_x, _y) || !this[_x][_y]) {
+    for (var loopX = x - lower; loopX <= x + upper; loopX++) {
+      for (var loopY = y - lower; loopY <= y + upper; loopY++) {
+        if (!this.isOnMap(loopX, loopY) || !this[loopX][loopY]) {
           continue;
         }
-        if ((_x === this.start.x && _y === this.start.y) ||
-            (_x === this.goal.x  && _y === this.goal.y)) {
+        if ((loopX === this.start.x && loopY === this.start.y) ||
+            (loopX === this.goal.x && loopY === this.goal.y)) {
           continue;
         }
-        this[_x][_y] = false;
+        this[loopX][loopY] = false;
         obstacleCount++;
       }
     }

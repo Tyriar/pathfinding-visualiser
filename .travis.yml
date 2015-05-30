@@ -16,6 +16,7 @@ before_install:
 install:
   - npm install
   - bower install
+  - grunt
 
 after_script:
   - npm run coverage
