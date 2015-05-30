@@ -36,7 +36,7 @@ npm run serve
 npm test
 
 # generate coverage report in ./coverage/
-npm coverage
+npm run coverage
 ```
 
 ## Contributing

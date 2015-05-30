@@ -1,6 +1,7 @@
 language: node_js
 
 node_js:
+  - "0.12"
   - "0.11"
   - "0.10"
 
@@ -9,7 +10,6 @@ addons:
     repo_token: 36e39f9da06f0fec64d3bf872eb690276b1ab1d4ed32050273209e2da96ec5a3
 
 before_install:
-  - npm install -g grunt-cli
   - npm install -g bower
   - npm install -g codeclimate-test-reporter
 
@@ -17,10 +17,6 @@ install:
   - npm install
   - bower install
 
-before_script:
-  - grunt
-  - grunt dist
-
 after_script:
-  - grunt coverage
+  - npm run coverage
   - cat coverage/lcov.info | codeclimate
