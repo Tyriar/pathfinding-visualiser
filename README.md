@@ -1,4 +1,4 @@
-# pathfinding-visualiser [![NPM version](http://img.shields.io/npm/v/pathfinding-visualiser.svg?style=flat)](https://www.npmjs.org/package/pathfinding-visualiser)
+# pathfinding-visualiser
 
 [![Build Status](http://img.shields.io/travis/Tyriar/pathfinding-visualiser.svg?style=flat)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
 [![Code climate](http://img.shields.io/codeclimate/github/Tyriar/pathfinding-visualiser.svg?style=flat)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
