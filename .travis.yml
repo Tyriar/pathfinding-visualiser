@@ -12,6 +12,7 @@ addons:
 before_install:
   - npm install -g bower
   - npm install -g codeclimate-test-reporter
+  - npm install -g grunt-cli
 
 install:
   - npm install
