@@ -10,7 +10,7 @@
     define(['dijkstra-heap', 'fibonacci-heap'], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory(require('./dijkstra-heap'),
-                             require('../../node_modules/js-data-structures/src/binary-heap'));
+                             require('../../bower_components/js-data-structures/lib/binary-heap'));
   }
 }(this, function (dijkstraHeap, BinaryHeap) {
   'use strict';
