@@ -9,7 +9,6 @@
 }
 
 #container {
-  visibility: hidden;
   transition: top 1s cubic-bezier(.37,0,.21,1) 0s, visibility 0s linear 1s, opacity .2s linear;
   position: relative;
   top: 20em;
@@ -23,7 +22,6 @@
 }
 
 #container.visible {
-  visibility: visible;
   top: 0em;
 }
 
