@@ -26,7 +26,8 @@
     "paper-slider": "PolymerElements/paper-slider#~1.0.1",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#~1.0.1",
     "layout": "Polymer/layout",
-    "paper-material": "PolymerElements/paper-material#~1.0.0"
+    "paper-material": "PolymerElements/paper-material#~1.0.0",
+    "js-data-structures": "~1.0.5"
   },
   "resolutions": {
     "polymer": "^1.0.0"
