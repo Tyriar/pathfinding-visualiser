@@ -10,6 +10,8 @@ Visualises pathfinding algorithms allowing customisation of algorithm, map gener
  - [Live version][1]
  - [A* article][2]
 
+![](http://www.growingwiththeweb.com/images/2012/06/03/demo.png)
+
 ## Installing dependencies
 
 ```bash
