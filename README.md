@@ -1,8 +1,8 @@
 # pathfinding-visualiser
 
-[![Build Status](http://img.shields.io/travis/Tyriar/pathfinding-visualiser.svg?style=flat)](http://travis-ci.org/Tyriar/pathfinding-visualiser)
-[![Code climate](http://img.shields.io/codeclimate/github/Tyriar/pathfinding-visualiser.svg?style=flat)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
-[![Test coverage](http://img.shields.io/codeclimate/coverage/github/Tyriar/pathfinding-visualiser.svg?style=flat)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
+[![Build Status](https://travis-ci.org/Tyriar/pathfinding-visualiser.svg?branch=master)](https://travis-ci.org/Tyriar/pathfinding-visualiser)
+[![Code Climate](https://codeclimate.com/github/Tyriar/pathfinding-visualiser/badges/gpa.svg)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser)
+[![Test Coverage](https://codeclimate.com/github/Tyriar/pathfinding-visualiser/badges/coverage.svg)](https://codeclimate.com/github/Tyriar/pathfinding-visualiser/coverage)
 
 Visualises pathfinding algorithms allowing customisation of algorithm, map generation and animation. The UI is build on [Polymer's][5] paper elements.
 
